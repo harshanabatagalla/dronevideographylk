@@ -12,8 +12,8 @@
  * vars are absent (local dev), the data layer falls back to the JSON file.
  */
 
-const URL = process.env.SUPABASE_URL;
-const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const URL = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
+const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SECRET_KEY;
 export const STORAGE_BUCKET = process.env.SUPABASE_BUCKET ?? "media";
 
 export function supabaseConfigured(): boolean {
