@@ -30,6 +30,7 @@ on conflict (id) do update set public = true;
 
 -- Allow public read of objects in the `media` bucket (so <video>/<img> can
 -- load them). Uploads are performed server-side with the service-role key.
-create policy if not exists "public read media"
+drop policy if exists "public read media" on storage.objects;
+create policy "public read media"
   on storage.objects for select
   using (bucket_id = 'media');
