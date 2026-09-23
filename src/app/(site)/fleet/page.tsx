@@ -1,19 +1,20 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
 import { DroneShowcase } from "@/components/fleet/DroneShowcase";
-import { getDrones } from "@/lib/db";
+import { getDrones, getSettings } from "@/lib/db";
+import { ShootPlanner } from "@/components/booking/ShootPlanner";
 import { whatsappHref } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Our Drone Fleet",
   description:
-    "Meet our fleet of professional camera drones. Every specification explained in plain language so you can pick the perfect drone for your Sri Lanka shoot.",
+    "Meet our fleet of professional camera drones. Every specification explained in plain language so you can pick the right drone for your Sri Lanka shoot.",
   path: "/fleet",
 });
 
 export default async function FleetPage() {
-  const drones = await getDrones();
+  const [drones, settings] = await Promise.all([getDrones(), getSettings()]);
   return (
     <>
       {/* Immersive header */}
@@ -21,13 +22,13 @@ export default async function FleetPage() {
         <div className="aurora" />
         <div className="relative mx-auto w-full max-w-6xl px-5 text-center sm:px-8">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 backdrop-blur">
-            <Icon name="sparkles" size={14} /> The fleet
+            <Icon name="drone" size={14} /> Fly ready drones
           </span>
           <h1 className="mx-auto mt-6 max-w-4xl font-display text-5xl font-semibold leading-[1.02] text-white text-balance sm:text-6xl md:text-7xl">
-            Pick your <span className="text-gradient">camera in the sky</span>
+            Choose the <span className="text-gradient">right drone</span> for your shoot
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-            No confusing tech jargon — just what each drone does best, in plain
+            No hard tech words. Just what each drone is good at, in plain
             English. Every flight is handled by a licensed, insured pilot.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
@@ -52,8 +53,16 @@ export default async function FleetPage() {
         </div>
       </header>
 
+      {/* Plan a shoot: drone, date, location, then WhatsApp */}
+      <div className="relative z-10 mx-auto -mt-10 w-full max-w-5xl px-5 sm:px-8">
+        <ShootPlanner
+          drones={drones.map((d) => ({ slug: d.slug, name: d.name }))}
+          whatsapp={settings.whatsapp}
+        />
+      </div>
+
       {/* Alternating product showcases */}
-      <div id="fleet">
+      <div id="fleet" className="mt-12">
         {drones.map((d, i) => (
           <DroneShowcase key={d.slug} drone={d} index={i} />
         ))}
@@ -66,11 +75,11 @@ export default async function FleetPage() {
             Still not sure which one?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-white/70">
-            Tell us where you&apos;re headed and what you want to capture — we&apos;ll
-            match the perfect drone (and pilot) to your itinerary.
+            Tell us where you are going and what you want to film. We will pick
+            the right drone and pilot for you.
           </p>
           <a
-            href={whatsappHref("Hi! Here's my itinerary — which drone do you recommend?")}
+            href={whatsappHref("Hi! Here is my plan. Which drone do you recommend?")}
             target="_blank"
             rel="noopener noreferrer"
             className="glow-sunset mt-8 inline-flex items-center gap-2 rounded-full bg-sunset px-8 py-4 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:bg-amber-400"

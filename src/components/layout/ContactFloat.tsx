@@ -53,7 +53,7 @@ export function ContactFloat({
         transform: inHero ? "translateY(0.75rem)" : "translateY(0)",
         pointerEvents: inHero ? "none" : "auto",
       }}
-      className="fixed bottom-4 right-4 z-40 flex items-center gap-2 transition-all duration-300"
+      className="safe-bottom fixed right-4 z-40 flex items-center gap-2 transition-all duration-300"
     >
       <a
         href={telHref}

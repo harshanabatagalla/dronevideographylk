@@ -26,8 +26,8 @@ export function IslandMap() {
         <SectionHeading
           light
           eyebrow="Where we fly"
-          title="Explore Sri Lanka's most cinematic spots"
-          subtitle="Tap a location to see what makes it special. We plan routes around the light, the tides and your itinerary."
+          title="The best places to fly in Sri Lanka"
+          subtitle="Tap a place to learn more. We plan each flight around the light, the tides and your plans."
         />
 
         <div className="mt-14 grid items-center gap-10 lg:grid-cols-2">

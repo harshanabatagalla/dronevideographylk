@@ -6,6 +6,7 @@ import { Icon } from "@/components/ui/Icon";
 import { getDrone, getDrones } from "@/lib/db";
 import { whatsappHref } from "@/lib/site";
 import { pageMetadata, JsonLd } from "@/lib/seo";
+import { PhotoCredit } from "@/components/shop/PhotoCredit";
 
 export async function generateStaticParams() {
   const drones = await getDrones();
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const drone = await getDrone(slug);
   if (!drone) return pageMetadata({ title: "Drone not found", path: `/fleet/${slug}` });
   return pageMetadata({
-    title: `${drone.name} — Drone Hire in Sri Lanka`,
+    title: `${drone.name} Drone Hire in Sri Lanka`,
     description: `${drone.tagline} ${drone.specs.map((s) => `${s.label}: ${s.value}.`).join(" ")}`,
     path: `/fleet/${drone.slug}`,
     image: drone.image,
@@ -43,7 +44,7 @@ export default async function DroneDetailPage({ params }: { params: Promise<{ sl
       <JsonLd data={productJsonLd} />
       <div className="bg-skyline pb-10 pt-28">
         <Section>
-          <Link href="/fleet" className="inline-flex items-center gap-1 text-sm text-white/70 hover:text-sunset">
+          <Link href="/fleet" className="tap inline-flex items-center gap-1 text-sm text-white/70 hover:text-sunset">
             ← Back to fleet
           </Link>
         </Section>
@@ -51,6 +52,7 @@ export default async function DroneDetailPage({ params }: { params: Promise<{ sl
 
       <Section className="py-12">
         <div className="grid gap-10 lg:grid-cols-2">
+          <div>
           <div className="cinematic-frame relative aspect-[4/3] overflow-hidden rounded-3xl">
             <Image
               src={drone.image}
@@ -60,6 +62,8 @@ export default async function DroneDetailPage({ params }: { params: Promise<{ sl
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
+          </div>
+          <PhotoCredit slug={drone.slug} className="mt-2" />
           </div>
 
           <div>

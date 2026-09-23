@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
@@ -12,10 +12,18 @@ const display = Space_Grotesk({
 });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  // Draw into the notch / Dynamic Island area; the CSS below keeps content clear of it.
+  viewportFit: "cover",
+  themeColor: "#0b1f2a",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.brand} — Cinematic Drone Videography in Sri Lanka`,
+    default: `${site.brand} | Drone Videography in Sri Lanka`,
     template: `%s | ${site.brand}`,
   },
   description: site.description,

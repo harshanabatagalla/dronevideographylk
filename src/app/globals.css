@@ -477,3 +477,30 @@
   .hud, .scanlines { display: none; }
 }
 
+
+
+/* ================================================================== */
+/*  iPhone safe areas (Dynamic Island, notch, home bar)               */
+/* ================================================================== */
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.safe-bottom {
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+}
+.safe-x {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+.safe-pb {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Bigger touch targets on phones: small text links get a comfortable hit area. */
+@media (max-width: 767px) {
+  .tap {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}

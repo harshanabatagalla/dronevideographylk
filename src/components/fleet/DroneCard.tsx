@@ -62,7 +62,7 @@ export function DroneCard({ drone }: { drone: Drone }) {
         <div className="mt-6 flex items-center gap-3 border-t border-white/10 pt-5">
           <Link
             href={`/fleet/${drone.slug}`}
-            className="text-sm font-semibold text-sunset transition hover:text-amber-300"
+            className="tap text-sm font-semibold text-sunset transition hover:text-amber-300"
           >
             View details →
           </Link>

@@ -9,11 +9,12 @@ const links: { href: string; label: string; icon: IconName }[] = [
   { href: "/admin/drones", label: "Drones", icon: "signal" },
   { href: "/admin/footage", label: "Footage", icon: "camera" },
   { href: "/admin/testimonials", label: "Testimonials", icon: "star" },
+  { href: "/admin/orders", label: "Orders", icon: "cart" },
   { href: "/admin/enquiries", label: "Enquiries", icon: "whatsapp" },
   { href: "/admin/settings", label: "Settings", icon: "shield" },
 ];
 
-export function AdminNav({ newEnquiries = 0 }: { newEnquiries?: number }) {
+export function AdminNav({ newEnquiries = 0, newOrders = 0 }: { newEnquiries?: number; newOrders?: number }) {
   const pathname = usePathname();
   return (
     <nav className="px-3 pb-4" aria-label="Admin">
@@ -30,6 +31,15 @@ export function AdminNav({ newEnquiries = 0 }: { newEnquiries?: number }) {
               >
                 <Icon name={l.icon} size={18} />
                 {l.label}
+                {l.href === "/admin/orders" && newOrders > 0 && (
+                  <span
+                    className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${
+                      active ? "bg-night text-sunset" : "bg-sunset text-night"
+                    }`}
+                  >
+                    {newOrders}
+                  </span>
+                )}
                 {l.href === "/admin/enquiries" && newEnquiries > 0 && (
                   <span
                     className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${

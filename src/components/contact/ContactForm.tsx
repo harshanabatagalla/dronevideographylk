@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { Icon } from "@/components/ui/Icon";
+import { ALL_COUNTRIES, COMMON_COUNTRIES } from "@/lib/countries";
 
 const shootTypes = ["Travel film", "Wedding", "Event", "Resort / Hotel", "Adventure / Surf", "Real estate", "Other"];
 
@@ -61,9 +62,33 @@ export function ContactForm() {
 
       <Field label="Your name" name="name" required />
       <Field label="Email" name="email" type="email" required />
-      <Field label="Country" name="country" placeholder="e.g. United Kingdom" />
-      <Field label="Travel dates" name="dates" placeholder="e.g. 12–20 August" />
-      <Field label="Locations" name="locations" placeholder="e.g. Ella, Mirissa" className="sm:col-span-2" />
+      <label className="text-sm">
+        <span className="mb-1.5 block font-medium text-night">Country</span>
+        <select
+          name="country"
+          autoComplete="country-name"
+          defaultValue=""
+          className="w-full rounded-xl border border-night/15 bg-white px-4 py-3 text-night focus:border-ocean focus:outline-none"
+        >
+          <option value="">Choose your country</option>
+          <optgroup label="Most common">
+            {COMMON_COUNTRIES.map((c) => (
+              <option key={`common-${c}`} value={c}>
+                {c}
+              </option>
+            ))}
+          </optgroup>
+          <optgroup label="All countries">
+            {ALL_COUNTRIES.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </optgroup>
+        </select>
+      </label>
+      <Field label="Travel dates" name="dates" placeholder="For example 12 to 20 August" />
+      <Field label="Locations" name="locations" placeholder="For example Ella, Mirissa" className="sm:col-span-2" />
 
       <label className="sm:col-span-2 text-sm">
         <span className="mb-1.5 block font-medium text-night">Type of shoot</span>
@@ -89,7 +114,7 @@ export function ContactForm() {
           name="message"
           rows={5}
           required
-          placeholder="What would you love us to capture?"
+          placeholder="What do you want us to film?"
           className="w-full rounded-xl border border-night/15 bg-white px-4 py-3 text-night focus:border-ocean focus:outline-none"
         />
       </label>

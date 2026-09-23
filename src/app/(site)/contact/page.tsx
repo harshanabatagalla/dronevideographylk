@@ -6,9 +6,9 @@ import { getSettings } from "@/lib/db";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Contact — Book Your Aerial Film",
+  title: "Contact Us to Book a Drone Video",
   description:
-    "Get a drone videography quote for your Sri Lanka trip, wedding or event. Message us on WhatsApp or send an enquiry — we reply within 24 hours.",
+    "Get a drone videography quote for your Sri Lanka trip, wedding or event. Message us on WhatsApp or send an enquiry. We reply within 24 hours.",
   path: "/contact",
 });
 
@@ -31,8 +31,8 @@ export default async function ContactPage() {
           <SectionHeading
             light
             eyebrow="Contact us"
-            title="Let's plan your aerial film"
-            subtitle="Tell us your dates and dream shots. Prefer chatting? WhatsApp is the fastest way to reach us."
+            title="Let's plan your drone video"
+            subtitle="Tell us your dates and the shots you want. WhatsApp is the fastest way to reach us."
           />
         </Section>
       </div>
@@ -54,7 +54,7 @@ export default async function ContactPage() {
                   </span>
                   <span>
                     <span className="block font-semibold text-night">WhatsApp</span>
-                    <span className="text-sm text-night/60">Fastest reply — usually within minutes</span>
+                    <span className="text-sm text-night/60">Fastest reply, often within minutes</span>
                   </span>
                 </a>
               </li>
@@ -92,7 +92,7 @@ export default async function ContactPage() {
                 </span>
                 <span>
                   <span className="block font-semibold text-night">Based in</span>
-                  <span className="text-sm text-night/60">{settings.address} · filming island-wide</span>
+                  <span className="text-sm text-night/60">{settings.address} · we film all over the island</span>
                 </span>
               </li>
             </ul>

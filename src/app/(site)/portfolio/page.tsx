@@ -4,9 +4,9 @@ import { getFootage } from "@/lib/db";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Portfolio — Real Drone Footage from Sri Lanka",
+  title: "Portfolio: Real Drone Photos from Sri Lanka",
   description:
-    "Watch real aerial drone footage filmed across Sri Lanka — Sigiriya, Ella, Mirissa, tea country and more. Travel films, weddings and events in 4K.",
+    "See real drone photos taken by our team across Sri Lanka, including Sigiriya, Kandy, Ella, Meemure and the Knuckles range.",
   path: "/portfolio",
 });
 
@@ -20,7 +20,7 @@ export default async function PortfolioPage() {
             light
             eyebrow="Portfolio"
             title="Real footage, real locations"
-            subtitle="Filter by the kind of film you're dreaming of. Tap any clip to watch."
+            subtitle="Every photo was taken by our team with our own drones. Tap any photo to see it full size."
           />
         </Section>
       </div>

@@ -16,7 +16,7 @@ export async function FlightOverIsland() {
     poster: f.poster,
     location: f.location,
     category: f.category,
-    blurb: blurbByName.get(f.location.toLowerCase()) ?? "Captured from the sky over Sri Lanka.",
+    blurb: blurbByName.get(f.location.toLowerCase()) ?? "Filmed from the sky over Sri Lanka.",
     altitude: 280 + i * 160,
   }));
 

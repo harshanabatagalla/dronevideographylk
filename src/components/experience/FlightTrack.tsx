@@ -55,7 +55,7 @@ export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
   }, [waypoints.length]);
 
   return (
-    <section aria-label="A cinematic flight across Sri Lanka" className="bg-night text-white">
+    <section aria-label="A drone flight across Sri Lanka" className="bg-night text-white">
       {/* ---- Pinned horizontal flight (md+) ---- */}
       <div
         ref={wrapRef}
@@ -68,13 +68,13 @@ export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
           {/* header row */}
           <div className="relative z-10 flex items-end justify-between px-8 pt-24 lg:px-16">
             <div>
-              <span className="tape text-white/50">Flight plan · 001</span>
+              <span className="tape text-white/50">Locations</span>
               <h2 className="mt-2 font-display text-4xl font-semibold text-white sm:text-5xl">
-                Fly the <span className="text-gradient">island</span>
+                Where we <span className="text-gradient">film</span>
               </h2>
             </div>
             <div className="hidden text-right sm:block">
-              <div className="tape text-white/40">Now approaching</div>
+              <div className="tape text-white/40">Location</div>
               <div className="font-mono text-lg text-sunset transition-all">
                 {String(active + 1).padStart(2, "0")} · {waypoints[active]?.location}
               </div>
@@ -126,18 +126,18 @@ export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
 
               {/* end-of-flight CTA panel */}
               <article className="relative flex w-[74vw] shrink-0 flex-col justify-center gap-6 rounded-[2rem] border border-white/10 bg-white/[0.03] px-10 lg:w-[40vw]">
-                <span className="tape text-white/40">End of flight</span>
+                <span className="tape text-white/40">Get started</span>
                 <h3 className="font-display text-4xl font-semibold leading-tight text-white lg:text-5xl">
-                  Your story is the <span className="text-gradient">next waypoint.</span>
+                  Plan your shoot <span className="text-gradient">with us.</span>
                 </h3>
                 <p className="max-w-sm text-white/70">
-                  Tell us where you&apos;re headed and we&apos;ll plan the shots.
+                  Tell us where you are going and we will plan the shots.
                 </p>
                 <a
                   href="/contact"
                   className="glow-sunset inline-flex w-fit items-center gap-2 rounded-full bg-sunset px-6 py-3.5 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:bg-amber-400"
                 >
-                  Plan your flight <Icon name="arrow-right" size={16} />
+                  Plan your shoot <Icon name="arrow-right" size={16} />
                 </a>
               </article>
             </div>
@@ -151,9 +151,9 @@ export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
               </div>
             </div>
             <div className="mt-4 flex justify-between tape text-white/40">
-              <span>Takeoff</span>
-              <span>{waypoints.length} waypoints</span>
-              <span>Landing</span>
+              <span>Start</span>
+              <span>{waypoints.length} locations</span>
+              <span>End</span>
             </div>
           </div>
         </div>
@@ -161,9 +161,9 @@ export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
 
       {/* ---- Mobile snap strip ---- */}
       <div className="bg-cinema noise px-5 py-20 md:hidden">
-        <span className="tape text-white/50">Flight plan · 001</span>
+        <span className="tape text-white/50">Locations</span>
         <h2 className="mt-2 font-display text-4xl font-semibold text-white">
-          Fly the <span className="text-gradient">island</span>
+          Where we <span className="text-gradient">film</span>
         </h2>
         <div className="filmstrip no-scrollbar mt-8 gap-4 pb-4">
           {waypoints.map((wp, i) => (
@@ -183,18 +183,18 @@ export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
 
           {/* end-of-flight CTA — last card in the strip, like desktop */}
           <article className="relative flex h-[64vh] flex-col justify-center gap-4 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7">
-            <span className="tape text-white/40">End of flight</span>
+            <span className="tape text-white/40">Get started</span>
             <h3 className="font-display text-3xl font-semibold leading-tight text-white">
-              Your story is the <span className="text-gradient">next waypoint.</span>
+              Plan your shoot <span className="text-gradient">with us.</span>
             </h3>
             <p className="text-white/70">
-              Tell us where you&apos;re headed and we&apos;ll plan the shots.
+              Tell us where you are going and we will plan the shots.
             </p>
             <a
               href="/contact"
               className="glow-sunset inline-flex w-fit items-center gap-2 rounded-full bg-sunset px-6 py-3.5 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:bg-amber-400"
             >
-              Plan your flight <Icon name="arrow-right" size={16} />
+              Plan your shoot <Icon name="arrow-right" size={16} />
             </a>
           </article>
         </div>

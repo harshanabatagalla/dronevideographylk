@@ -15,11 +15,11 @@ export async function FleetTeaser() {
             <Icon name="camera" size={14} /> Our drone fleet
           </span>
           <h2 className="mt-4 font-display text-4xl font-semibold text-white text-balance sm:text-5xl">
-            Choose your <span className="text-gradient">camera in the sky</span>
+            Our <span className="text-gradient">fly ready</span> drones
           </h2>
           <p className="mt-4 text-lg text-white/70">
-            Every drone explained in plain language — pick the one that fits your
-            shoot, or let us recommend one.
+            Each drone explained in plain words. Pick the one that fits your shoot,
+            or ask us to choose.
           </p>
         </div>
         <div className="mt-14 grid gap-6 md:grid-cols-3">

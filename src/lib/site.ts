@@ -9,15 +9,15 @@ export const site = {
   brand: "Drone Videography LK",
   tagline: "Sri Lanka, from above.",
   description:
-    "Cinematic drone videography across Sri Lanka for travelers, weddings and events. Licensed, insured pilots filming your journey in stunning 4K/6K.",
+    "Drone videography across Sri Lanka for travellers, weddings and events. Licensed and insured pilots film your trip in 4K and 6K.",
   url: "https://dronevideography.lk",
   locale: "en_LK",
   // Contact — travelers strongly prefer WhatsApp, so it is first-class.
-  whatsapp: "+94770000000",
+  whatsapp: "+94775406357",
   whatsappMessage:
     "Hi! I'm visiting Sri Lanka and I'd love a drone videography quote.",
   email: "hello@dronevideography.lk",
-  phone: "+94 77 000 0000",
+  phone: "+94 77 540 6357",
   address: "Colombo, Sri Lanka",
   // Social links — editable from the admin dashboard.
   socials: {
@@ -43,5 +43,6 @@ export const nav = [
   { label: "Home", href: "/" },
   { label: "Our Fleet", href: "/fleet" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Shop", href: "/shop" },
   { label: "Contact", href: "/contact" },
 ] as const;

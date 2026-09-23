@@ -49,7 +49,7 @@ export function DroneShowcase({ drone, index }: { drone: Drone; index: number })
         >
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-sunset">
-              Camera in the sky · {number}
+              Drone {number}
             </p>
             <h2 className="mt-3 font-display text-4xl font-semibold leading-[1.05] text-white sm:text-5xl">
               {drone.name}

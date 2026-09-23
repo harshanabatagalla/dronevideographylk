@@ -1,14 +1,15 @@
 import Link from "next/link";
-import { getDrones, getFootage, getTestimonials, getEnquiries } from "@/lib/db";
+import { getDrones, getFootage, getTestimonials, getEnquiries, getOrders } from "@/lib/db";
 import { usingDefaults } from "@/lib/auth";
 import { Icon, type IconName } from "@/components/ui/Icon";
 
 export default async function AdminOverview() {
-  const [drones, footage, testimonials, enquiries] = await Promise.all([
+  const [drones, footage, testimonials, enquiries, orders] = await Promise.all([
     getDrones(),
     getFootage(),
     getTestimonials(),
     getEnquiries(),
+    getOrders(),
   ]);
   const newEnquiries = enquiries.filter((e) => e.status === "new").length;
 
@@ -17,6 +18,7 @@ export default async function AdminOverview() {
     { label: "Footage", value: footage.length, href: "/admin/footage", icon: "camera" },
     { label: "Testimonials", value: testimonials.length, href: "/admin/testimonials", icon: "star" },
     { label: "New enquiries", value: newEnquiries, href: "/admin/enquiries", icon: "whatsapp" },
+    { label: "New orders", value: orders.filter((o) => o.status === "new").length, href: "/admin/orders", icon: "cart" },
   ];
 
   return (
@@ -32,7 +34,7 @@ export default async function AdminOverview() {
         </div>
       )}
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {stats.map((s) => (
           <Link
             key={s.label}
