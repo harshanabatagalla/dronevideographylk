@@ -55,7 +55,7 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
           <ul className="mt-4 space-y-2 text-sm">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="text-white/60 transition hover:text-sunset">
+                <Link href={item.href} className="tap text-white/60 transition hover:text-sunset">
                   {item.label}
                 </Link>
               </li>
@@ -85,7 +85,13 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-white/40 sm:flex-row sm:px-8">
           <p>© {new Date().getFullYear()} {site.brand}. All rights reserved.</p>
-          <p>Licensed &amp; insured drone pilots · Colombo, Sri Lanka</p>
+          <p>
+            <Link href="/credits" className="hover:text-sunset">
+              Photo credits
+            </Link>
+            {" · "}
+            Licensed &amp; insured drone pilots · Colombo, Sri Lanka
+          </p>
         </div>
       </div>
     </footer>

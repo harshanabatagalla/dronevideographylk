@@ -46,3 +46,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local content store (may contain customer orders)
+/.data/
+
+# admin uploads
+/public/uploads/*
+!/public/uploads/.gitkeep

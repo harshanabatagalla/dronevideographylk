@@ -2,7 +2,7 @@ import { Icon } from "@/components/ui/Icon";
 
 const items = [
   { icon: "shield", text: "Licensed & insured pilots" },
-  { icon: "camera", text: "4K / 6K cinema footage" },
+  { icon: "camera", text: "4K and 6K video" },
   { icon: "check", text: "Permits handled for you" },
   { icon: "whatsapp", text: "Book in minutes on WhatsApp" },
 ] as const;

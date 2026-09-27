@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/Section";
+import { HeroVideo } from "./HeroVideo";
 import { Icon } from "@/components/ui/Icon";
 import { HeroHUD } from "@/components/experience/HeroHUD";
-import { buildWhatsappHref } from "@/lib/site";
+import { BookButton } from "@/components/booking/BookingDialog";
 import { getSettings } from "@/lib/db";
 
 const TICKER = [
@@ -23,22 +24,11 @@ const TICKER = [
  */
 export async function Hero() {
   const settings = await getSettings();
-  const waHref = buildWhatsappHref(settings.whatsapp, settings.whatsappMessage);
   const { heroVideo, heroPoster } = settings.media;
   const videoType = heroVideo.endsWith(".webm") ? "video/webm" : "video/mp4";
   return (
     <section id="hero" className="relative flex min-h-[100svh] flex-col overflow-hidden bg-night">
-      <video
-        className="absolute inset-0 h-full w-full scale-105 object-cover"
-        poster={heroPoster}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-      >
-        <source src={heroVideo} type={videoType} />
-      </video>
+      <HeroVideo src={heroVideo} type={videoType} poster={heroPoster} />
       <div className="absolute inset-0 bg-gradient-to-b from-night/85 via-night/55 to-night" />
       <div className="absolute inset-0 bg-gradient-to-r from-night/85 via-night/25 to-transparent" />
       <div className="aurora opacity-40" />
@@ -55,7 +45,7 @@ export async function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sunset opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-sunset" />
               </span>
-              Systems armed · ready for takeoff
+              Now booking across Sri Lanka
             </span>
 
             <h1 className="mt-5 font-display font-bold uppercase text-white kinetic-line">
@@ -65,25 +55,22 @@ export async function Hero() {
             </h1>
 
             <p className="mt-5 max-w-xl text-base text-white/80 sm:text-lg">
-              Cinematic drone films of your journey, wedding or adventure — captured
-              by licensed, insured pilots in stunning 4K &amp; 6K.
+              Drone videos of your trip, wedding or event in Sri Lanka. Filmed in 4K
+              and 6K by licensed and insured pilots.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-              <a
-                href={waHref}
-                target="_blank"
-                rel="noopener noreferrer"
+              <BookButton
                 className="glow-sunset inline-flex items-center justify-center gap-2 rounded-full bg-sunset px-7 py-3.5 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:bg-amber-400"
               >
-                <Icon name="whatsapp" size={18} /> Book Your Aerial Film
-              </a>
+                <Icon name="whatsapp" size={18} /> Book a drone video
+              </BookButton>
               <Button href="/portfolio" variant="light" icon>
-                Watch the showreel
+                See our videos
               </Button>
             </div>
             <dl className="mt-7 grid max-w-md grid-cols-3 gap-4 text-white sm:gap-6">
               {[
-                { n: "4K / 6K", l: "Cinema quality" },
+                { n: "4K / 6K", l: "Video quality" },
                 { n: "20+", l: "Locations" },
                 { n: "100%", l: "Licensed & insured" },
               ].map((s) => (
@@ -99,7 +86,7 @@ export async function Hero() {
 
       {/* Scroll-to-takeoff cue — in flow, above the ticker (never overlaps content) */}
       <div className="pointer-events-none relative z-10 flex flex-col items-center gap-1 pb-3">
-        <span className="tape text-white/75">Scroll to take off</span>
+        <span className="tape text-white/75">Scroll down</span>
         <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/40 bg-white/10 backdrop-blur">
           <svg
             viewBox="0 0 24 24"

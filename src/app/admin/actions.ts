@@ -17,9 +17,11 @@ import {
   deleteTestimonial,
   saveSettings,
   setEnquiryStatus,
+  setOrderStatus,
   getSettings,
   newId,
   type Enquiry,
+  type Order,
   type SiteSettings,
 } from "@/lib/db";
 import type { Drone, Footage, Spec } from "@/lib/content";
@@ -67,7 +69,7 @@ function splitCsv(value: string): string[] {
     .filter(Boolean);
 }
 
-const SPEC_ICONS: Spec["icon"][] = ["clock", "camera", "signal", "wind", "mountain", "sparkles"];
+const SPEC_ICONS: Spec["icon"][] = ["clock", "camera", "signal", "wind", "mountain", "drone"];
 
 /* ------------------------------ Drones ------------------------------ */
 
@@ -80,7 +82,7 @@ export async function saveDroneAction(formData: FormData) {
   // Specs entered one per line as: icon | label | value
   const specs: Spec[] = splitLines(String(formData.get("specs") ?? "")).map((line) => {
     const [rawIcon, label, ...rest] = line.split("|").map((p) => p.trim());
-    const icon = (SPEC_ICONS.includes(rawIcon as Spec["icon"]) ? rawIcon : "sparkles") as Spec["icon"];
+    const icon = (SPEC_ICONS.includes(rawIcon as Spec["icon"]) ? rawIcon : "camera") as Spec["icon"];
     return { icon, label: label ?? "", value: rest.join(" | ") };
   });
 
@@ -214,4 +216,17 @@ export async function setEnquiryStatusAction(formData: FormData) {
   if (id) await setEnquiryStatus(id, status);
   revalidatePath("/admin/enquiries");
   redirect("/admin/enquiries");
+}
+
+/* ------------------------------ Orders ------------------------------ */
+
+const ORDER_STATUSES: Order["status"][] = ["new", "confirmed", "paid", "shipped", "cancelled"];
+
+export async function setOrderStatusAction(formData: FormData) {
+  await assertAuth();
+  const id = String(formData.get("id") ?? "");
+  const status = String(formData.get("status") ?? "") as Order["status"];
+  if (id && ORDER_STATUSES.includes(status)) await setOrderStatus(id, status);
+  revalidatePath("/admin/orders");
+  redirect("/admin/orders");
 }

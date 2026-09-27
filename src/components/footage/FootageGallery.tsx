@@ -6,9 +6,9 @@ import { Icon } from "@/components/ui/Icon";
 import { droneName, type Footage } from "@/lib/content";
 
 /**
- * Responsive footage grid with an accessible video lightbox. Videos are only
- * loaded (via YouTube's privacy-enhanced embed) when a user clicks play, so the
- * grid itself stays lightweight and fast — just optimized poster images.
+ * Responsive footage grid with an accessible lightbox. Items with a YouTube id
+ * are videos, loaded (privacy-enhanced embed) only when a user clicks play.
+ * Items without one are photos and open full size.
  */
 export function FootageGallery({
   items,
@@ -51,24 +51,27 @@ export function FootageGallery({
             type="button"
             onClick={() => setActive(f)}
             className="cinematic-frame group relative aspect-video overflow-hidden rounded-2xl text-left"
-            aria-label={`Play ${f.title}`}
+            aria-label={f.youtubeId ? `Play ${f.title}` : `View photo: ${f.title}`}
           >
             <Image
               src={f.poster}
-              alt={`Aerial drone footage of ${f.title}, ${f.location}, Sri Lanka`}
+              alt={`Drone ${f.youtubeId ? "video" : "photo"} of ${f.title}, ${f.location}, Sri Lanka`}
               fill
               loading="lazy"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover transition duration-500 group-hover:scale-105"
             />
             <span className="absolute inset-0 z-10 bg-gradient-to-t from-night/80 via-transparent to-transparent" />
-            <span className="absolute left-1/2 top-1/2 z-10 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-night shadow-lg transition group-hover:scale-110">
-              <Icon name="play" size={24} />
-            </span>
+            {f.youtubeId && (
+              <span className="absolute left-1/2 top-1/2 z-10 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-night shadow-lg transition group-hover:scale-110">
+                <Icon name="play" size={24} />
+              </span>
+            )}
             <span className="absolute bottom-0 left-0 z-10 p-4">
               <span className="block font-semibold text-white">{f.title}</span>
               <span className="mt-0.5 flex items-center gap-2 text-xs text-white/70">
-                <Icon name="map-pin" size={12} /> {f.location} · {droneName(f.droneSlug)}
+                <Icon name="map-pin" size={12} /> {f.location}
+                {f.droneSlug && ` · ${droneName(f.droneSlug)}`}
               </span>
             </span>
             <span className="absolute right-3 top-3 z-10 rounded-full bg-night/70 px-3 py-1 text-xs font-medium text-white">
@@ -92,13 +95,13 @@ export function FootageGallery({
               <button
                 type="button"
                 onClick={() => setActive(null)}
-                aria-label="Close video"
+                aria-label="Close"
                 className="grid h-9 w-9 place-items-center rounded-full bg-white/10 hover:bg-white/20"
               >
                 <Icon name="close" size={20} />
               </button>
             </div>
-            <div className="aspect-video overflow-hidden rounded-2xl bg-black">
+            <div className="relative aspect-video overflow-hidden rounded-2xl bg-black">
               {active.youtubeId ? (
                 <iframe
                   className="h-full w-full"
@@ -108,7 +111,13 @@ export function FootageGallery({
                   allowFullScreen
                 />
               ) : (
-                <div className="grid h-full place-items-center text-white/60">Coming soon</div>
+                <Image
+                  src={active.poster}
+                  alt={`Drone photo of ${active.title}, ${active.location}, Sri Lanka`}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 900px"
+                  className="object-contain"
+                />
               )}
             </div>
           </div>

@@ -32,7 +32,7 @@ export default async function AdminDronesPage({
                 name="slug"
                 defaultValue={editing?.slug}
                 placeholder="auto from name"
-                hint="URL id, e.g. skymaster-pro"
+                hint="URL id, e.g. cinema-drone"
               />
             </div>
             <Field label="Tagline" name="tagline" defaultValue={editing?.tagline} />
@@ -43,7 +43,7 @@ export default async function AdminDronesPage({
               defaultValue={specsText}
               rows={6}
               placeholder={"camera | Video quality | Stunning 4K\nclock | Flight time | ~30 min per battery"}
-              hint="Format: icon | label | value. Icons: clock, camera, signal, wind, mountain, sparkles"
+              hint="Format: icon | label | value. Icons: clock, camera, signal, wind, mountain, drone"
             />
             <div className="grid gap-4 sm:grid-cols-2">
               <Field

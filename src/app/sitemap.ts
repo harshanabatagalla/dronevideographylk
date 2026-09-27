@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { drones } from "@/lib/content";
+import { products } from "@/lib/shop";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const routes = ["", "/fleet", "/portfolio", "/contact"].map((path) => ({
+  const routes = ["", "/fleet", "/portfolio", "/shop", "/contact", "/credits"].map((path) => ({
     url: `${site.url}${path}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
@@ -18,5 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...routes, ...droneRoutes];
+  const shopRoutes = products.map((p) => ({
+    url: `${site.url}/shop/${p.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
+  return [...routes, ...droneRoutes, ...shopRoutes];
 }

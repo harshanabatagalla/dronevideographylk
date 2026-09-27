@@ -3,18 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { nav, site, buildWhatsappHref } from "@/lib/site";
+import { nav, site } from "@/lib/site";
 import { Icon } from "@/components/ui/Icon";
+import { CartButton } from "@/components/shop/CartButton";
+import { BookButton } from "@/components/booking/BookingDialog";
 
-export function Header({
-  whatsapp = site.whatsapp,
-  whatsappMessage = site.whatsappMessage,
-}: {
-  whatsapp?: string;
-  whatsappMessage?: string;
-}) {
+export function Header() {
   const pathname = usePathname();
-  const waHref = buildWhatsappHref(whatsapp, whatsappMessage);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -29,7 +24,7 @@ export function Header({
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+      className={`safe-top safe-x fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         scrolled || open ? "bg-night/90 backdrop-blur-md shadow-lg shadow-black/20" : "bg-transparent"
       }`}
     >
@@ -43,9 +38,9 @@ export function Header({
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-6 md:flex lg:gap-8" aria-label="Primary">
           {nav.map((item) => {
-            const active = pathname === item.href;
+            const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}
@@ -58,29 +53,30 @@ export function Header({
               </Link>
             );
           })}
-          <a
-            href={waHref}
-            target="_blank"
-            rel="noopener noreferrer"
+          <CartButton />
+          <BookButton
             className="inline-flex items-center gap-2 rounded-full bg-sunset px-5 py-2.5 text-sm font-semibold text-night transition hover:bg-amber-400"
           >
             <Icon name="whatsapp" size={18} /> Book Now
-          </a>
+          </BookButton>
         </nav>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="grid h-10 w-10 place-items-center rounded-lg text-white md:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-        >
-          <Icon name={open ? "close" : "menu"} size={24} />
-        </button>
+        <div className="flex items-center gap-1 md:hidden">
+          <CartButton />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="grid h-10 w-10 place-items-center rounded-lg text-white md:hidden"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
+            <Icon name={open ? "close" : "menu"} size={24} />
+          </button>
+        </div>
       </div>
 
       {open && (
-        <nav className="border-t border-white/10 bg-night/95 px-5 py-4 md:hidden" aria-label="Mobile">
+        <nav className="safe-pb border-t border-white/10 bg-night/95 px-5 py-4 md:hidden" aria-label="Mobile">
           <ul className="flex flex-col gap-1">
             {nav.map((item) => (
               <li key={item.href}>
@@ -93,14 +89,12 @@ export function Header({
               </li>
             ))}
             <li className="mt-2">
-              <a
-                href={waHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-full bg-sunset px-5 py-3 font-semibold text-night"
+              <BookButton
+                onClick={() => setOpen(false)}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-sunset px-5 py-3 font-semibold text-night"
               >
-                <Icon name="whatsapp" size={18} /> Book on WhatsApp
-              </a>
+                <Icon name="whatsapp" size={18} /> Book a drone video
+              </BookButton>
             </li>
           </ul>
         </nav>

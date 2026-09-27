@@ -18,10 +18,11 @@ export function pageMetadata({
 }): Metadata {
   const url = `${site.url}${path}`;
   const fullTitle =
-    path === "/" ? `${site.brand} — Cinematic Drone Videography in Sri Lanka` : `${title} | ${site.brand}`;
+    path === "/" ? `${site.brand} | Drone Videography in Sri Lanka` : `${title} | ${site.brand}`;
 
   return {
-    title: fullTitle,
+    // Absolute, so the root layout's "%s | brand" template doesn't add the brand twice.
+    title: { absolute: fullTitle },
     description,
     alternates: { canonical: url },
     openGraph: {

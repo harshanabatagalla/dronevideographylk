@@ -62,11 +62,34 @@ export type SiteSettings = {
 
 export type StoredTestimonial = Testimonial & { id: string };
 
+export type OrderItem = { slug: string; name: string; price: number; qty: number };
+
+export type Order = {
+  id: string;
+  /** Short human-friendly reference shown to the customer, e.g. DV-7K3Q9M. */
+  ref: string;
+  items: OrderItem[];
+  total: number;
+  currency: "LKR";
+  customer: {
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+    city: string;
+  };
+  payment: "bank-transfer" | "cash-on-delivery";
+  notes: string;
+  status: "new" | "confirmed" | "paid" | "shipped" | "cancelled";
+  createdAt: string;
+};
+
 type Store = {
   drones: Drone[];
   footage: Footage[];
   testimonials: StoredTestimonial[];
   enquiries: Enquiry[];
+  orders?: Order[];
   settings: SiteSettings;
 };
 
@@ -83,8 +106,7 @@ function defaultSettings(): SiteSettings {
     socials: { ...site.socials },
     media: {
       heroVideo: "/media/hero_background.mp4",
-      heroPoster:
-        "https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?auto=format&fit=crop&w=2000&q=70",
+      heroPoster: "/media/portfolio/sigiriya-rock-pidurangala.webp",
     },
   };
 }
@@ -250,6 +272,36 @@ export async function setEnquiryStatus(id: string, status: Enquiry["status"]): P
   const s = await read();
   const e = s.enquiries.find((x) => x.id === id);
   if (e) e.status = status;
+  await write(s);
+}
+
+/* ------------------------------ Orders ----------------------------- */
+
+export async function getOrders(): Promise<Order[]> {
+  const s = await read();
+  return [...(s.orders ?? [])].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export async function addOrder(
+  data: Omit<Order, "id" | "ref" | "status" | "createdAt">,
+): Promise<Order> {
+  const s = await read();
+  const order: Order = {
+    ...data,
+    id: randomUUID(),
+    ref: `DV-${randomUUID().replace(/-/g, "").slice(0, 6).toUpperCase()}`,
+    status: "new",
+    createdAt: new Date().toISOString(),
+  };
+  s.orders = [...(s.orders ?? []), order];
+  await write(s);
+  return order;
+}
+
+export async function setOrderStatus(id: string, status: Order["status"]): Promise<void> {
+  const s = await read();
+  const o = (s.orders ?? []).find((x) => x.id === id);
+  if (o) o.status = status;
   await write(s);
 }
 

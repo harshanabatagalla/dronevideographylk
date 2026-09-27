@@ -8,8 +8,8 @@ export async function FeaturedFootage() {
     <Section className="py-20 sm:py-24">
       <SectionHeading
         eyebrow="Real footage"
-        title="Shots we've actually captured"
-        subtitle="No stock clips — every frame below was filmed by our team across the island."
+        title="Shots we filmed ourselves"
+        subtitle="No stock images. Our team took every shot below with our own drones in Sri Lanka."
       />
       <div className="mt-12">
         <FootageGallery items={featured} />

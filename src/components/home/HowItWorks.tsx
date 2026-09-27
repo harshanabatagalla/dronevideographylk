@@ -2,9 +2,9 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 
 const steps = [
-  { n: "01", title: "Pick a package", text: "Choose a half-day, full-day or event package — or ask us for a custom itinerary." },
-  { n: "02", title: "Share your plan", text: "Tell us your dates, locations and vibe over WhatsApp. We handle permits and logistics." },
-  { n: "03", title: "Get your film", text: "We fly, edit and deliver a cinematic film plus social-ready cuts, ready to share." },
+  { n: "01", title: "Pick a package", text: "Choose a half day, full day or event package. Or ask us to plan one for you." },
+  { n: "02", title: "Share your plan", text: "Send us your dates and places on WhatsApp. We take care of permits and planning." },
+  { n: "03", title: "Get your film", text: "We film and edit your video. You also get short clips for social media." },
 ];
 
 export function HowItWorks() {
@@ -12,8 +12,8 @@ export function HowItWorks() {
     <Section className="py-20 sm:py-24">
       <SectionHeading
         eyebrow="How it works"
-        title="From idea to cinematic film in 3 steps"
-        subtitle="Booked entirely on WhatsApp — no long email chains, no stress on your holiday."
+        title="Your drone video in 3 steps"
+        subtitle="You can book everything on WhatsApp. No long emails."
       />
       <div className="relative mt-14 grid gap-6 md:grid-cols-3">
         <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-night/15 to-transparent md:block" />

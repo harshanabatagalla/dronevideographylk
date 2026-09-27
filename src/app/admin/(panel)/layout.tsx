@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { isAuthenticated } from "@/lib/auth";
 import { logoutAction } from "@/app/admin/actions";
-import { getEnquiries } from "@/lib/db";
+import { getEnquiries, getOrders } from "@/lib/db";
 import { AdminNav } from "@/components/admin/AdminNav";
 import { Icon } from "@/components/ui/Icon";
 
@@ -12,6 +12,7 @@ export default async function AdminPanelLayout({ children }: { children: React.R
   if (!(await isAuthenticated())) redirect("/admin/login");
   const enquiries = await getEnquiries();
   const newCount = enquiries.filter((e) => e.status === "new").length;
+  const newOrders = (await getOrders()).filter((o) => o.status === "new").length;
 
   return (
     <div className="min-h-screen bg-cream md:grid md:grid-cols-[250px_1fr]">
@@ -27,7 +28,7 @@ export default async function AdminPanelLayout({ children }: { children: React.R
             View site ↗
           </Link>
         </div>
-        <AdminNav newEnquiries={newCount} />
+        <AdminNav newEnquiries={newCount} newOrders={newOrders} />
         <form action={logoutAction} className="p-4">
           <button
             type="submit"

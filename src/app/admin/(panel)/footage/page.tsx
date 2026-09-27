@@ -4,7 +4,7 @@ import { saveFootageAction, deleteFootageAction } from "@/app/admin/actions";
 import { AdminHeading, Card, Field, SubmitButton } from "@/components/admin/form";
 import { ConfirmButton } from "@/components/admin/ConfirmButton";
 
-const CATEGORIES = ["Travel", "Wedding", "Event", "Resort", "Adventure"];
+const CATEGORIES = ["Heritage", "Mountains", "Waterfalls", "Coast", "Lakes and Rivers", "Travel", "Wedding", "Event", "Resort", "Adventure"];
 
 export default async function AdminFootagePage({
   searchParams,

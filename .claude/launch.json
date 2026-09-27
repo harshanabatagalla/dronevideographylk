@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dronevideographylk",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "C:/Users/Sankalpa Bandara/Desktop/dronevideographylk-main", "--", "--port", "3007"],
+      "port": 3007
+    }
+  ]
+}
