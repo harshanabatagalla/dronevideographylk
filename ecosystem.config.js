@@ -13,13 +13,18 @@
 // every deploy, so even a from-scratch server recovers the same isolation
 // automatically. Do not remove the explicit port/host here without also
 // updating the Nginx proxy_pass in the server's site config to match.
+//
+// Port 4101 (not the framework-default 3000, and not 3001 either) is
+// reserved for this app in the server's port registry at /opt/ops/PORTS.md.
+// That file is the source of truth for which ports are taken on that box -
+// check it before ever changing the number below.
 module.exports = {
   apps: [
     {
       name: "drone",
       script: "npm",
-      args: "start -- -p 3001 -H 127.0.0.1",
-      env: { NODE_ENV: "production", PORT: "3001", HOSTNAME: "127.0.0.1" },
+      args: "start -- -p 4101 -H 127.0.0.1",
+      env: { NODE_ENV: "production", PORT: "4101", HOSTNAME: "127.0.0.1" },
     },
   ],
 };
