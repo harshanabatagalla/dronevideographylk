@@ -361,23 +361,7 @@
   text-transform: uppercase;
 }
 
-/* --- Heads-up display overlay (global, non-interactive) --- */
-.hud {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  pointer-events: none;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  color: rgba(255, 255, 255, 0.62);
-  mix-blend-mode: difference;
-}
-.hud-el {
-  position: absolute;
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
+/* --- Heads-up display overlay (hero-scoped, non-interactive) --- */
 .hud-corner {
   position: absolute;
   width: 26px;
@@ -388,52 +372,6 @@
 .hud-corner.tr { top: 16px; right: 16px; border-left: 0; border-bottom: 0; }
 .hud-corner.bl { bottom: 16px; left: 16px; border-right: 0; border-top: 0; }
 .hud-corner.br { bottom: 16px; right: 16px; border-left: 0; border-top: 0; }
-
-/* cursor focus reticle */
-.hud-reticle {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 58px;
-  height: 58px;
-  will-change: transform;
-}
-.hud-reticle span {
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.95);
-}
-.hud-reticle span:nth-child(1) { top: 0; left: 0; border-right: 0; border-bottom: 0; }
-.hud-reticle span:nth-child(2) { top: 0; right: 0; border-left: 0; border-bottom: 0; }
-.hud-reticle span:nth-child(3) { bottom: 0; left: 0; border-right: 0; border-top: 0; }
-.hud-reticle span:nth-child(4) { bottom: 0; right: 0; border-left: 0; border-top: 0; }
-/* crosshair */
-.hud-reticle::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)) center / 1.5px 100% no-repeat,
-    linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)) center / 100% 1.5px no-repeat;
-}
-/* blinking red REC dot in the middle */
-.hud-reticle::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 7px;
-  height: 7px;
-  border-radius: 9999px;
-  background: #ff3b3b;
-  box-shadow: 0 0 8px 2px rgba(255, 59, 59, 0.65);
-  transform: translate(-50%, -50%);
-  animation: reticleBlink 1s steps(1, end) infinite;
-}
-@keyframes reticleBlink {
-  50% { opacity: 0.12; }
-}
 
 .blink { animation: blink 1.1s steps(1) infinite; }
 @keyframes blink {
@@ -474,7 +412,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hud, .scanlines { display: none; }
+  .scanlines { display: none; }
 }
 
 
