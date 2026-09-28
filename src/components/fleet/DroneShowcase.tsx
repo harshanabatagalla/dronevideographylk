@@ -102,7 +102,7 @@ export function DroneShowcase({ drone, index }: { drone: Drone; index: number })
                 href={`/fleet/${drone.slug}`}
                 className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/5"
               >
-                Learn more <Icon name="arrow-right" size={16} />
+                What we use the {drone.name} for <Icon name="arrow-right" size={16} />
               </Link>
             </div>
           </div>

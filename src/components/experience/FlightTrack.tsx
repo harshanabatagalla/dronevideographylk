@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Icon } from "@/components/ui/Icon";
+import { photoAlt } from "@/lib/alt";
 
 export type Waypoint = {
   id: string;
@@ -11,14 +13,13 @@ export type Waypoint = {
   location: string;
   category: string;
   blurb: string;
-  altitude: number;
 };
 
 /**
- * Signature "flight over the island" — a scroll-pinned horizontal journey.
- * The section is tall; an inner panel sticks to the viewport while the film
- * strip of waypoints pans left, driven by scroll progress (rAF, no libraries).
- * On touch / small screens it degrades to a horizontal snap-scroll strip.
+ * "Where we film": one strip of location cards, rendered once for every screen.
+ * On md and up the section is tall and an inner panel sticks to the viewport
+ * while the strip pans left with scroll progress (rAF, no libraries). Below md
+ * the same strip is a native horizontal snap scroller and no transform runs.
  */
 export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -29,6 +30,7 @@ export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
+    const wide = window.matchMedia("(min-width: 768px)");
 
     let raf = 0;
     let current = -1;
@@ -36,16 +38,20 @@ export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
       const wrap = wrapRef.current;
       const track = trackRef.current;
       if (wrap && track) {
-        const total = wrap.offsetHeight - window.innerHeight;
-        const scrolled = Math.min(Math.max(-wrap.getBoundingClientRect().top, 0), total);
-        const p = total > 0 ? scrolled / total : 0;
-        const distance = track.scrollWidth - window.innerWidth;
-        track.style.transform = `translate3d(${-(p * distance)}px, 0, 0)`;
-        if (markerRef.current) markerRef.current.style.left = `${p * 100}%`;
-        const idx = Math.min(waypoints.length - 1, Math.floor(p * waypoints.length + 0.35));
-        if (idx !== current) {
-          current = idx;
-          setActive(idx);
+        if (!wide.matches) {
+          track.style.transform = "";
+        } else {
+          const total = wrap.offsetHeight - window.innerHeight;
+          const scrolled = Math.min(Math.max(-wrap.getBoundingClientRect().top, 0), total);
+          const p = total > 0 ? scrolled / total : 0;
+          const distance = track.scrollWidth - window.innerWidth;
+          track.style.transform = `translate3d(${-(p * distance)}px, 0, 0)`;
+          if (markerRef.current) markerRef.current.style.left = `${p * 100}%`;
+          const idx = Math.min(waypoints.length - 1, Math.floor(p * waypoints.length + 0.35));
+          if (idx !== current) {
+            current = idx;
+            setActive(idx);
+          }
         }
       }
       raf = requestAnimationFrame(update);
@@ -54,26 +60,22 @@ export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
     return () => cancelAnimationFrame(raf);
   }, [waypoints.length]);
 
-  return (
-    <section aria-label="A drone flight across Sri Lanka" className="bg-night text-white">
-      {/* ---- Pinned horizontal flight (md+) ---- */}
-      <div
-        ref={wrapRef}
-        className="relative hidden md:block"
-        style={{ height: `${(waypoints.length + 1) * 80}vh` }}
-      >
-        <div className="sticky top-0 flex h-screen flex-col overflow-hidden bg-cinema noise">
-          <div className="aurora opacity-30" />
+  const pinHeight = { "--pin-h": `${(waypoints.length + 1) * 80}vh` } as CSSProperties;
 
-          {/* header row */}
-          <div className="relative z-10 flex items-end justify-between px-8 pt-24 lg:px-16">
+  return (
+    <section aria-labelledby="where-we-film" className="bg-night text-white">
+      <div ref={wrapRef} style={pinHeight} className="relative md:h-[var(--pin-h)]">
+        <div className="relative bg-cinema noise px-5 py-20 md:sticky md:top-0 md:flex md:h-screen md:flex-col md:overflow-hidden md:px-0 md:py-0">
+          <div className="aurora hidden opacity-30 md:block" />
+
+          <div className="relative z-10 flex items-end justify-between md:px-8 md:pt-24 lg:px-16">
             <div>
               <span className="tape text-white/50">Locations</span>
-              <h2 className="mt-2 font-display text-4xl font-semibold text-white sm:text-5xl">
+              <h2 id="where-we-film" className="mt-2 font-display text-4xl font-semibold text-white sm:text-5xl">
                 Where we <span className="text-gradient">film</span>
               </h2>
             </div>
-            <div className="hidden text-right sm:block">
+            <div className="hidden text-right md:block">
               <div className="tape text-white/40">Location</div>
               <div className="font-mono text-lg text-sunset transition-all">
                 {String(active + 1).padStart(2, "0")} · {waypoints[active]?.location}
@@ -81,70 +83,70 @@ export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
             </div>
           </div>
 
-          {/* the moving film strip */}
-          <div className="relative z-10 flex flex-1 items-center">
+          <div className="relative z-10 md:flex md:flex-1 md:items-center">
             <div
               ref={trackRef}
-              className="flex h-[62vh] items-stretch gap-6 pl-8 pr-[20vw] will-change-transform lg:gap-8 lg:pl-16"
+              className="no-scrollbar mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:mt-0 md:h-[62vh] md:snap-none md:items-stretch md:gap-6 md:overflow-visible md:pb-0 md:pl-8 md:pr-[20vw] md:will-change-transform lg:gap-8 lg:pl-16"
             >
               {waypoints.map((wp, i) => (
                 <article
                   key={wp.id}
-                  className="group relative w-[74vw] shrink-0 overflow-hidden rounded-[2rem] border border-white/10 lg:w-[52vw]"
+                  className="group relative h-[64vh] shrink-0 basis-[85%] snap-center overflow-hidden rounded-3xl border border-white/10 md:h-auto md:basis-auto md:w-[74vw] md:rounded-[2rem] lg:w-[52vw]"
                 >
                   <Image
                     src={wp.poster}
-                    alt={wp.title}
+                    alt={photoAlt(wp.title, wp.location)}
                     fill
-                    sizes="60vw"
+                    sizes="(max-width: 767px) 85vw, (max-width: 1023px) 74vw, 52vw"
                     className="object-cover transition-transform duration-[1.2s] group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-night via-night/30 to-transparent" />
                   <div className="scanlines" />
 
-                  {/* giant waypoint number */}
-                  <span className="pointer-events-none absolute right-6 top-4 font-display text-[7rem] font-bold leading-none text-white/10">
+                  <span className="pointer-events-none absolute right-4 top-3 font-display text-6xl font-bold leading-none text-white/15 md:right-6 md:top-4 md:text-[7rem] md:text-white/10">
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
-                  {/* corner brackets to echo the HUD */}
-                  <span className="hud-corner tl !border-white/40" />
-                  <span className="hud-corner br !border-white/40" />
+                  <span className="hud-corner tl hidden !border-white/40 md:block" />
+                  <span className="hud-corner br hidden !border-white/40 md:block" />
 
-                  <div className="absolute inset-x-0 bottom-0 p-7 lg:p-9">
-                    <div className="flex items-center gap-3 tape text-white/70">
-                      <span className="rounded-full border border-white/25 px-2 py-0.5">{wp.category}</span>
-                      <span>ALT {wp.altitude}m</span>
-                    </div>
-                    <h3 className="mt-3 font-display text-4xl font-semibold text-white lg:text-5xl">
+                  <div className="absolute inset-x-0 bottom-0 p-6 md:p-7 lg:p-9">
+                    <span className="tape rounded-full border border-white/25 px-2 py-0.5 text-white/70">{wp.category}</span>
+                    <h3 className="mt-2 font-display text-3xl font-semibold text-white md:mt-3 md:text-4xl lg:text-5xl">
                       {wp.location}
                     </h3>
-                    <p className="mt-2 max-w-md text-white/75">{wp.blurb}</p>
+                    <p className="mt-1 max-w-md text-sm text-white/75 md:mt-2 md:text-base">{wp.blurb}</p>
                   </div>
                 </article>
               ))}
 
-              {/* end-of-flight CTA panel */}
-              <article className="relative flex w-[74vw] shrink-0 flex-col justify-center gap-6 rounded-[2rem] border border-white/10 bg-white/[0.03] px-10 lg:w-[40vw]">
-                <span className="tape text-white/40">Get started</span>
-                <h3 className="font-display text-4xl font-semibold leading-tight text-white lg:text-5xl">
-                  Plan your shoot <span className="text-gradient">with us.</span>
+              <article className="relative flex h-[64vh] shrink-0 basis-[85%] snap-center flex-col justify-center gap-5 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7 md:h-auto md:basis-auto md:w-[74vw] md:rounded-[2rem] md:px-10 lg:w-[40vw]">
+                <span className="tape text-white/40">More places</span>
+                <h3 className="font-display text-3xl font-semibold leading-tight text-white lg:text-5xl">
+                  Filming somewhere <span className="text-gradient">else?</span>
                 </h3>
                 <p className="max-w-sm text-white/70">
-                  Tell us where you are going and we will plan the shots.
+                  We film across the island. See the places we know well, or tell us where you are going.
                 </p>
-                <a
-                  href="/contact"
-                  className="glow-sunset inline-flex w-fit items-center gap-2 rounded-full bg-sunset px-6 py-3.5 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:bg-amber-400"
-                >
-                  Plan your shoot <Icon name="arrow-right" size={16} />
-                </a>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href="/locations"
+                    className="glow-sunset inline-flex w-fit items-center gap-2 rounded-full bg-sunset px-6 py-3.5 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:bg-amber-400"
+                  >
+                    Our filming locations <Icon name="arrow-right" size={16} />
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="inline-flex w-fit items-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/5"
+                  >
+                    Plan your shoot
+                  </Link>
+                </div>
               </article>
             </div>
           </div>
 
-          {/* flight-path progress rail */}
-          <div className="relative z-10 px-8 pb-14 lg:px-16">
+          <div className="relative z-10 hidden px-8 pb-14 md:block lg:px-16">
             <div className="relative h-px w-full flight-rail">
               <div ref={markerRef} className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ left: "0%" }}>
                 <span className="block h-3 w-3 rounded-full bg-sunset shadow-[0_0_16px_4px_rgba(245,158,11,0.6)]" />
@@ -156,47 +158,6 @@ export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
               <span>End</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* ---- Mobile snap strip ---- */}
-      <div className="bg-cinema noise px-5 py-20 md:hidden">
-        <span className="tape text-white/50">Locations</span>
-        <h2 className="mt-2 font-display text-4xl font-semibold text-white">
-          Where we <span className="text-gradient">film</span>
-        </h2>
-        <div className="filmstrip no-scrollbar mt-8 gap-4 pb-4">
-          {waypoints.map((wp, i) => (
-            <article key={wp.id} className="relative h-[64vh] overflow-hidden rounded-3xl border border-white/10">
-              <Image src={wp.poster} alt={wp.title} fill sizes="85vw" className="object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-night via-night/30 to-transparent" />
-              <span className="pointer-events-none absolute right-4 top-3 font-display text-6xl font-bold text-white/15">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="absolute inset-x-0 bottom-0 p-6">
-                <div className="tape text-white/70">{wp.category} · ALT {wp.altitude}m</div>
-                <h3 className="mt-2 font-display text-3xl font-semibold text-white">{wp.location}</h3>
-                <p className="mt-1 text-sm text-white/75">{wp.blurb}</p>
-              </div>
-            </article>
-          ))}
-
-          {/* end-of-flight CTA — last card in the strip, like desktop */}
-          <article className="relative flex h-[64vh] flex-col justify-center gap-4 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7">
-            <span className="tape text-white/40">Get started</span>
-            <h3 className="font-display text-3xl font-semibold leading-tight text-white">
-              Plan your shoot <span className="text-gradient">with us.</span>
-            </h3>
-            <p className="text-white/70">
-              Tell us where you are going and we will plan the shots.
-            </p>
-            <a
-              href="/contact"
-              className="glow-sunset inline-flex w-fit items-center gap-2 rounded-full bg-sunset px-6 py-3.5 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:bg-amber-400"
-            >
-              Plan your shoot <Icon name="arrow-right" size={16} />
-            </a>
-          </article>
         </div>
       </div>
     </section>

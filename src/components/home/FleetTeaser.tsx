@@ -12,14 +12,14 @@ export async function FleetTeaser() {
       <Section className="relative">
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-sunset/40 bg-sunset/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-sunset">
-            <Icon name="camera" size={14} /> Our drone fleet
+            <Icon name="camera" size={14} /> Our drones
           </span>
           <h2 className="mt-4 font-display text-4xl font-semibold text-white text-balance sm:text-5xl">
-            Our <span className="text-gradient">fly ready</span> drones
+            The <span className="text-gradient">drones we use</span>
           </h2>
           <p className="mt-4 text-lg text-white/70">
-            Each drone explained in plain words. Pick the one that fits your shoot,
-            or ask us to choose.
+            We use different drones depending on the place, the weather and the shots you want. Each one is
+            explained in plain words.
           </p>
         </div>
         <div className="mt-14 grid gap-6 md:grid-cols-3">
@@ -31,7 +31,7 @@ export async function FleetTeaser() {
         </div>
         <div className="mt-12 text-center">
           <Button href="/fleet" icon>
-            Explore the full fleet
+            See all our drones
           </Button>
         </div>
       </Section>

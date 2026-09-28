@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Hero background video. The file is large, so phones and tablets get only the
- * poster image and never download it. Wider screens load it after the page is
- * ready, so it never competes with the content for bandwidth.
+ * Hero background video. Phones and tablets never download it; they only see the
+ * optimized poster image rendered behind this element by Hero. Wider screens load
+ * it after the page is ready, so it never competes with the content for bandwidth.
  */
-export function HeroVideo({ src, type, poster }: { src: string; type: string; poster: string }) {
+export function HeroVideo({ src, type }: { src: string; type: string }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [load, setLoad] = useState(false);
 
@@ -27,8 +27,7 @@ export function HeroVideo({ src, type, poster }: { src: string; type: string; po
   return (
     <video
       ref={ref}
-      className="absolute inset-0 h-full w-full object-cover"
-      poster={poster}
+      className="absolute inset-0 h-full w-full bg-transparent object-cover"
       autoPlay
       muted
       loop

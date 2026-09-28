@@ -1,10 +1,10 @@
 import { Icon } from "@/components/ui/Icon";
 
 const items = [
-  { icon: "shield", text: "Licensed & insured pilots" },
+  { icon: "shield", text: "Licensed and insured pilots" },
   { icon: "camera", text: "4K and 6K video" },
-  { icon: "check", text: "Permits handled for you" },
-  { icon: "whatsapp", text: "Book in minutes on WhatsApp" },
+  { icon: "check", text: "Help with drone permits" },
+  { icon: "whatsapp", text: "Book on WhatsApp from abroad" },
 ] as const;
 
 export function TrustBar() {

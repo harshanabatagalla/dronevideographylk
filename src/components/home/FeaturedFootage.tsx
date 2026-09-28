@@ -7,16 +7,16 @@ export async function FeaturedFootage() {
   return (
     <Section className="py-20 sm:py-24">
       <SectionHeading
-        eyebrow="Real footage"
-        title="Shots we filmed ourselves"
-        subtitle="No stock images. Our team took every shot below with our own drones in Sri Lanka."
+        eyebrow="Our work"
+        title="Drone photos we took in Sri Lanka"
+        subtitle="No stock images. Our team took every photo below with our own drones."
       />
       <div className="mt-12">
         <FootageGallery items={featured} />
       </div>
       <div className="mt-10 text-center">
         <Button href="/portfolio" variant="ghost" icon>
-          See the full portfolio
+          See all our drone photos
         </Button>
       </div>
     </Section>
