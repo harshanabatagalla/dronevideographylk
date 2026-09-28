@@ -22,4 +22,9 @@ jobs:
             git reset --hard origin/main
             npm ci
             npm run build
-            pm2 restart drone
+            # startOrRestart re-applies the pinned port/host from
+            # ecosystem.config.js every deploy, so the isolation fix from
+            # 2026-09-28 can never silently drift even if the server's PM2
+            # process table is ever rebuilt from scratch.
+            pm2 startOrRestart ecosystem.config.js --update-env
+            pm2 save
