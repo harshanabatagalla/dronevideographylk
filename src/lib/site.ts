@@ -16,7 +16,7 @@ export const site = {
   whatsapp: "+94775406357",
   whatsappMessage:
     "Hi! I'm visiting Sri Lanka and I'd love a drone videography quote.",
-  email: "hello@dronevideography.lk",
+  email: "sankalpabandara60@gmail.com",
   phone: "+94 77 540 6357",
   address: "Colombo, Sri Lanka",
   // Social links, editable from the admin dashboard. Only add profiles that exist:
