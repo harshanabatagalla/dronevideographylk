@@ -5,11 +5,12 @@ import { getDrones, getSettings } from "@/lib/db";
 import { ShootPlanner } from "@/components/booking/ShootPlanner";
 import { whatsappHref } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 
 export const metadata = pageMetadata({
-  title: "Our Drone Fleet",
+  title: "Our Drones for Filming in Sri Lanka",
   description:
-    "Meet our fleet of professional camera drones. Every specification explained in plain language so you can pick the right drone for your Sri Lanka shoot.",
+    "The DJI drones we use for filming in Sri Lanka, from the small Mini 2 to the Mavic 4 Pro. What each one is good at, explained in plain words, so you can choose.",
   path: "/fleet",
 });
 
@@ -21,15 +22,18 @@ export default async function FleetPage() {
       <header className="relative flex min-h-[70vh] items-center overflow-hidden bg-cinema noise pt-24">
         <div className="aurora" />
         <div className="relative mx-auto w-full max-w-6xl px-5 text-center sm:px-8">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 backdrop-blur">
-            <Icon name="drone" size={14} /> Fly ready drones
+          <div className="flex justify-center">
+            <Breadcrumbs items={[{ name: "Our Drones", path: "/fleet" }]} />
+          </div>
+          <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 backdrop-blur">
+            <Icon name="drone" size={14} /> Our drones
           </span>
           <h1 className="mx-auto mt-6 max-w-4xl font-display text-5xl font-semibold leading-[1.02] text-white text-balance sm:text-6xl md:text-7xl">
-            Choose the <span className="text-gradient">right drone</span> for your shoot
+            The <span className="text-gradient">drones we use</span> in Sri Lanka
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-            No hard tech words. Just what each drone is good at, in plain
-            English. Every flight is handled by a licensed, insured pilot.
+            We use different drones depending on the place, the weather and the shots you want. Here is what
+            each one is good at, in plain English. A licensed, insured pilot flies every one.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <a
@@ -44,7 +48,7 @@ export default async function FleetPage() {
               href="#fleet"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/5"
             >
-              Explore drones <Icon name="arrow-right" size={16} />
+              See the drones <Icon name="arrow-right" size={16} />
             </a>
           </div>
           <div className="scroll-cue mt-14 flex justify-center text-white/50">
@@ -86,9 +90,12 @@ export default async function FleetPage() {
           >
             <Icon name="whatsapp" size={18} /> Chat with a pilot
           </a>
-          <p className="mt-6">
-            <Link href="/portfolio" className="text-sm font-medium text-white/60 hover:text-white">
-              Or watch what these drones can do →
+          <p className="mt-6 flex flex-col items-center gap-2 text-sm font-medium sm:flex-row sm:justify-center sm:gap-6">
+            <Link href="/portfolio" className="text-white/60 hover:text-white">
+              See photos we took with these drones
+            </Link>
+            <Link href="/shop" className="text-white/60 hover:text-white">
+              Want to buy a DJI drone? Visit our shop
             </Link>
           </p>
         </div>

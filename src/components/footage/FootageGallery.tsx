@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { droneName, type Footage } from "@/lib/content";
+import { photoAlt } from "@/lib/alt";
 
 /**
  * Responsive footage grid with an accessible lightbox. Items with a YouTube id
@@ -55,7 +56,7 @@ export function FootageGallery({
           >
             <Image
               src={f.poster}
-              alt={`Drone ${f.youtubeId ? "video" : "photo"} of ${f.title}, ${f.location}, Sri Lanka`}
+              alt={photoAlt(f.title, f.location)}
               fill
               loading="lazy"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -113,7 +114,7 @@ export function FootageGallery({
               ) : (
                 <Image
                   src={active.poster}
-                  alt={`Drone photo of ${active.title}, ${active.location}, Sri Lanka`}
+                  alt={photoAlt(active.title, active.location)}
                   fill
                   sizes="(max-width: 1024px) 100vw, 900px"
                   className="object-contain"

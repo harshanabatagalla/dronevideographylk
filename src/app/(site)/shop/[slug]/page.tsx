@@ -7,7 +7,9 @@ import { PhotoCredit } from "@/components/shop/PhotoCredit";
 import { VariantPicker } from "@/components/shop/VariantPicker";
 import { getProduct, getProducts, lowestPrice, SERIES, windLabel } from "@/lib/shop";
 import { site } from "@/lib/site";
-import { pageMetadata, JsonLd } from "@/lib/seo";
+import { fitDescription, pageMetadata, JsonLd } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { RULES_PATH } from "@/lib/drone-rules";
 
 export function generateStaticParams() {
   return getProducts().map((p) => ({ slug: p.slug }));
@@ -19,7 +21,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!p) return pageMetadata({ title: "Drone not found", path: `/shop/${slug}` });
   return pageMetadata({
     title: `${p.name} Price in Sri Lanka`,
-    description: `${p.name} in Sri Lanka. ${p.headline} Wind resistance ${windLabel(p)}. See the price, benefits and common problems before you buy.`,
+    description: fitDescription([
+      `${p.name} price in Sri Lanka.`,
+      p.headline,
+      "See the kit, wind handling and common problems before you buy.",
+      `Wind resistance ${windLabel(p)}.`,
+    ]),
     path: `/shop/${p.slug}`,
   });
 }
@@ -54,9 +61,12 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
       <JsonLd data={productJsonLd} />
       <div className="bg-skyline pb-8 pt-28">
         <Section>
-          <Link href="/shop" className="tap inline-flex items-center gap-1 text-sm text-white/70 hover:text-sunset">
-            ← Back to shop
-          </Link>
+          <Breadcrumbs
+            items={[
+              { name: "Shop", path: "/shop" },
+              { name: p.name, path: `/shop/${p.slug}` },
+            ]}
+          />
         </Section>
       </div>
 
@@ -121,7 +131,13 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
             ))}
             <li className="flex gap-2">
               <span className="text-sunset">•</span>
-              Register your drone with the Civil Aviation Authority of Sri Lanka (CAASL) before flying.
+              <span>
+                Register your drone with the Civil Aviation Authority of Sri Lanka (CAASL) before flying.{" "}
+                <Link href={RULES_PATH} className="font-semibold text-ocean hover:underline">
+                  Read the Sri Lanka drone rules
+                </Link>
+                .
+              </span>
             </li>
           </ul>
         </div>

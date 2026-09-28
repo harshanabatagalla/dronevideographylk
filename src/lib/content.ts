@@ -427,32 +427,9 @@ export const locations: Location[] = [
   { slug: "somawathiya", name: "Somawathiya", x: 66, y: 36, blurb: "The Mahaweli River winding through forest." },
 ];
 
-export const testimonials: Testimonial[] = [
-  {
-    name: "Emma & Jack",
-    country: "United Kingdom",
-    countryFlag: "🇬🇧",
-    quote:
-      "Our honeymoon film gave us goosebumps. They knew exactly where to fly for that golden light over Mirissa.",
-    rating: 5,
-  },
-  {
-    name: "Lukas M.",
-    country: "Germany",
-    countryFlag: "🇩🇪",
-    quote:
-      "Professional, punctual and the 4K footage of Ella is unreal. Handled all the permits so we just enjoyed the trip.",
-    rating: 5,
-  },
-  {
-    name: "Sophie D.",
-    country: "Australia",
-    countryFlag: "🇦🇺",
-    quote:
-      "Booked over WhatsApp in minutes. The surf reel from Weligama looks like a travel commercial.",
-    rating: 5,
-  },
-];
+// Real client reviews only, added from the admin dashboard. The original seed
+// entries were placeholders, not real clients, so the site starts with none.
+export const testimonials: Testimonial[] = [];
 
 export function getDrone(slug: string): Drone | undefined {
   return drones.find((d) => d.slug === slug);

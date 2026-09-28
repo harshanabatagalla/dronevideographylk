@@ -4,7 +4,15 @@ import { useState, type FormEvent } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { ALL_COUNTRIES, COMMON_COUNTRIES } from "@/lib/countries";
 
-const shootTypes = ["Travel film", "Wedding", "Event", "Resort / Hotel", "Adventure / Surf", "Real estate", "Other"];
+const shootTypes = [
+  "Travel video",
+  "Wedding or event",
+  "Hotel or resort",
+  "Surf or outdoor trip",
+  "Property or land",
+  "Drone photos",
+  "Other",
+];
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");

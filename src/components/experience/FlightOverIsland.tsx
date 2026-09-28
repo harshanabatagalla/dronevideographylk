@@ -10,14 +10,13 @@ export async function FlightOverIsland() {
   const footage = await getFeaturedFootage();
   const blurbByName = new Map(locations.map((l) => [l.name.toLowerCase(), l.blurb]));
 
-  const waypoints: Waypoint[] = footage.map((f, i) => ({
+  const waypoints: Waypoint[] = footage.map((f) => ({
     id: f.id,
     title: f.title,
     poster: f.poster,
     location: f.location,
     category: f.category,
-    blurb: blurbByName.get(f.location.toLowerCase()) ?? "Filmed from the sky over Sri Lanka.",
-    altitude: 280 + i * 160,
+    blurb: blurbByName.get(f.location.toLowerCase()) ?? f.title,
   }));
 
   if (waypoints.length === 0) return null;

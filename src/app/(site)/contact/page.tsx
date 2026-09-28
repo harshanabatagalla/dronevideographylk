@@ -1,4 +1,6 @@
-import { Section, SectionHeading } from "@/components/ui/Section";
+import { Section } from "@/components/ui/Section";
+import { PageHero } from "@/components/ui/PageHero";
+import { WHAT_TO_SEND } from "@/components/booking/EnquiryCta";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Icon } from "@/components/ui/Icon";
 import { buildWhatsappHref } from "@/lib/site";
@@ -6,9 +8,9 @@ import { getSettings } from "@/lib/db";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Contact Us to Book a Drone Video",
+  title: "Contact Us to Book a Drone Shoot in Sri Lanka",
   description:
-    "Get a drone videography quote for your Sri Lanka trip, wedding or event. Message us on WhatsApp or send an enquiry. We reply within 24 hours.",
+    "Get a price for drone filming in Sri Lanka for your trip, wedding, hotel or property. Message us on WhatsApp or send an enquiry. We reply within 24 hours.",
   path: "/contact",
 });
 
@@ -26,16 +28,17 @@ export default async function ContactPage() {
   ).filter((s) => s.href);
   return (
     <>
-      <div className="bg-skyline pb-16 pt-32">
-        <Section>
-          <SectionHeading
-            light
-            eyebrow="Contact us"
-            title="Let's plan your drone video"
-            subtitle="Tell us your dates and the shots you want. WhatsApp is the fastest way to reach us."
-          />
-        </Section>
-      </div>
+      <PageHero
+        crumbs={[{ name: "Contact", path: "/contact" }]}
+        eyebrow="Contact us"
+        title="Contact us about your drone shoot"
+        intro={
+          <p>
+            Tell us your dates and the shots you want. WhatsApp is the fastest way to reach us, and you can
+            message us before you arrive in Sri Lanka.
+          </p>
+        }
+      />
 
       <Section className="py-16">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
@@ -96,6 +99,20 @@ export default async function ContactPage() {
                 </span>
               </li>
             </ul>
+
+            <div className="mt-8 rounded-2xl border border-night/10 bg-white p-5">
+              <h2 className="font-display text-lg font-semibold text-night">What to send us</h2>
+              <ul className="mt-3 space-y-2 text-sm text-night/70">
+                {WHAT_TO_SEND.map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-0.5 text-teal">
+                      <Icon name="check" size={14} />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             {socialLinks.length > 0 && (
               <div className="mt-8">

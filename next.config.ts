@@ -20,6 +20,8 @@ const nextConfig: NextConfig = {
     // never legitimately requests past ~2048px. Dropping the 3840 tier
     // removes a wasted candidate from every responsive image's srcset.
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    // 60 is used only for the hero poster, which sits under a dark gradient overlay.
+    qualities: [60, 75],
     // Allow optimized remote images. Replace/extend with your CDN (Bunny,
     // Cloudflare R2, Cloudinary) when wiring real media in Phase 2.
     remotePatterns: [

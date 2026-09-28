@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { PHOTO_CREDITS } from "@/lib/photo-credits";
 import { getProduct } from "@/lib/shop";
+import { getDrone } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -11,8 +12,19 @@ export const metadata = pageMetadata({
   path: "/credits",
 });
 
+/** Where a credited photo is shown: its shop page, or our drone page. Null if it is no longer used. */
+function usedOn(slug: string): { name: string; href: string } | null {
+  const product = getProduct(slug);
+  if (product) return { name: product.name, href: `/shop/${slug}` };
+  const drone = getDrone(slug);
+  if (drone) return { name: drone.name, href: `/fleet/${slug}` };
+  return null;
+}
+
 export default function CreditsPage() {
-  const rows = Object.entries(PHOTO_CREDITS);
+  const rows = Object.entries(PHOTO_CREDITS)
+    .map(([slug, c]) => ({ slug, c, page: usedOn(slug) }))
+    .filter((r) => r.page !== null);
   return (
     <>
       <div className="bg-skyline pb-10 pt-32">
@@ -28,13 +40,12 @@ export default function CreditsPage() {
 
       <Section className="py-12">
         <ul className="divide-y divide-night/10 rounded-3xl border border-night/10 bg-white">
-          {rows.map(([slug, c]) => {
-            const product = getProduct(slug);
+          {rows.map(({ slug, c, page }) => {
             return (
               <li key={slug} className="flex flex-wrap items-baseline justify-between gap-2 p-5">
                 <span>
-                  <Link href={`/shop/${slug}`} className="font-semibold text-night hover:text-ocean">
-                    {product?.name ?? slug}
+                  <Link href={page!.href} className="font-semibold text-night hover:text-ocean">
+                    {page!.name}
                   </Link>
                   <span className="ml-2 text-sm text-night/60">by {c.author}</span>
                 </span>

@@ -62,9 +62,9 @@ export function DroneCard({ drone }: { drone: Drone }) {
         <div className="mt-6 flex items-center gap-3 border-t border-white/10 pt-5">
           <Link
             href={`/fleet/${drone.slug}`}
-            className="tap text-sm font-semibold text-sunset transition hover:text-amber-300"
+            className="tap inline-flex items-center gap-1 text-sm font-semibold text-sunset transition hover:text-amber-300"
           >
-            View details →
+            {drone.name} details <Icon name="arrow-right" size={14} />
           </Link>
           <a
             href={whatsappHref(`Hi! I'd like to book the ${drone.name} drone for my Sri Lanka trip.`)}

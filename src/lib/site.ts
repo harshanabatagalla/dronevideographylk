@@ -7,9 +7,9 @@
 export const site = {
   name: "dronevideography.lk",
   brand: "Drone Videography LK",
-  tagline: "Sri Lanka, from above.",
+  tagline: "Drone filming and photography across Sri Lanka.",
   description:
-    "Drone videography across Sri Lanka for travellers, weddings and events. Licensed and insured pilots film your trip in 4K and 6K.",
+    "Drone videography and photography across Sri Lanka for travellers, hotels, weddings and property. We help with drone permits. Send your date on WhatsApp.",
   url: "https://dronevideography.lk",
   locale: "en_LK",
   // Contact — travelers strongly prefer WhatsApp, so it is first-class.
@@ -19,10 +19,11 @@ export const site = {
   email: "hello@dronevideography.lk",
   phone: "+94 77 540 6357",
   address: "Colombo, Sri Lanka",
-  // Social links — editable from the admin dashboard.
+  // Social links, editable from the admin dashboard. Only add profiles that exist:
+  // the YouTube handle that used to sit here returned 404.
   socials: {
     instagram: "https://instagram.com/dronevideography.lk",
-    youtube: "https://youtube.com/@dronevideography.lk",
+    youtube: "",
     facebook: "https://facebook.com/dronevideography.lk",
     tiktok: "https://tiktok.com/@dronevideography.lk",
   },
@@ -40,9 +41,11 @@ export function buildWhatsappHref(number: string, message: string): string {
 }
 
 export const nav = [
-  { label: "Home", href: "/" },
-  { label: "Our Fleet", href: "/fleet" },
+  { label: "Services", href: "/services" },
+  { label: "Our Drones", href: "/fleet" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Locations", href: "/locations" },
+  { label: "Drone Rules", href: "/sri-lanka-drone-rules" },
   { label: "Shop", href: "/shop" },
   { label: "Contact", href: "/contact" },
 ] as const;

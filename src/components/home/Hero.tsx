@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Section";
 import { HeroVideo } from "./HeroVideo";
 import { Icon } from "@/components/ui/Icon";
@@ -5,16 +6,17 @@ import { HeroHUD } from "@/components/experience/HeroHUD";
 import { BookButton } from "@/components/booking/BookingDialog";
 import { getSettings } from "@/lib/db";
 
+// Places from our own portfolio.
 const TICKER = [
   "Sigiriya",
-  "Ella",
-  "Mirissa",
-  "Galle Fort",
-  "Nuwara Eliya",
   "Kandy",
-  "Yala",
+  "Ella",
+  "Knuckles",
+  "Meemure",
+  "Hiriketiya",
+  "Kalpitiya",
   "Arugam Bay",
-  "Nine Arch Bridge",
+  "Bambarakanda",
 ];
 
 /**
@@ -28,7 +30,20 @@ export async function Hero() {
   const videoType = heroVideo.endsWith(".webm") ? "video/webm" : "video/mp4";
   return (
     <section id="hero" className="relative flex min-h-[100svh] flex-col overflow-hidden bg-night">
-      <HeroVideo src={heroVideo} type={videoType} poster={heroPoster} />
+      {/* The poster is the LCP element on phones (the video only loads on wide screens),
+          so serve it through the image optimizer at the right size, preloaded. It is a
+          16:9 photo cropped to cover, so in portrait its rendered width follows the
+          screen height, not the width. */}
+      <Image
+        src={heroPoster}
+        alt=""
+        fill
+        preload
+        quality={60}
+        sizes="(orientation: portrait) 100vh, 100vw"
+        className="object-cover"
+      />
+      <HeroVideo src={heroVideo} type={videoType} />
       <div className="absolute inset-0 bg-gradient-to-b from-night/85 via-night/55 to-night" />
       <div className="absolute inset-0 bg-gradient-to-r from-night/85 via-night/25 to-transparent" />
       <div className="aurora opacity-40" />
@@ -45,34 +60,35 @@ export async function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sunset opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-sunset" />
               </span>
-              Now booking across Sri Lanka
+              Booking shoots across Sri Lanka
             </span>
 
             <h1 className="mt-5 font-display font-bold uppercase text-white kinetic-line">
-              <span className="block text-outline-sunset text-[2.75rem] leading-[0.9] sm:text-7xl lg:text-8xl">Fly</span>
-              <span className="block text-gradient text-[2.75rem] leading-[0.9] sm:text-7xl lg:text-8xl">Sri Lanka</span>
-              <span className="block text-2xl text-white/90 sm:text-5xl lg:text-6xl">from above.</span>
+              <span className="block text-gradient text-[2.6rem] leading-[0.95] sm:text-7xl lg:text-8xl">
+                Drone videography
+              </span>
+              <span className="block text-2xl text-white/90 sm:text-5xl lg:text-6xl">in Sri Lanka</span>
             </h1>
 
             <p className="mt-5 max-w-xl text-base text-white/80 sm:text-lg">
-              Drone videos of your trip, wedding or event in Sri Lanka. Filmed in 4K
-              and 6K by licensed and insured pilots.
+              Drone filming and photography for travellers, hotels, weddings and property across Sri Lanka.
+              We help with the drone permits. Send us your date and location.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <BookButton
                 className="glow-sunset inline-flex items-center justify-center gap-2 rounded-full bg-sunset px-7 py-3.5 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:bg-amber-400"
               >
-                <Icon name="whatsapp" size={18} /> Book a drone video
+                <Icon name="whatsapp" size={18} /> Check availability
               </BookButton>
-              <Button href="/portfolio" variant="light" icon>
-                See our videos
+              <Button href="/services" variant="light" icon>
+                Our drone services
               </Button>
             </div>
             <dl className="mt-7 grid max-w-md grid-cols-3 gap-4 text-white sm:gap-6">
               {[
                 { n: "4K / 6K", l: "Video quality" },
                 { n: "20+", l: "Locations" },
-                { n: "100%", l: "Licensed & insured" },
+                { n: "Licensed", l: "and insured pilots" },
               ].map((s) => (
                 <div key={s.l} className="border-l border-white/15 pl-3 sm:pl-4">
                   <dt className="font-display text-xl font-semibold text-sunset sm:text-2xl">{s.n}</dt>

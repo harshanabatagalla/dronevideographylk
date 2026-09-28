@@ -4,7 +4,10 @@ import { ShopGrid } from "@/components/shop/ShopGrid";
 import { AccessoryGrid } from "@/components/shop/AccessoryGrid";
 import { getProducts } from "@/lib/shop";
 import { whatsappHref } from "@/lib/site";
+import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { RULES_PATH } from "@/lib/drone-rules";
 
 export const metadata = pageMetadata({
   title: "Buy DJI Drones in Sri Lanka",
@@ -20,7 +23,8 @@ export default function ShopPage() {
       <header className="relative overflow-hidden bg-cinema noise pb-16 pt-32">
         <div className="aurora" />
         <div className="relative mx-auto w-full max-w-6xl px-5 sm:px-8">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 backdrop-blur">
+          <Breadcrumbs items={[{ name: "Shop", path: "/shop" }]} />
+          <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 backdrop-blur">
             <Icon name="cart" size={14} /> Drone shop
           </span>
           <h1 className="mt-6 max-w-3xl font-display text-4xl font-semibold leading-[1.05] text-white text-balance sm:text-5xl md:text-6xl">
@@ -55,7 +59,11 @@ export default function ShopPage() {
           </Note>
           <Note icon="map-pin" title="Flying in Sri Lanka">
             Drones must be registered with the Civil Aviation Authority of Sri Lanka (CAASL) before you
-            fly. Ask us and we will explain the steps.
+            fly.{" "}
+            <Link href={RULES_PATH} className="font-semibold text-ocean hover:underline">
+              See the drone rules
+            </Link>
+            .
           </Note>
         </div>
 

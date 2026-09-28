@@ -29,7 +29,7 @@ export function ProductVisual({
         src={product.image}
         alt={product.name}
         fill
-        priority={priority}
+        preload={priority}
         sizes={sizes}
         className="object-cover"
       />

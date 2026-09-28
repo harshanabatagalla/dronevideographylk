@@ -38,14 +38,14 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex lg:gap-8" aria-label="Primary">
+        <nav className="hidden items-center gap-6 xl:flex" aria-label="Primary">
           {nav.map((item) => {
-            const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+            const active = pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm font-medium transition-colors ${
+                className={`whitespace-nowrap text-sm font-medium transition-colors ${
                   active ? "text-sunset" : "text-white/80 hover:text-white"
                 }`}
               >
@@ -55,18 +55,18 @@ export function Header() {
           })}
           <CartButton />
           <BookButton
-            className="inline-flex items-center gap-2 rounded-full bg-sunset px-5 py-2.5 text-sm font-semibold text-night transition hover:bg-amber-400"
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-sunset px-5 py-2.5 text-sm font-semibold text-night transition hover:bg-amber-400"
           >
             <Icon name="whatsapp" size={18} /> Book Now
           </BookButton>
         </nav>
 
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-1 xl:hidden">
           <CartButton />
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="grid h-10 w-10 place-items-center rounded-lg text-white md:hidden"
+            className="grid h-10 w-10 place-items-center rounded-lg text-white xl:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
@@ -76,7 +76,7 @@ export function Header() {
       </div>
 
       {open && (
-        <nav className="safe-pb border-t border-white/10 bg-night/95 px-5 py-4 md:hidden" aria-label="Mobile">
+        <nav className="safe-pb border-t border-white/10 bg-night/95 px-5 py-4 xl:hidden" aria-label="Mobile">
           <ul className="flex flex-col gap-1">
             {nav.map((item) => (
               <li key={item.href}>
