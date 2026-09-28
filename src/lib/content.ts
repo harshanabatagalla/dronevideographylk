@@ -69,14 +69,6 @@ export type Testimonial = {
   rating: number;
 };
 
-export type Package = {
-  name: string;
-  priceFrom: string;
-  duration: string;
-  includes: string[];
-  highlight?: boolean;
-};
-
 /* ------------------------------------------------------------------ */
 /* Seed data                                                           */
 /* ------------------------------------------------------------------ */
@@ -459,28 +451,6 @@ export const testimonials: Testimonial[] = [
     quote:
       "Booked over WhatsApp in minutes. The surf reel from Weligama looks like a travel commercial.",
     rating: 5,
-  },
-];
-
-export const packages: Package[] = [
-  {
-    name: "Half-Day Escape",
-    priceFrom: "$149",
-    duration: "Up to 4 hours, one location",
-    includes: ["1 drone + pilot", "Edited video (60 to 90 seconds)", "4K footage delivery", "Basic colour grade"],
-  },
-  {
-    name: "Full-Day Adventure",
-    priceFrom: "$279",
-    duration: "Up to 8 hours, two locations",
-    includes: ["Choice of drone", "Edited video (2 to 3 minutes)", "Raw + edited files", "Licensed & insured pilot", "Permit handling"],
-    highlight: true,
-  },
-  {
-    name: "Multi-Day / Event",
-    priceFrom: "Custom",
-    duration: "Weddings, tours & itineraries",
-    includes: ["Multiple drones", "Full film + social cuts", "Ground + aerial coverage", "Dedicated producer"],
   },
 ];
 

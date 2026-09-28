@@ -1,7 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ContactFloat } from "@/components/layout/ContactFloat";
-import { DroneHUD } from "@/components/experience/DroneHUD";
 import { localBusinessJsonLd, JsonLd } from "@/lib/seo";
 import { getSettings } from "@/lib/db";
 import { CartProvider } from "@/components/shop/CartProvider";
@@ -13,7 +12,6 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
     <CartProvider>
       <BookingProvider whatsapp={settings.whatsapp}>
         <JsonLd data={localBusinessJsonLd()} />
-        <DroneHUD />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer settings={settings} />

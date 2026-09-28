@@ -16,6 +16,7 @@ export type IconName =
   | "map-pin"
   | "whatsapp"
   | "phone"
+  | "mail"
   | "instagram"
   | "youtube"
   | "facebook"
@@ -93,6 +94,12 @@ const paths: Record<IconName, React.ReactNode> = {
   ),
   phone: (
     <path d="M6.6 10.8a12 12 0 0 0 5.6 5.6l1.9-1.9c.3-.3.7-.4 1.1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .5 1 1V19c0 .6-.4 1-1 1A16 16 0 0 1 4 6c0-.6.4-1 1-1h2.7c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1.1z" />
+  ),
+  mail: (
+    <>
+      <rect x="3" y="5" width="18" height="14" rx="2.5" />
+      <path d="m4 7 8 6 8-6" />
+    </>
   ),
   instagram: (
     <>
