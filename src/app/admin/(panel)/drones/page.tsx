@@ -81,7 +81,7 @@ export default async function AdminDronesPage({
               <li key={d.slug} className="flex items-center gap-4 rounded-2xl border border-night/10 bg-white p-4">
                 {d.image && (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={d.image} alt="" className="h-14 w-20 rounded-lg object-cover" />
+                  <img src={d.image} alt={`${d.name} thumbnail`} className="h-14 w-20 rounded-lg object-cover" />
                 )}
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-semibold text-night">{d.name}</p>

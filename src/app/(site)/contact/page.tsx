@@ -78,7 +78,7 @@ export default async function ContactPage() {
                   className="flex items-center gap-4 rounded-2xl border border-night/10 bg-white p-4 transition hover:border-ocean/40"
                 >
                   <span className="grid h-11 w-11 place-items-center rounded-xl bg-ocean/10 text-ocean">
-                    <Icon name="arrow-right" size={22} />
+                    <Icon name="mail" size={22} />
                   </span>
                   <span>
                     <span className="block font-semibold text-night">Email</span>

@@ -59,12 +59,12 @@ export function SectionHeading({
 
 type ButtonProps = {
   children: ReactNode;
-  href?: string;
+  href: string;
   variant?: "primary" | "ghost" | "light";
   icon?: boolean;
 } & Partial<ComponentProps<typeof Link>>;
 
-export function Button({ children, href = "#", variant = "primary", icon = false, ...rest }: ButtonProps) {
+export function Button({ children, href, variant = "primary", icon = false, ...rest }: ButtonProps) {
   const base =
     "inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sunset";
   const styles = {

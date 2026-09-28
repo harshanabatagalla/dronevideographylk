@@ -96,7 +96,7 @@ export default async function AdminFootagePage({
               <li key={f.id} className="flex items-center gap-4 rounded-2xl border border-night/10 bg-white p-4">
                 {f.poster && (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={f.poster} alt="" className="h-14 w-20 rounded-lg object-cover" />
+                  <img src={f.poster} alt={`${f.title} thumbnail`} className="h-14 w-20 rounded-lg object-cover" />
                 )}
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-semibold text-night">
