@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { addOrder, type Order, type OrderItem } from "@/lib/db";
 import { getSku } from "@/lib/shop";
+import { sendNotification } from "@/lib/email";
 
 export const runtime = "nodejs";
 
@@ -94,41 +95,24 @@ export async function POST(request: Request) {
     );
   }
 
-  // Notify the shop by email when Resend is configured (same setup as the contact form).
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
-  if (apiKey && to) {
-    const lines = items.map((i) => `${i.qty} x ${i.name} @ Rs ${i.price.toLocaleString("en-LK")}`).join("\n");
-    try {
-      await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-        body: JSON.stringify({
-          from: "dronevideography.lk <onboarding@resend.dev>",
-          to: [to],
-          reply_to: customer.email,
-          subject: `New drone order ${order.ref} from ${customer.name} (Rs ${total.toLocaleString("en-LK")})`,
-          text: [
-            `Order: ${order.ref}`,
-            lines,
-            `Total: Rs ${total.toLocaleString("en-LK")}`,
-            `Payment: ${payment}`,
-            "",
-            `Name: ${customer.name}`,
-            `Email: ${customer.email}`,
-            `Phone: ${customer.phone}`,
-            `Address: ${customer.address}, ${customer.city}`,
-            `Notes: ${order.notes}`,
-          ].join("\n"),
-        }),
-      });
-    } catch (err) {
-      // The order is already saved and visible in the admin panel.
-      console.error("Failed to send order email", err);
-    }
-  } else {
-    console.info(`New order ${order.ref} (email delivery not configured)`);
-  }
+  // The order is already saved in the admin panel; a failed email is logged by sendNotification.
+  const lines = items.map((i) => `${i.qty} x ${i.name} @ Rs ${i.price.toLocaleString("en-LK")}`).join("\n");
+  await sendNotification({
+    replyTo: customer.email,
+    subject: `New drone order ${order.ref} from ${customer.name} (Rs ${total.toLocaleString("en-LK")})`,
+    text: [
+      `Order: ${order.ref}`,
+      lines,
+      `Total: Rs ${total.toLocaleString("en-LK")}`,
+      `Payment: ${payment}`,
+      "",
+      `Name: ${customer.name}`,
+      `Email: ${customer.email}`,
+      `Phone: ${customer.phone}`,
+      `Address: ${customer.address}, ${customer.city}`,
+      `Notes: ${order.notes}`,
+    ].join("\n"),
+  });
 
   return NextResponse.json({ ok: true, ref: order.ref, total });
 }
