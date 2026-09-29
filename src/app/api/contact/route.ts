@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { addEnquiry } from "@/lib/db";
+import { sendNotification } from "@/lib/email";
 
 export const runtime = "nodejs";
 
@@ -67,39 +68,15 @@ export async function POST(request: Request) {
     console.error("Failed to store enquiry", err);
   }
 
-  // Delivery: if RESEND_API_KEY is set, email the enquiry; otherwise log it.
-  // In Phase 2 this also writes to the Supabase `enquiries` table for the
-  // admin dashboard inbox.
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
-  if (apiKey && to) {
-    try {
-      await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "dronevideography.lk <onboarding@resend.dev>",
-          to: [to],
-          reply_to: email,
-          subject: `New enquiry from ${name} (${enquiry.country || "unknown"})`,
-          text: Object.entries(enquiry)
-            .map(([k, v]) => `${k}: ${v}`)
-            .join("\n"),
-        }),
-      });
-    } catch (err) {
-      console.error("Failed to send enquiry email", err);
-      return NextResponse.json(
-        { ok: false, error: "Could not send right now. Please WhatsApp us instead." },
-        { status: 502 },
-      );
-    }
-  } else {
-    console.info("New enquiry (email delivery not configured):", enquiry);
-  }
+  // The enquiry is already saved in the admin inbox, so the visitor gets a success
+  // either way; a failed email is logged by sendNotification.
+  await sendNotification({
+    replyTo: email,
+    subject: `New enquiry from ${name} (${enquiry.country || "unknown"})`,
+    text: Object.entries(enquiry)
+      .map(([k, v]) => `${k}: ${v}`)
+      .join("\n"),
+  });
 
   return NextResponse.json({ ok: true });
 }
