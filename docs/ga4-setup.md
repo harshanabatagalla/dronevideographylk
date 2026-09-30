@@ -75,6 +75,8 @@ Before activation:
 
 The repository's current workflow deploys pushes to `main` to Contabo. Opening this PR does not merge it or publish these changes. Preserve unrelated unpublished work.
 
+The verified production checkout follows `harshanabatagalla/dronevideographylk`, not the `sankalpabandara/dronevideographylk-1` fork. This integration is based on production commit `aa10de790b8d5cf37498bb36f4bdb69945b89b4b`, preserving the newer SEO, services, navigation and contact-email changes. Deploy through the production repository's existing workflow. The additional deployment key created in the fork has not been authorized on the server and is not required for this workflow.
+
 ### Pre-merge security and regression review
 
 Next.js and its ESLint configuration were updated from 16.2.12 to 16.3.7, with compatible lockfile security updates. The initial dependency audit reported one critical and five high package findings; the updated audit reported zero known vulnerabilities. This is a dependency database result, not a guarantee against unknown vulnerabilities.
