@@ -10,9 +10,9 @@ import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { RULES_PATH } from "@/lib/drone-rules";
 
 export const metadata = pageMetadata({
-  title: "Buy DJI Drones in Sri Lanka",
+  title: "DJI Drone Prices in Sri Lanka",
   description:
-    "Buy DJI drones in Sri Lanka, from the Mavic Mini to the Mavic 3 Cine, with batteries, propellers and tools. Rupee prices, standard and Fly More Combo kits.",
+    "DJI drone prices in Sri Lanka, from the Mavic Mini to the Mavic 3 Cine, with batteries, propellers and tools. Rupee prices, standard and Fly More Combo kits.",
   path: "/shop",
 });
 
@@ -67,6 +67,9 @@ export default function ShopPage() {
           </Note>
         </div>
 
+        <h2 className="mb-6 font-display text-2xl font-semibold text-night sm:text-3xl">
+          DJI drones and prices
+        </h2>
         <ShopGrid products={products} />
         <AccessoryGrid />
       </Section>

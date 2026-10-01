@@ -8,7 +8,7 @@ import { OFFICIAL, PERMIT_PATH, RULES_PATH, RULES_PUBLISHED, RULES_REVIEWED } fr
 import { servicePath } from "@/lib/services";
 import { articleJsonLd, JsonLd, pageMetadata } from "@/lib/seo";
 
-const TITLE = "Sri Lanka Drone Rules for Tourists (2026 Guide)";
+const TITLE = "Sri Lanka Drone Rules for Tourists (2026)";
 const DESCRIPTION =
   "Can tourists fly drones in Sri Lanka? Yes, with CAASL approval. A plain guide to registration, insurance, no fly zones, Sigiriya and national parks.";
 
@@ -19,9 +19,9 @@ const TOC = [
   { id: "checklist", title: "Checklist before you fly" },
   { id: "bringing-a-drone", title: "Can you bring a drone to Sri Lanka?" },
   { id: "ministry-of-defence", title: "Do you need Ministry of Defence clearance?" },
-  { id: "registration", title: "Registration, pilot test and insurance" },
+  { id: "registration", title: "Drone registration, pilot licence and insurance" },
   { id: "flying-rules", title: "Flying rules" },
-  { id: "where-you-cannot-fly", title: "Where you cannot fly without extra approval" },
+  { id: "where-you-cannot-fly", title: "No fly zones and the drone zone map" },
   { id: "commercial", title: "Commercial drone filming" },
   { id: "how-to-apply", title: "How to apply" },
   { id: "penalties", title: "What happens if you break the rules" },
@@ -118,7 +118,7 @@ export default function DroneRulesPage() {
               </p>
             </GuideSection>
 
-            <GuideSection id="registration" title="Registration, pilot test and insurance">
+            <GuideSection id="registration" title="Drone registration, pilot licence and insurance">
               <h3 className="font-semibold text-night">Your drone</h3>
               <p>
                 Most camera drones must be registered with CAASL, including small drones under 250 g if they
@@ -166,7 +166,7 @@ export default function DroneRulesPage() {
               </p>
             </GuideSection>
 
-            <GuideSection id="where-you-cannot-fly" title="Where you cannot fly without extra approval">
+            <GuideSection id="where-you-cannot-fly" title="No fly zones and the drone zone map">
               <p>
                 Start with the <Ext href={OFFICIAL.zoneMap}>CAASL drone zone map</Ext>. It shows restricted,
                 authorisation, altitude and warning areas across the island.
@@ -266,6 +266,27 @@ export default function DroneRulesPage() {
               <div className="mt-6">
                 <Faq
                   items={[
+                    {
+                      q: "Do I need a drone licence to fly in Sri Lanka?",
+                      a: (
+                        <p>
+                          Yes. Every drone pilot, including visitors, must be registered with CAASL. For normal flights
+                          you pass CAASL&apos;s online training and theory exam to get a Remote Pilot Competency
+                          Certificate, called a Flyer ID. You still need a flight approval for each outdoor flight.
+                        </p>
+                      ),
+                    },
+                    {
+                      q: "Are drones allowed at Sigiriya?",
+                      a: (
+                        <p>
+                          Not without special permission. Sigiriya is a protected archaeological site, and no drone may
+                          fly over an archaeological site without prior approval from the relevant authority, such as
+                          the Department of Archaeology, on top of the normal CAASL approval. Approval is not
+                          guaranteed.
+                        </p>
+                      ),
+                    },
                     {
                       q: "Can I fly a DJI Mini in Sri Lanka without registration?",
                       a: (

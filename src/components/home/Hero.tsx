@@ -33,14 +33,14 @@ export async function Hero() {
       {/* The poster is the LCP element on phones (the video only loads on wide screens),
           so serve it through the image optimizer at the right size, preloaded. It is a
           16:9 photo cropped to cover, so in portrait its rendered width follows the
-          screen height, not the width. */}
+          screen height. 75vh (not the full 178vh) is enough under the dark overlay. */}
       <Image
         src={heroPoster}
         alt=""
         fill
         preload
         quality={60}
-        sizes="(orientation: portrait) 100vh, 100vw"
+        sizes="(orientation: portrait) 75vh, 100vw"
         className="object-cover"
       />
       <HeroVideo src={heroVideo} type={videoType} />

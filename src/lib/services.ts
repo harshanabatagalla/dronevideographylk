@@ -80,7 +80,7 @@ export const services: Service[] = [
     title: "Travel Drone Videography in Sri Lanka",
     h1: "Travel drone videography in Sri Lanka",
     description:
-      "Hire a local drone team to film your Sri Lanka trip, honeymoon or travel content. We handle the drone approval and plan flights around your route and the weather.",
+      "Hire a local drone pilot to film your Sri Lanka trip, honeymoon or travel content. We handle the drone approval and plan flights around your route and weather.",
     cardText: "Drone video of your trip, honeymoon or travel content, filmed at the places on your route.",
     serviceType: "Travel drone videography",
     intro: [
@@ -253,10 +253,10 @@ export const services: Service[] = [
   {
     slug: "hotel-resort-drone-videography",
     label: "Hotels and resorts",
-    title: "Hotel and Resort Drone Videography in Sri Lanka",
+    title: "Hotel and Resort Drone Video in Sri Lanka",
     h1: "Hotel and resort drone videography in Sri Lanka",
     description:
-      "Drone video and aerial photos for hotels, resorts and villas in Sri Lanka. Show guests your setting, pool and view, plus indoor fly through tours with small drones.",
+      "Drone video and aerial photos for hotels, resorts and villas in Sri Lanka. Show guests your setting, pool and view, plus indoor tours with small drones.",
     cardText: "Aerial video and photos that show your hotel, its setting and the view, for your website and booking pages.",
     serviceType: "Hotel and resort drone videography",
     intro: [
@@ -468,6 +468,87 @@ export const services: Service[] = [
     ],
     message: "Hi! I'd like drone photos in Sri Lanka. The place and date are: ",
     related: ["travel-drone-videography", "property-drone-photography"],
+  },
+  {
+    slug: "commercial-drone-filming",
+    label: "Commercial filming",
+    title: "Commercial Drone Filming in Sri Lanka",
+    h1: "Commercial drone filming in Sri Lanka",
+    description:
+      "Drone filming in Sri Lanka for brands, film crews, tourism campaigns and paid creator content. We handle the commercial flight approval and the letters it needs.",
+    cardText: "Aerial shots for brands, production crews, tourism campaigns and paid creator content.",
+    serviceType: "Commercial drone filming",
+    intro: [
+      "If the footage is for a client, an advert or a brand, the drone flight is a commercial operation in Sri Lanka. The approval process is different from a holiday flight, and it needs more documents.",
+      "We film for brands, production teams, tourism campaigns and creators making paid content. We apply for the flight approval as the operator and tell you early which letters we need from you.",
+    ],
+    sections: [
+      {
+        heading: "What the approval process asks for",
+        body: [
+          "Commercial flights are applied for on the CAASL portal, and the Ministry of Defence gives security clearance. The Ministry says a commercial flight must never be declared as a leisure flight. For a commercial application it asks for:",
+        ],
+        list: [
+          "A request letter from the client on company letterhead, with the location, date and time of the flight and the drone operator's details",
+          "No objection letters from the owner or manager of the property or land",
+          "A no objection letter from the police for flights in public areas",
+          "Extra approvals for protected places, such as archaeological sites and wildlife areas",
+        ],
+      },
+      {
+        heading: "Timing",
+        body: [
+          "Restricted areas on the official drone map need a special clearance requested at least 14 days before the flight. Special operations, such as drone swarms, must reach the Ministry of Defence at least three weeks before. Letters from property owners and the police also take time, so contact us as soon as the dates and places are known.",
+        ],
+      },
+      {
+        heading: "Film crews coming from abroad",
+        body: [
+          "Anyone who flies a drone in Sri Lanka must be registered with CAASL, visitors included. If a pilot already holds a drone licence from another country, CAASL may accept it for more advanced flights, but the pilot still takes its theory exam and medical. Working with a local operator avoids that step for your crew.",
+        ],
+      },
+      {
+        heading: "Cameras for commercial work",
+        list: [
+          "DJI Mavic 4 Pro: 100 MP Hasselblad camera and two zoom cameras, 6K at 60 fps",
+          "DJI Air 3S: 1 inch main camera and 3x zoom, 4K at 60 fps, good in low light",
+          "DJI Avata 360: films in every direction at once, 8K, so the angle is chosen after the flight",
+        ],
+      },
+      {
+        heading: "Planning the shots",
+        body: [
+          "Outdoor flights are only allowed in daylight, and not in rain, gusty wind or low visibility. Drones may never fly over crowds, so we plan crowd scenes from the side or from a distance.",
+          "Tell us what the footage is for, the places and the dates. We check each place on the official drone map and come back with a plan, the approvals it needs and a price.",
+        ],
+      },
+      {
+        heading: "What you get",
+        list: ["Edited video, short clips and photos, as agreed in the plan", "Video in 4K, 6K with the DJI Mavic 4 Pro, or 8K 360 video"],
+      },
+    ],
+    drones: ["dji-mavic-4-pro", "dji-air-3s", "dji-avata-360", "dji-air-3"],
+    photos: ["sigiriya-rock-pidurangala", "arippu-doric-sunset", "sea-of-clouds-sunrise"],
+    faqs: [
+      {
+        q: "Can our own drone pilot fly in Sri Lanka?",
+        a: [
+          "Only after the pilot and the drone are registered with CAASL. A licence from another country may be accepted for more advanced flights, but the CAASL theory exam and medical still apply. Many crews hire a local operator instead.",
+        ],
+      },
+      {
+        q: "How early should we contact you?",
+        a: [
+          "As early as you can. Commercial flights need letters from other parties, restricted areas need at least 14 days, and special operations need at least three weeks.",
+        ],
+      },
+      {
+        q: "Do you film outside Colombo?",
+        a: ["Yes. We are based in Colombo and travel to shoots across Sri Lanka."],
+      },
+    ],
+    message: "Hi! We are planning a commercial shoot in Sri Lanka and need a drone operator. The project, dates and places are: ",
+    related: ["hotel-resort-drone-videography", "drone-photography"],
   },
 ];
 

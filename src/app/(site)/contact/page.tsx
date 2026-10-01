@@ -8,7 +8,7 @@ import { getSettings } from "@/lib/db";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Contact Us to Book a Drone Shoot in Sri Lanka",
+  title: "Book a Drone Shoot in Sri Lanka",
   description:
     "Get a price for drone filming in Sri Lanka for your trip, wedding, hotel or property. Message us on WhatsApp or send an enquiry. We reply within 24 hours.",
   path: "/contact",

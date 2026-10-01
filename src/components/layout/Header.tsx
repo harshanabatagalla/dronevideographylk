@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { nav, site } from "@/lib/site";
+import { nav } from "@/lib/site";
 import { Icon } from "@/components/ui/Icon";
 import { CartButton } from "@/components/shop/CartButton";
 import { BookButton } from "@/components/booking/BookingDialog";
@@ -29,7 +29,7 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
-        <Link href="/" className="flex items-center gap-2 text-white" aria-label={`${site.brand} home`}>
+        <Link href="/" className="flex items-center gap-2 text-white">
           <span className="grid h-9 w-9 place-items-center rounded-full bg-sunset text-night">
             <Icon name="play" size={18} />
           </span>

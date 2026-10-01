@@ -43,6 +43,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const drone = await getDrone(slug);
   if (!drone) return {};
+  // Kept for visitors, but not indexed: each page is a short spec card that repeats
+  // /fleet (the indexed hub) and would compete with /shop/<model> for "<model> Sri Lanka".
+  return {
+    ...droneMeta(drone),
+    robots: { index: false, follow: true },
+  };
+}
+
+function droneMeta(drone: { name: string; tagline: string; bestFor: string[]; slug: string; image: string }) {
   const uses = drone.bestFor.map((t) => t.toLowerCase());
   const usesText = uses.length > 1 ? `${uses.slice(0, -1).join(", ")} and ${uses[uses.length - 1]}` : uses[0];
   return pageMetadata({

@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       `Wind resistance ${windLabel(p)}.`,
     ]),
     path: `/shop/${p.slug}`,
+    ...(p.image ? { image: p.image } : {}),
   });
 }
 
@@ -36,29 +37,33 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
   const p = getProduct(slug);
   if (!p) notFound();
 
-  const productJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: p.name,
-    description: p.purpose,
-    brand: { "@type": "Brand", name: "DJI" },
-    ...(lowestPrice(p)
-      ? {
-          offers: {
-            "@type": "Offer",
-            url: `${site.url}/shop/${p.slug}`,
-            priceCurrency: "LKR",
-            price: lowestPrice(p),
-            availability: p.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-            itemCondition: "https://schema.org/NewCondition",
-          },
-        }
-      : {}),
-  };
+  // Google treats Product markup without an offer, review or rating as invalid, and we
+  // never invent those. So only models with a confirmed rupee price get Product markup.
+  const price = lowestPrice(p);
+  const productJsonLd = price
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: p.name,
+        description: p.purpose,
+        brand: { "@type": "Brand", name: "DJI" },
+        ...(p.image ? { image: `${site.url}${p.image}` } : {}),
+        offers: {
+          "@type": "Offer",
+          url: `${site.url}/shop/${p.slug}`,
+          priceCurrency: "LKR",
+          price,
+          availability: p.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+          itemCondition: "https://schema.org/NewCondition",
+        },
+      }
+    : null;
+  const related = getProducts().filter((o) => o.series === p.series && o.slug !== p.slug);
+  const seriesLabel = SERIES.find((s) => s.key === p.series)?.label ?? p.series;
 
   return (
     <>
-      <JsonLd data={productJsonLd} />
+      {productJsonLd && <JsonLd data={productJsonLd} />}
       <div className="bg-skyline pb-8 pt-28">
         <Section>
           <Breadcrumbs
@@ -141,6 +146,32 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
             </li>
           </ul>
         </div>
+
+        {related.length > 0 && (
+          <div className="mt-6 rounded-3xl border border-night/10 bg-white p-6">
+            <h2 className="font-display text-xl font-semibold text-night">Other {seriesLabel} drones</h2>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((o) => (
+                <li key={o.slug}>
+                  <Link
+                    href={`/shop/${o.slug}`}
+                    className="block h-full rounded-2xl border border-night/10 p-4 transition hover:border-ocean/40"
+                  >
+                    <span className="font-semibold text-night">{o.name}</span>
+                    <span className="mt-1 block text-sm text-night/65">{o.headline}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-sm text-night/65">
+              Not sure which one fits your trip?{" "}
+              <Link href="/shop" className="font-semibold text-ocean hover:underline">
+                Compare all DJI drones and prices
+              </Link>
+              .
+            </p>
+          </div>
+        )}
       </Section>
     </>
   );
