@@ -57,7 +57,7 @@ export function ContactFloat({
     >
       <a
         href={telHref}
-        aria-label={`Call ${site.brand}`}
+        aria-label="Call us"
         tabIndex={inHero ? -1 : 0}
         className="flex items-center gap-1.5 rounded-full bg-ocean px-3 py-2 text-xs font-semibold text-white shadow-lg shadow-black/25 transition hover:scale-105"
       >
@@ -68,7 +68,7 @@ export function ContactFloat({
         href={buildWhatsappHref(whatsapp, whatsappMessage)}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Message ${site.brand} on WhatsApp`}
+        aria-label="Chat with us on WhatsApp"
         tabIndex={inHero ? -1 : 0}
         className="flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-2 text-xs font-semibold text-white shadow-lg shadow-black/25 transition hover:scale-105"
       >

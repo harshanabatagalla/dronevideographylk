@@ -106,7 +106,7 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
         <FooterLinks title="Explore" items={explore} />
       </div>
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-white/40 sm:flex-row sm:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-white/65 sm:flex-row sm:px-8">
           <p>© {new Date().getFullYear()} {site.brand}. All rights reserved.</p>
           <p>
             <Link href="/credits" className="hover:text-sunset">

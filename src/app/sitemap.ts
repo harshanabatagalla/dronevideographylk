@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
-import { drones, footage } from "@/lib/content";
+import { footage } from "@/lib/content";
 import { products } from "@/lib/shop";
 import { services, servicePath, SERVICES_PATH } from "@/lib/services";
 import { PERMIT_PATH, RULES_PATH, RULES_REVIEWED } from "@/lib/drone-rules";
@@ -40,17 +40,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     images: photoUrls(s.photos),
   }));
 
-  const dronePages: MetadataRoute.Sitemap = drones.map((d) => ({
-    url: abs(`/fleet/${d.slug}`),
-    lastModified: SITE_UPDATED,
-    images: [abs(d.image)],
-  }));
-
+  // /fleet/<slug> pages are noindex (thin spec cards), so they stay out of the sitemap.
   const shopPages: MetadataRoute.Sitemap = products.map((p) => ({
     url: abs(`/shop/${p.slug}`),
     lastModified: SHOP_UPDATED,
     ...(p.image ? { images: [abs(p.image)] } : {}),
   }));
 
-  return [...core, ...servicePages, ...dronePages, ...shopPages];
+  return [...core, ...servicePages, ...shopPages];
 }

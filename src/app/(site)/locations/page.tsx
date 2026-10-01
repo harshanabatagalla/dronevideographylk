@@ -13,7 +13,7 @@ const PATH = "/locations";
 export const metadata = pageMetadata({
   title: "Drone Filming Locations in Sri Lanka",
   description:
-    "Where we film with drones in Sri Lanka: Sigiriya, Kandy, the Knuckles, Ella, the waterfalls and the coast. Real photos from our portfolio and notes for planning.",
+    "Where we film with drones in Sri Lanka: Sigiriya, Kandy, the Knuckles, Ella, the waterfalls and the coast. Real photos from our portfolio and planning notes.",
   path: PATH,
 });
 

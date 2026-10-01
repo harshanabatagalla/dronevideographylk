@@ -8,15 +8,16 @@ import { OFFICIAL, PERMIT_PATH, RULES_PATH, RULES_PUBLISHED, RULES_REVIEWED } fr
 import { SERVICES_PATH } from "@/lib/services";
 import { articleJsonLd, JsonLd, pageMetadata } from "@/lib/seo";
 
-const TITLE = "How to Get a Drone Permit in Sri Lanka";
+const TITLE = "Drone Permit and Registration in Sri Lanka";
 const DESCRIPTION =
-  "Apply for drone approval in Sri Lanka step by step: the CAASL portal, documents for leisure and commercial flights, and extra approvals for protected places.";
+  "How to register a drone and get flight approval in Sri Lanka, step by step: the CAASL portal, documents for leisure and commercial flights, and extra approvals.";
 
 export const metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: PERMIT_PATH, type: "article" });
 
 const TOC = [
   { id: "short-answer", title: "The short answer" },
   { id: "before-you-apply", title: "Before you apply" },
+  { id: "register-a-drone", title: "How to register a drone in Sri Lanka" },
   { id: "step-1", title: "Step 1: Check the drone zone map" },
   { id: "step-2", title: "Step 2: Get any extra approvals" },
   { id: "step-3", title: "Step 3: Prepare your documents" },
@@ -86,6 +87,21 @@ export default function DronePermitPage() {
                 </Link>{" "}
                 for the details behind each point.
               </p>
+            </GuideSection>
+
+            <GuideSection id="register-a-drone" title="How to register a drone in Sri Lanka">
+              <p>
+                Most camera drones must be registered with CAASL, and so must you as the pilot. Drones in the
+                C1, C2 and C3 classes always need registration, and smaller C0 drones need it too if they carry a
+                camera. Registration costs a set fee and lasts five years.
+              </p>
+              <Bullets
+                items={[
+                  <>Apply through the <Ext href={OFFICIAL.portal}>CAASL Drone Flight Approval Portal</Ext>, which asks for your pilot and drone details. CAASL also lists a paper form, UAS Registration (CAA/OP/074), on its <Ext href={OFFICIAL.caaslDrones}>drones page</Ext>.</>,
+                  "Once registered, the drone must carry the identification label issued by CAASL.",
+                  "Carry proof of registration every time you fly.",
+                ]}
+              />
             </GuideSection>
 
             <GuideSection id="step-1" title="Step 1: Check the drone zone map">

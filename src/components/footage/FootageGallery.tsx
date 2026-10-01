@@ -14,9 +14,12 @@ import { photoAlt } from "@/lib/alt";
 export function FootageGallery({
   items,
   filterable = false,
+  eagerCount = 0,
 }: {
   items: Footage[];
   filterable?: boolean;
+  /** How many leading photos are above the fold and should load right away (LCP). */
+  eagerCount?: number;
 }) {
   const categories = ["All", ...Array.from(new Set(items.map((i) => i.category)))];
   const [filter, setFilter] = useState<string>("All");
@@ -46,19 +49,20 @@ export function FootageGallery({
       )}
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {visible.map((f) => (
+        {visible.map((f, i) => (
           <button
             key={f.id}
             type="button"
             onClick={() => setActive(f)}
             className="cinematic-frame group relative aspect-video overflow-hidden rounded-2xl text-left"
-            aria-label={f.youtubeId ? `Play ${f.title}` : `View photo: ${f.title}`}
+            title={f.youtubeId ? `Play ${f.title}` : `View ${f.title} full size`}
           >
             <Image
               src={f.poster}
               alt={photoAlt(f.title, f.location)}
               fill
-              loading="lazy"
+              loading={i < eagerCount ? "eager" : "lazy"}
+              fetchPriority={i === 0 && eagerCount > 0 ? "high" : undefined}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover transition duration-500 group-hover:scale-105"
             />

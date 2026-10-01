@@ -27,37 +27,57 @@ export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
   const markerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
+  // Work only happens on scroll/resize while the section is on screen, and only on
+  // wide screens. An always-running rAF loop here used to read layout every frame
+  // from page load, which Lighthouse flagged as forced reflow and which slowed
+  // first paint on phones.
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+    const wrap = wrapRef.current;
+    const track = trackRef.current;
+    if (reduce || !wrap || !track) return;
     const wide = window.matchMedia("(min-width: 768px)");
 
     let raf = 0;
     let current = -1;
+    let visible = false;
     const update = () => {
-      const wrap = wrapRef.current;
-      const track = trackRef.current;
-      if (wrap && track) {
-        if (!wide.matches) {
-          track.style.transform = "";
-        } else {
-          const total = wrap.offsetHeight - window.innerHeight;
-          const scrolled = Math.min(Math.max(-wrap.getBoundingClientRect().top, 0), total);
-          const p = total > 0 ? scrolled / total : 0;
-          const distance = track.scrollWidth - window.innerWidth;
-          track.style.transform = `translate3d(${-(p * distance)}px, 0, 0)`;
-          if (markerRef.current) markerRef.current.style.left = `${p * 100}%`;
-          const idx = Math.min(waypoints.length - 1, Math.floor(p * waypoints.length + 0.35));
-          if (idx !== current) {
-            current = idx;
-            setActive(idx);
-          }
-        }
+      raf = 0;
+      if (!wide.matches) {
+        track.style.transform = "";
+        return;
       }
-      raf = requestAnimationFrame(update);
+      // Read everything first, then write, so the browser lays out once.
+      const total = wrap.offsetHeight - window.innerHeight;
+      const top = wrap.getBoundingClientRect().top;
+      const distance = track.scrollWidth - window.innerWidth;
+      const p = total > 0 ? Math.min(Math.max(-top, 0), total) / total : 0;
+      track.style.transform = `translate3d(${-(p * distance)}px, 0, 0)`;
+      if (markerRef.current) markerRef.current.style.left = `${p * 100}%`;
+      const idx = Math.min(waypoints.length - 1, Math.floor(p * waypoints.length + 0.35));
+      if (idx !== current) {
+        current = idx;
+        setActive(idx);
+      }
     };
-    raf = requestAnimationFrame(update);
-    return () => cancelAnimationFrame(raf);
+    const schedule = () => {
+      if (visible && !raf) raf = requestAnimationFrame(update);
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      schedule();
+    });
+    observer.observe(wrap);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    wide.addEventListener("change", update);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      wide.removeEventListener("change", update);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, [waypoints.length]);
 
   const pinHeight = { "--pin-h": `${(waypoints.length + 1) * 80}vh` } as CSSProperties;

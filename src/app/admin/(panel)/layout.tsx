@@ -39,7 +39,7 @@ export default async function AdminPanelLayout({ children }: { children: React.R
         </form>
       </aside>
 
-      <main className="p-5 sm:p-8">{children}</main>
+      <main className="min-w-0 p-5 sm:p-8">{children}</main>
     </div>
   );
 }
