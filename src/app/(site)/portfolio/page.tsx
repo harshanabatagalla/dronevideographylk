@@ -29,7 +29,7 @@ export default async function PortfolioPage() {
         }
       />
       <Section className="py-16">
-        <FootageGallery items={footage} filterable eagerCount={1} />
+        <FootageGallery items={footage} filterable eagerCount={3} />
         <p className="mx-auto mt-12 max-w-2xl text-center text-night/70">
           Want photos like these of your trip, hotel or property?{" "}
           <Link href={servicePath("drone-photography")} className="font-semibold text-ocean hover:underline">

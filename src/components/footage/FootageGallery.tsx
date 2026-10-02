@@ -18,8 +18,9 @@ export function FootageGallery({
 }: {
   items: Footage[];
   filterable?: boolean;
-  /** How many leading photos load right away at high priority (the LCP photo). Keep it at 1:
-   *  on phones the next photos are below the screen and would compete with it for bandwidth. */
+  /** How many leading photos load right away: the first row on desktop, where any of them can
+   *  be the LCP image. Only the first gets high priority, since on phones it is the only one
+   *  on screen and the rest would compete with it for bandwidth. */
   eagerCount?: number;
 }) {
   const categories = ["All", ...Array.from(new Set(items.map((i) => i.category)))];
@@ -63,7 +64,7 @@ export function FootageGallery({
               alt={photoAlt(f.title, f.location)}
               fill
               loading={i < eagerCount ? "eager" : "lazy"}
-              fetchPriority={i < eagerCount ? "high" : undefined}
+              fetchPriority={i === 0 && eagerCount > 0 ? "high" : undefined}
               // The grid sits in a max-w-6xl container, so a column is never wider than 384px.
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
               className="object-cover transition duration-500 group-hover:scale-105"
