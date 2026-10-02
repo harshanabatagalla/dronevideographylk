@@ -1,5 +1,6 @@
 import { Section } from "@/components/ui/Section";
 import { Icon } from "@/components/ui/Icon";
+import { CloudflareEmailOff } from "@/components/ui/CloudflareEmailOff";
 import { BookButton } from "@/components/booking/BookingDialog";
 import { getSettings } from "@/lib/db";
 
@@ -25,12 +26,14 @@ export async function FinalCTA() {
           >
             <Icon name="whatsapp" size={18} /> Check availability on WhatsApp
           </BookButton>
-          <a
-            href={`mailto:${settings.email}`}
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-4 text-sm font-semibold text-white backdrop-blur transition hover:border-white/50 hover:bg-white/5"
-          >
-            Email us
-          </a>
+          <CloudflareEmailOff>
+            <a
+              href={`mailto:${settings.email}`}
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-4 text-sm font-semibold text-white backdrop-blur transition hover:border-white/50 hover:bg-white/5"
+            >
+              Email us
+            </a>
+          </CloudflareEmailOff>
         </div>
       </Section>
     </div>

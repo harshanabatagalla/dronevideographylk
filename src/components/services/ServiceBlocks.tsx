@@ -20,7 +20,7 @@ export async function PhotoGrid({ ids, caption }: { ids: string[]; caption?: str
                 src={f.poster}
                 alt={photoAlt(f.title, f.location)}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
                 className="object-cover"
               />
             </div>
@@ -30,7 +30,7 @@ export async function PhotoGrid({ ids, caption }: { ids: string[]; caption?: str
           </div>
         ))}
       </div>
-      {caption && <figcaption className="mt-3 text-sm text-night/55">{caption}</figcaption>}
+      {caption && <figcaption className="mt-3 text-sm text-night/65">{caption}</figcaption>}
     </figure>
   );
 }

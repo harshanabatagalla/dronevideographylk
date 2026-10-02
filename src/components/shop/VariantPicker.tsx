@@ -39,10 +39,10 @@ export function VariantPicker({ product }: { product: ShopProduct }) {
                 <span className="flex flex-wrap items-baseline justify-between gap-2">
                   <span className="font-semibold text-night">{v.label}</span>
                   <span className="font-display text-lg font-semibold text-night">
-                    {typeof v.lkr === "number" ? formatLkr(v.lkr) : <span className="text-sm font-normal text-night/50">Price on request</span>}
+                    {typeof v.lkr === "number" ? formatLkr(v.lkr) : <span className="text-sm font-normal text-night/65">Price on request</span>}
                   </span>
                 </span>
-                <span className="mt-0.5 block text-sm text-night/60">{v.includes}</span>
+                <span className="mt-0.5 block text-sm text-night/65">{v.includes}</span>
               </span>
             </label>
           ))}
@@ -65,7 +65,7 @@ export function VariantPicker({ product }: { product: ShopProduct }) {
         </a>
       </div>
 
-      <p className="mt-4 text-xs text-night/50">
+      <p className="mt-4 text-xs text-night/65">
         Prices follow the DJI distributor in Sri Lanka and can change. We confirm the final price and
         delivery before you pay. Payment is by bank transfer or cash on delivery.
       </p>

@@ -38,7 +38,7 @@ export function Ext({ href, children }: { href: string; children: ReactNode }) {
 export function Toc({ items }: { items: { id: string; title: string }[] }) {
   return (
     <nav aria-label="On this page" className="rounded-3xl border border-night/10 bg-white p-6">
-      <h2 className="text-sm font-semibold uppercase tracking-wider text-night/60">On this page</h2>
+      <h2 className="text-sm font-semibold uppercase tracking-wider text-night/65">On this page</h2>
       <ol className="mt-3 space-y-2 text-sm">
         {items.map((it) => (
           <li key={it.id}>
@@ -81,7 +81,7 @@ export function OfficialSources() {
     <ul className="space-y-2">
       {links.map((l) => (
         <li key={l.href}>
-          <Ext href={l.href}>{l.label}</Ext> <span className="text-night/60">({l.note})</span>
+          <Ext href={l.href}>{l.label}</Ext> <span className="text-night/65">({l.note})</span>
         </li>
       ))}
     </ul>

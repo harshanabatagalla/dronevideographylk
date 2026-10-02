@@ -20,24 +20,19 @@ export function ContactFloat({
   const [inHero, setInHero] = useState(true);
   const pathname = usePathname();
 
+  // Hidden while the hero still reaches below the middle of the screen. The observer's
+  // root is the bottom half of the viewport, so this needs no layout reads on scroll.
   useEffect(() => {
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const hero = document.getElementById("hero");
-      setInHero(Boolean(hero && hero.getBoundingClientRect().bottom > window.innerHeight * 0.5));
-    };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    raf = requestAnimationFrame(update);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      if (raf) cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
+    const hero = document.getElementById("hero");
+    if (!hero) {
+      const raf = requestAnimationFrame(() => setInHero(false));
+      return () => cancelAnimationFrame(raf);
+    }
+    const observer = new IntersectionObserver(([entry]) => setInHero(entry.isIntersecting), {
+      rootMargin: "-50% 0px 0px 0px",
+    });
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, [pathname]);
 
   const telHref = `tel:${phone.replace(/[^0-9+]/g, "")}`;
@@ -67,7 +62,7 @@ export function ContactFloat({
         rel="noopener noreferrer"
         aria-label="Chat with us on WhatsApp"
         tabIndex={inHero ? -1 : 0}
-        className="flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-2 text-xs font-semibold text-white shadow-lg shadow-black/25 transition hover:scale-105"
+        className="flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-2 text-xs font-semibold text-night shadow-lg shadow-black/25 transition hover:scale-105"
       >
         <Icon name="whatsapp" size={16} />
         <span className="hidden sm:inline">Chat with us</span>

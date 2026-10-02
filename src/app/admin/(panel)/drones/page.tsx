@@ -64,7 +64,7 @@ export default async function AdminDronesPage({
             <div className="flex items-center gap-3 pt-2">
               <SubmitButton>{editing ? "Save changes" : "Add drone"}</SubmitButton>
               {editing && (
-                <Link href="/admin/drones" className="text-sm text-night/60 hover:text-night">
+                <Link href="/admin/drones" className="text-sm text-night/65 hover:text-night">
                   Cancel
                 </Link>
               )}
@@ -85,7 +85,7 @@ export default async function AdminDronesPage({
                 )}
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-semibold text-night">{d.name}</p>
-                  <p className="truncate text-sm text-night/55">{d.tagline}</p>
+                  <p className="truncate text-sm text-night/65">{d.tagline}</p>
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
                   <Link

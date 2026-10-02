@@ -4,7 +4,7 @@ import { JsonLd, breadcrumbJsonLd, type Crumb } from "@/lib/seo";
 /** Visible breadcrumb trail plus matching BreadcrumbList schema. First crumb is always Home. */
 export function Breadcrumbs({ items, light = true }: { items: Crumb[]; light?: boolean }) {
   const crumbs: Crumb[] = [{ name: "Home", path: "/" }, ...items];
-  const base = light ? "text-white/60" : "text-night/55";
+  const base = light ? "text-white/60" : "text-night/65";
   const hover = light ? "hover:text-sunset" : "hover:text-ocean";
   const current = light ? "text-white/85" : "text-night/80";
   return (

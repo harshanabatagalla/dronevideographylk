@@ -24,7 +24,7 @@ export default async function AdminOverview() {
   return (
     <div>
       <h1 className="font-display text-3xl font-semibold text-night">Dashboard</h1>
-      <p className="mt-1 text-night/60">Manage everything on your site from here.</p>
+      <p className="mt-1 text-night/65">Manage everything on your site from here.</p>
 
       {usingDefaults() && (
         <div className="mt-6 rounded-2xl border border-sunset/40 bg-sunset/10 p-4 text-sm text-night/80">
@@ -45,7 +45,7 @@ export default async function AdminOverview() {
               <Icon name={s.icon} size={20} />
             </span>
             <p className="mt-4 font-display text-3xl font-semibold text-night">{s.value}</p>
-            <p className="text-sm text-night/60">{s.label}</p>
+            <p className="text-sm text-night/65">{s.label}</p>
           </Link>
         ))}
       </div>
@@ -68,7 +68,7 @@ function QuickAction({ href, title, text }: { href: string; title: string; text:
     >
       <span>
         <span className="block font-semibold text-night">{title}</span>
-        <span className="text-sm text-night/60">{text}</span>
+        <span className="text-sm text-night/65">{text}</span>
       </span>
       <Icon name="arrow-right" size={20} className="text-ocean" />
     </Link>

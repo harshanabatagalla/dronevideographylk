@@ -38,7 +38,7 @@ export function ShootPlanner({ drones, whatsapp }: { drones: DroneOption[]; what
   return (
     <div className="rounded-3xl border border-night/10 bg-white p-6 shadow-lg shadow-night/5 sm:p-7">
       <h2 className="font-display text-2xl font-semibold text-night">Plan your shoot</h2>
-      <p className="mt-1 text-sm text-night/60">
+      <p className="mt-1 text-sm text-night/65">
         Choose a drone, a date and where you want to film. We reply on WhatsApp.
       </p>
 
@@ -83,12 +83,12 @@ export function ShootPlanner({ drones, whatsapp }: { drones: DroneOption[]; what
         <button
           type="button"
           onClick={() => send("book")}
-          className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white transition hover:brightness-95"
+          className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-night transition hover:brightness-95"
         >
           <Icon name="whatsapp" size={18} /> Book now
         </button>
       </div>
-      <p className="mt-3 text-xs text-night/50">
+      <p className="mt-3 text-xs text-night/65">
         Nothing is sent until you press send in WhatsApp.
       </p>
     </div>

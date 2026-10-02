@@ -3,8 +3,10 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 /**
- * Progressive scroll-reveal wrapper. Content is visible by default (SSR / no-JS)
- * and only animates in when JavaScript is available and motion is allowed.
+ * Progressive scroll-reveal wrapper. The server HTML is visible as is; once
+ * JavaScript runs, only content that is still below the screen is hidden and
+ * then animated in. Content already on screen never fades, and nothing stays
+ * hidden if the script fails to load. Motion is skipped when reduced.
  */
 export function Reveal({
   children,
@@ -20,15 +22,26 @@ export function Reveal({
   variant?: "up" | "left" | "right" | "scale";
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  // "static": plain server HTML. "hidden": below the screen, waiting. "shown": animated in.
+  const [state, setState] = useState<"static" | "hidden" | "shown">("static");
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    let first = true;
     const observer = new IntersectionObserver(
       ([entry]) => {
+        if (first) {
+          first = false;
+          // Any part already on screen (or above it) stays as rendered.
+          if (entry.boundingClientRect.top < window.innerHeight) {
+            observer.disconnect();
+            return;
+          }
+          setState("hidden");
+        }
         if (entry.isIntersecting) {
-          setVisible(true);
+          setState("shown");
           observer.disconnect();
         }
       },
@@ -43,7 +56,7 @@ export function Reveal({
   return (
     <Component
       ref={ref}
-      className={`${base} ${visible ? "is-visible" : ""} ${className}`}
+      className={`${state === "static" ? "" : base} ${state === "shown" ? "is-visible" : ""} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}

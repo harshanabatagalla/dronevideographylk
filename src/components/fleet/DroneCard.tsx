@@ -18,7 +18,7 @@ export function DroneCard({ drone }: { drone: Drone }) {
           alt={`${drone.name} camera drone`}
           fill
           loading="lazy"
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 768px) 100vw, 384px"
           className="object-cover transition duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-night via-night/40 to-transparent" />

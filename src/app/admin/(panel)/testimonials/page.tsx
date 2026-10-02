@@ -35,7 +35,7 @@ export default async function AdminTestimonialsPage({
             <div className="flex items-center gap-3 pt-2">
               <SubmitButton>{editing ? "Save changes" : "Add testimonial"}</SubmitButton>
               {editing && (
-                <Link href="/admin/testimonials" className="text-sm text-night/60 hover:text-night">
+                <Link href="/admin/testimonials" className="text-sm text-night/65 hover:text-night">
                   Cancel
                 </Link>
               )}
@@ -56,7 +56,7 @@ export default async function AdminTestimonialsPage({
                       {t.countryFlag} {t.name}{" "}
                       <span className="text-sm font-normal text-sunset">{"★".repeat(t.rating)}</span>
                     </p>
-                    <p className="mt-1 text-sm text-night/60">“{t.quote}”</p>
+                    <p className="mt-1 text-sm text-night/65">“{t.quote}”</p>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
                     <Link

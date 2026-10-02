@@ -81,11 +81,11 @@ export function MediaUploader({ label, name, kind, accept, currentPath, hint }: 
         className="hidden"
       />
 
-      {hint && <p className="mt-2 text-xs text-night/50">{hint}</p>}
+      {hint && <p className="mt-2 text-xs text-night/65">{hint}</p>}
       {message && (
         <p
           className={`mt-2 text-xs ${
-            status === "error" ? "text-coral" : status === "done" ? "text-teal" : "text-night/60"
+            status === "error" ? "text-coral" : status === "done" ? "text-teal" : "text-night/65"
           }`}
         >
           {message}

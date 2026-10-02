@@ -3,6 +3,7 @@ import { site, buildWhatsappHref } from "@/lib/site";
 import { services, servicePath, SERVICES_PATH } from "@/lib/services";
 import { PERMIT_PATH, RULES_PATH } from "@/lib/drone-rules";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { CloudflareEmailOff } from "@/components/ui/CloudflareEmailOff";
 import type { SiteSettings } from "@/lib/db";
 
 const socialIcons: { key: keyof SiteSettings["socials"]; icon: IconName; label: string }[] = [
@@ -72,9 +73,11 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
               </a>
             </li>
             <li>
-              <a href={`mailto:${email}`} className="inline-flex items-center gap-2 hover:text-sunset">
-                <Icon name="mail" size={16} /> {email}
-              </a>
+              <CloudflareEmailOff>
+                <a href={`mailto:${email}`} className="inline-flex items-center gap-2 hover:text-sunset">
+                  <Icon name="mail" size={16} /> {email}
+                </a>
+              </CloudflareEmailOff>
             </li>
             <li className="inline-flex items-center gap-2">
               <Icon name="map-pin" size={16} /> {address}
