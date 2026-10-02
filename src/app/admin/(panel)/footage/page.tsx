@@ -79,7 +79,7 @@ export default async function AdminFootagePage({
             <div className="flex items-center gap-3 pt-2">
               <SubmitButton>{editing ? "Save changes" : "Add footage"}</SubmitButton>
               {editing && (
-                <Link href="/admin/footage" className="text-sm text-night/60 hover:text-night">
+                <Link href="/admin/footage" className="text-sm text-night/65 hover:text-night">
                   Cancel
                 </Link>
               )}
@@ -102,7 +102,7 @@ export default async function AdminFootagePage({
                   <p className="truncate font-semibold text-night">
                     {f.title} {f.featured && <span className="text-sunset">★</span>}
                   </p>
-                  <p className="truncate text-sm text-night/55">
+                  <p className="truncate text-sm text-night/65">
                     {f.location} · {f.category}
                   </p>
                 </div>

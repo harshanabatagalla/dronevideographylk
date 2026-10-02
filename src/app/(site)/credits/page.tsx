@@ -47,13 +47,13 @@ export default function CreditsPage() {
                   <Link href={page!.href} className="font-semibold text-night hover:text-ocean">
                     {page!.name}
                   </Link>
-                  <span className="ml-2 text-sm text-night/60">by {c.author}</span>
+                  <span className="ml-2 text-sm text-night/65">by {c.author}</span>
                 </span>
                 <span className="flex gap-4 text-sm">
                   <a href={c.source} target="_blank" rel="noopener noreferrer" className="text-ocean hover:underline">
                     Original photo
                   </a>
-                  <a href={c.licenseUrl} target="_blank" rel="noopener noreferrer" className="text-night/60 hover:underline">
+                  <a href={c.licenseUrl} target="_blank" rel="noopener noreferrer" className="text-night/65 hover:underline">
                     {c.license}
                   </a>
                 </span>
@@ -62,7 +62,7 @@ export default function CreditsPage() {
           })}
         </ul>
 
-        <p className="mt-6 max-w-3xl text-sm text-night/60">
+        <p className="mt-6 max-w-3xl text-sm text-night/65">
           Photos marked share alike may be reused under the same licence. We crop and resize them for
           the page, and nothing else. We do not use DJI&apos;s own product photos, because those are
           copyrighted. DJI, Mavic, Mini, Air and Avata are trademarks of their owner. This shop is not

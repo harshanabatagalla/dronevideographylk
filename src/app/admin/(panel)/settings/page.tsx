@@ -24,7 +24,7 @@ export default async function AdminSettingsPage({
       <div className="mb-6 grid max-w-3xl gap-4">
         <Card>
           <h2 className="mb-1 font-display text-xl font-semibold text-night">Homepage hero media</h2>
-          <p className="mb-4 text-sm text-night/60">
+          <p className="mb-4 text-sm text-night/65">
             Upload the background video and its poster image for the homepage hero.
             The poster shows instantly while the video streams in, so the page
             loads with no delay.

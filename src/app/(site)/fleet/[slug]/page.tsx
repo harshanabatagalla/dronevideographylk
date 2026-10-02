@@ -98,8 +98,9 @@ export default async function DroneDetailPage({ params }: { params: Promise<{ sl
                 src={drone.image}
                 alt={`${drone.name} camera drone`}
                 fill
-                preload
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                loading="eager"
+                fetchPriority="high"
+                sizes="(max-width: 1024px) 100vw, 576px"
                 className="object-cover"
               />
             </div>
@@ -127,7 +128,7 @@ export default async function DroneDetailPage({ params }: { params: Promise<{ sl
                     <Icon name={s.icon} size={20} />
                   </span>
                   <p className="mt-3 text-sm font-semibold text-night">{s.label}</p>
-                  <p className="mt-1 text-sm text-night/60">{s.value}</p>
+                  <p className="mt-1 text-sm text-night/65">{s.value}</p>
                 </div>
               ))}
             </div>

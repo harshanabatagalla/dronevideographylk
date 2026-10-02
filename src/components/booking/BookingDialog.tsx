@@ -107,7 +107,7 @@ export function BookingProvider({ whatsapp, children }: { whatsapp: string; chil
               <h2 id="booking-title" className="font-display text-2xl font-semibold">
                 Book a drone video
               </h2>
-              <p className="mt-1 text-sm text-night/60">
+              <p className="mt-1 text-sm text-night/65">
                 Tick the questions you want to ask. We will open WhatsApp with your message ready to send.
               </p>
             </div>
@@ -115,7 +115,7 @@ export function BookingProvider({ whatsapp, children }: { whatsapp: string; chil
               type="button"
               onClick={close}
               aria-label="Close"
-              className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-night/60 hover:bg-night/5 hover:text-night"
+              className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-night/65 hover:bg-night/5 hover:text-night"
             >
               <Icon name="close" size={20} />
             </button>
@@ -151,7 +151,7 @@ export function BookingProvider({ whatsapp, children }: { whatsapp: string; chil
 
             <label className="mt-5 block text-sm">
               <span className="mb-1.5 block font-semibold">
-                Other questions <span className="font-normal text-night/50">(optional)</span>
+                Other questions <span className="font-normal text-night/65">(optional)</span>
               </span>
               <textarea
                 value={other}
@@ -167,12 +167,12 @@ export function BookingProvider({ whatsapp, children }: { whatsapp: string; chil
           <div className="border-t border-night/10 px-6 pb-5 pt-4 sm:px-7">
             <button
               type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-white transition hover:brightness-95"
+              className="flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-night transition hover:brightness-95"
             >
               <Icon name="whatsapp" size={18} />
               {count > 0 ? `Send ${count} question${count === 1 ? "" : "s"} on WhatsApp` : "Send on WhatsApp"}
             </button>
-            <p className="mt-2 text-center text-xs text-night/50">
+            <p className="mt-2 text-center text-xs text-night/65">
               Nothing is sent until you press send in WhatsApp.
             </p>
           </div>

@@ -3,6 +3,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { WHAT_TO_SEND } from "@/components/booking/EnquiryCta";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Icon } from "@/components/ui/Icon";
+import { CloudflareEmailOff } from "@/components/ui/CloudflareEmailOff";
 import { buildWhatsappHref } from "@/lib/site";
 import { getSettings } from "@/lib/db";
 import { pageMetadata } from "@/lib/seo";
@@ -57,7 +58,7 @@ export default async function ContactPage() {
                   </span>
                   <span>
                     <span className="block font-semibold text-night">WhatsApp</span>
-                    <span className="text-sm text-night/60">Fastest reply, often within minutes</span>
+                    <span className="text-sm text-night/65">Fastest reply, often within minutes</span>
                   </span>
                 </a>
               </li>
@@ -71,23 +72,25 @@ export default async function ContactPage() {
                   </span>
                   <span>
                     <span className="block font-semibold text-night">Call us</span>
-                    <span className="text-sm text-night/60">{settings.phone}</span>
+                    <span className="text-sm text-night/65">{settings.phone}</span>
                   </span>
                 </a>
               </li>
               <li>
-                <a
-                  href={`mailto:${settings.email}`}
-                  className="flex items-center gap-4 rounded-2xl border border-night/10 bg-white p-4 transition hover:border-ocean/40"
-                >
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-ocean/10 text-ocean">
-                    <Icon name="mail" size={22} />
-                  </span>
-                  <span>
-                    <span className="block font-semibold text-night">Email</span>
-                    <span className="text-sm text-night/60">{settings.email}</span>
-                  </span>
-                </a>
+                <CloudflareEmailOff>
+                  <a
+                    href={`mailto:${settings.email}`}
+                    className="flex items-center gap-4 rounded-2xl border border-night/10 bg-white p-4 transition hover:border-ocean/40"
+                  >
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-ocean/10 text-ocean">
+                      <Icon name="mail" size={22} />
+                    </span>
+                    <span>
+                      <span className="block font-semibold text-night">Email</span>
+                      <span className="text-sm text-night/65">{settings.email}</span>
+                    </span>
+                  </a>
+                </CloudflareEmailOff>
               </li>
               <li className="flex items-center gap-4 rounded-2xl border border-night/10 bg-white p-4">
                 <span className="grid h-11 w-11 place-items-center rounded-xl bg-sunset/15 text-sunset">
@@ -95,7 +98,7 @@ export default async function ContactPage() {
                 </span>
                 <span>
                   <span className="block font-semibold text-night">Based in</span>
-                  <span className="text-sm text-night/60">{settings.address} · we film all over the island</span>
+                  <span className="text-sm text-night/65">{settings.address} · we film all over the island</span>
                 </span>
               </li>
             </ul>

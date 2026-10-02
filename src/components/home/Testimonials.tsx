@@ -26,7 +26,7 @@ export async function Testimonials() {
                   <span className="text-2xl" aria-hidden>{t.countryFlag}</span>
                   <span>
                     <span className="block font-semibold text-night">{t.name}</span>
-                    <span className="text-xs text-night/55">{t.country}</span>
+                    <span className="text-xs text-night/65">{t.country}</span>
                   </span>
                 </figcaption>
               </figure>

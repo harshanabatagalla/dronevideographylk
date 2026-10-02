@@ -5,7 +5,7 @@ import { AdminHeading } from "@/components/admin/form";
 const STATUS_STYLES: Record<string, string> = {
   new: "bg-sunset/15 text-sunset",
   handled: "bg-teal/15 text-teal",
-  archived: "bg-night/10 text-night/50",
+  archived: "bg-night/10 text-night/65",
 };
 
 export default async function AdminEnquiriesPage() {
@@ -16,7 +16,7 @@ export default async function AdminEnquiriesPage() {
       <AdminHeading title="Enquiries" description="Messages sent through the contact form." />
 
       {enquiries.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-night/20 bg-white p-10 text-center text-night/50">
+        <div className="rounded-2xl border border-dashed border-night/20 bg-white p-10 text-center text-night/65">
           No enquiries yet. Submissions from the contact form will appear here.
         </div>
       ) : (
@@ -31,14 +31,14 @@ export default async function AdminEnquiriesPage() {
                       {e.status}
                     </span>
                   </p>
-                  <p className="text-sm text-night/60">
+                  <p className="text-sm text-night/65">
                     <a href={`mailto:${e.email}`} className="hover:text-ocean">
                       {e.email}
                     </a>
                     {e.country && ` · ${e.country}`}
                   </p>
                 </div>
-                <time className="text-xs text-night/40">
+                <time className="text-xs text-night/65">
                   {new Date(e.createdAt).toLocaleString()}
                 </time>
               </div>

@@ -19,7 +19,7 @@ export function AddToCartButton({
 
   if (disabled) {
     return (
-      <span className="inline-flex min-h-10 items-center rounded-full bg-night/10 px-5 py-2.5 text-sm font-semibold text-night/50">
+      <span className="inline-flex min-h-10 items-center rounded-full bg-night/10 px-5 py-2.5 text-sm font-semibold text-night/65">
         Out of stock
       </span>
     );

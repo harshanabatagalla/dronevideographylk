@@ -17,7 +17,8 @@ const SERIES_TINT: Record<ShopSeries, string> = {
 export function ProductVisual({
   product,
   priority = false,
-  sizes = "(max-width: 768px) 100vw, 33vw",
+  // Shop grid: one column on phones, two on tablets, three 384px columns from lg up.
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px",
 }: {
   product: ShopProduct;
   priority?: boolean;
@@ -29,7 +30,9 @@ export function ProductVisual({
         src={product.image}
         alt={product.name}
         fill
-        preload={priority}
+        // The LCP image itself needs fetchpriority=high; preload only adds a <link> hint.
+        loading={priority ? "eager" : undefined}
+        fetchPriority={priority ? "high" : undefined}
         sizes={sizes}
         className="object-cover"
       />

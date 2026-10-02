@@ -27,7 +27,7 @@ export default async function AdminOrdersPage() {
       <AdminHeading title="Orders" description="Drone orders placed through the shop. Confirm each one with the customer before taking payment." />
 
       {orders.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-night/20 bg-white p-10 text-center text-night/50">
+        <div className="rounded-2xl border border-dashed border-night/20 bg-white p-10 text-center text-night/65">
           No orders yet. Orders from the shop will appear here.
         </div>
       ) : (
@@ -42,21 +42,21 @@ export default async function AdminOrdersPage() {
                       {o.status}
                     </span>
                   </p>
-                  <p className="text-sm text-night/60">
+                  <p className="text-sm text-night/65">
                     <a href={`mailto:${o.customer.email}`} className="hover:text-ocean">
                       {o.customer.email}
                     </a>
                     {" · "}
                     {o.customer.phone}
                   </p>
-                  <p className="text-sm text-night/60">
+                  <p className="text-sm text-night/65">
                     {o.customer.address}, {o.customer.city}
                   </p>
                 </div>
                 <div className="text-right">
                   <p className="font-display text-2xl font-semibold text-night">{formatLkr(o.total)}</p>
-                  <p className="text-xs text-night/50">{PAYMENT_LABEL[o.payment]}</p>
-                  <time className="text-xs text-night/40">{new Date(o.createdAt).toLocaleString()}</time>
+                  <p className="text-xs text-night/65">{PAYMENT_LABEL[o.payment]}</p>
+                  <time className="text-xs text-night/65">{new Date(o.createdAt).toLocaleString()}</time>
                 </div>
               </div>
 
@@ -90,7 +90,7 @@ export default async function AdminOrdersPage() {
                   href={buildWhatsappHref(o.customer.phone, `Hi ${o.customer.name}, thanks for your order ${o.ref} with dronevideography.lk.`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-lg bg-[#25D366] px-3 py-1.5 text-xs font-semibold text-white"
+                  className="rounded-lg bg-[#25D366] px-3 py-1.5 text-xs font-semibold text-night"
                 >
                   WhatsApp
                 </a>

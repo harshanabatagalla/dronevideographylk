@@ -13,7 +13,7 @@ export function AdminHeading({
     <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
       <div>
         <h1 className="font-display text-3xl font-semibold text-night">{title}</h1>
-        {description && <p className="mt-1 text-night/60">{description}</p>}
+        {description && <p className="mt-1 text-night/65">{description}</p>}
       </div>
       {action}
     </div>
@@ -56,7 +56,7 @@ export function Field({
         placeholder={placeholder}
         className="w-full rounded-xl border border-night/15 bg-white px-4 py-2.5 text-night focus:border-ocean focus:outline-none"
       />
-      {hint && <span className="mt-1 block text-xs text-night/50">{hint}</span>}
+      {hint && <span className="mt-1 block text-xs text-night/65">{hint}</span>}
     </label>
   );
 }
@@ -86,7 +86,7 @@ export function Textarea({
         placeholder={placeholder}
         className="w-full rounded-xl border border-night/15 bg-white px-4 py-2.5 font-mono text-[13px] text-night focus:border-ocean focus:outline-none"
       />
-      {hint && <span className="mt-1 block text-xs text-night/50">{hint}</span>}
+      {hint && <span className="mt-1 block text-xs text-night/65">{hint}</span>}
     </label>
   );
 }

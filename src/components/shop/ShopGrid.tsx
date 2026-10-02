@@ -39,7 +39,7 @@ export function ShopGrid({ products }: { products: ShopProduct[] }) {
             </button>
           ))}
         </div>
-        <label className="flex items-center gap-2 text-sm text-night/60">
+        <label className="flex items-center gap-2 text-sm text-night/65">
           Sort
           <select
             value={sort}
@@ -54,7 +54,7 @@ export function ShopGrid({ products }: { products: ShopProduct[] }) {
       </div>
 
       {series !== "all" && (
-        <p className="mt-4 text-sm text-night/60">{SERIES.find((s) => s.key === series)?.blurb}</p>
+        <p className="mt-4 text-sm text-night/65">{SERIES.find((s) => s.key === series)?.blurb}</p>
       )}
 
       <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -106,12 +106,12 @@ export function ShopGrid({ products }: { products: ShopProduct[] }) {
                       return from ? (
                         <>
                           <p className="font-display text-2xl font-semibold text-night">{formatLkr(from)}</p>
-                          <p className="text-xs text-night/50">{priced?.label}</p>
+                          <p className="text-xs text-night/65">{priced?.label}</p>
                         </>
                       ) : (
                         <>
                           <p className="font-display text-lg font-semibold text-night/70">Price on request</p>
-                          <p className="text-xs text-night/50">Ask us for today&apos;s price</p>
+                          <p className="text-xs text-night/65">Ask us for today&apos;s price</p>
                         </>
                       );
                     })()}

@@ -79,13 +79,13 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <div className="cinematic-frame relative aspect-[4/3] overflow-hidden rounded-3xl">
-              <ProductVisual product={p} priority sizes="(max-width: 1024px) 100vw, 50vw" />
+              <ProductVisual product={p} priority sizes="(max-width: 1024px) 100vw, 576px" />
             </div>
             <PhotoCredit slug={p.slug} className="mt-2" />
             <dl className="mt-6 grid gap-3 sm:grid-cols-2">
               {p.specs.map((s) => (
                 <div key={s.label} className="rounded-2xl border border-night/10 bg-white p-4">
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-night/45">{s.label}</dt>
+                  <dt className="text-xs font-semibold uppercase tracking-wide text-night/65">{s.label}</dt>
                   <dd className="mt-1 text-sm text-night/80">{s.value}</dd>
                 </div>
               ))}

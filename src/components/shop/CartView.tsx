@@ -80,13 +80,13 @@ export function CartView() {
   }
 
   if (!ready) {
-    return <p className="text-night/50">Loading your cart…</p>;
+    return <p className="text-night/65">Loading your cart…</p>;
   }
 
   if (items.length === 0) {
     return (
       <div className="rounded-3xl border border-dashed border-night/20 bg-white p-10 text-center">
-        <p className="text-night/60">Your cart is empty.</p>
+        <p className="text-night/65">Your cart is empty.</p>
         <Link
           href="/shop"
           className="mt-5 inline-flex items-center gap-2 rounded-full bg-sunset px-6 py-3 text-sm font-semibold text-night hover:bg-amber-400"
@@ -114,7 +114,7 @@ export function CartView() {
                     <Link href={item.href} className="font-semibold text-night hover:text-ocean">
                       {item.name}
                     </Link>
-                    <p className="text-xs text-night/50">{item.sub}</p>
+                    <p className="text-xs text-night/65">{item.sub}</p>
                   </div>
                   <p className="shrink-0 font-semibold text-night">{formatLkr((item.lkr ?? 0) * line.qty)}</p>
                 </div>
@@ -141,7 +141,7 @@ export function CartView() {
                   <button
                     type="button"
                     onClick={() => remove(item.sku)}
-                    className="inline-flex items-center gap-1 text-xs text-night/50 hover:text-coral"
+                    className="inline-flex items-center gap-1 text-xs text-night/65 hover:text-coral"
                   >
                     <Icon name="trash" size={14} /> Remove
                   </button>
@@ -154,7 +154,7 @@ export function CartView() {
           <span className="font-medium text-night/70">Total</span>
           <span className="font-display text-2xl font-semibold text-night">{formatLkr(total)}</span>
         </div>
-        <p className="mt-2 text-xs text-night/50">
+        <p className="mt-2 text-xs text-night/65">
           Prices in Sri Lankan rupees. We confirm stock, the final price and any delivery cost before you pay.
         </p>
       </div>
@@ -195,7 +195,7 @@ export function CartView() {
         >
           {status === "sending" ? "Sending order…" : `Place order · ${formatLkr(total)}`}
         </button>
-        <p className="text-center text-xs text-night/50">Nothing is charged now. We confirm first.</p>
+        <p className="text-center text-xs text-night/65">Nothing is charged now. We confirm first.</p>
       </form>
     </div>
   );
@@ -246,7 +246,7 @@ function PayOption({
       <input type="radio" name="payment" value={value} defaultChecked={defaultChecked} className="mt-1 accent-ocean" />
       <span>
         <span className="block text-sm font-semibold text-night">{title}</span>
-        <span className="text-xs text-night/60">{text}</span>
+        <span className="text-xs text-night/65">{text}</span>
       </span>
     </label>
   );

@@ -30,7 +30,7 @@ export function AccessoryGrid() {
               </span>
               {g.title}
             </h3>
-            <p className="mt-1 text-sm text-night/60">{g.blurb}</p>
+            <p className="mt-1 text-sm text-night/65">{g.blurb}</p>
 
             <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((a) => (
@@ -46,7 +46,7 @@ export function AccessoryGrid() {
                       </>
                     ) : (
                       <>
-                        <p className="text-sm font-semibold text-night/60">Price on request</p>
+                        <p className="text-sm font-semibold text-night/65">Price on request</p>
                         <a
                           href={whatsappHref(`Hi! What is the price for the ${a.name}?`)}
                           target="_blank"

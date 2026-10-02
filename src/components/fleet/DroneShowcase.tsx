@@ -30,7 +30,7 @@ export function DroneShowcase({ drone, index }: { drone: Drone; index: number })
                 src={drone.image}
                 alt={`${drone.name} camera drone`}
                 fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 1024px) 100vw, 576px"
                 className="rounded-[2rem] object-cover shadow-2xl shadow-black/50 ring-1 ring-white/10"
               />
               <div className="cinematic-frame absolute inset-0 rounded-[2rem]" />

@@ -8,8 +8,8 @@ export function PhotoCredit({ slug, className = "" }: { slug: string; className?
   const c = getPhotoCredit(slug);
   if (!c) return null;
   return (
-    <p className={`text-xs text-night/45 ${className}`}>
-      {c.note && <span className="mr-1 text-night/60">{c.note}</span>}
+    <p className={`text-xs text-night/65 ${className}`}>
+      {c.note && <span className="mr-1 text-night/65">{c.note}</span>}
       Photo:{" "}
       <a href={c.source} target="_blank" rel="noopener noreferrer" className="underline hover:text-night/70">
         {c.author}
