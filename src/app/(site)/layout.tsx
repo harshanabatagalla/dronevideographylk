@@ -14,7 +14,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   return (
     <CartProvider>
       <BookingProvider whatsapp={settings.whatsapp}>
-        <JsonLd data={localBusinessJsonLd()} />
+        <JsonLd data={localBusinessJsonLd(Object.values(settings.socials).filter(Boolean))} />
         <JsonLd data={websiteJsonLd()} />
         <Header />
         <main className="flex-1">{children}</main>
