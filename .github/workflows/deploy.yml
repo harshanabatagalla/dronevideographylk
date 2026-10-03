@@ -21,7 +21,16 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             npm ci
+            # Cloudflare caches the HTML pages for a few hours, so a page cached
+            # just before this deploy still points at the previous build's hashed
+            # /_next/static files. The build deletes them, so keep a week of old
+            # assets and copy them back next to the new ones.
+            ARCHIVE=/var/www/dronevideographylk-static-archive
+            mkdir -p "$ARCHIVE"
+            if [ -d .next/static ]; then rsync -a --ignore-existing .next/static/ "$ARCHIVE/"; fi
             npm run build
+            rsync -a --ignore-existing "$ARCHIVE/" .next/static/
+            find "$ARCHIVE" -type f -mtime +7 -delete
             # startOrRestart re-applies the pinned port/host from
             # ecosystem.config.js every deploy, so the isolation fix from
             # 2026-09-28 can never silently drift even if the server's PM2
