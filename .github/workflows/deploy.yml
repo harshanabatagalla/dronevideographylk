@@ -28,3 +28,6 @@ jobs:
             # process table is ever rebuilt from scratch.
             pm2 startOrRestart ecosystem.config.js --update-env
             pm2 save
+            # Ask Bing and the other IndexNow engines to recrawl the sitemap.
+            # Never blocks or fails the deploy.
+            node scripts/indexnow.mjs || true

@@ -63,8 +63,12 @@ export function pageMetadata({
 
 const BUSINESS_ID = `${site.url}#business`;
 
-/** The business, referenced by id from every other schema block. */
-export function localBusinessJsonLd() {
+/**
+ * The business, referenced by id from every other schema block. `sameAs` lists
+ * the business's own social profiles, so search engines tie the site, the Google
+ * Business Profile and those accounts to one business.
+ */
+export function localBusinessJsonLd(sameAs: string[] = []) {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -88,6 +92,7 @@ export function localBusinessJsonLd() {
       "Aerial photography",
       "Sri Lanka drone regulations",
     ],
+    ...(sameAs.length ? { sameAs } : {}),
   };
 }
 
