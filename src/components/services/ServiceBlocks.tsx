@@ -20,7 +20,8 @@ export async function PhotoGrid({ ids, caption }: { ids: string[]; caption?: str
                 src={f.poster}
                 alt={photoAlt(f.title, f.location)}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
+                sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 384px"
+                quality={60}
                 className="object-cover"
               />
             </div>

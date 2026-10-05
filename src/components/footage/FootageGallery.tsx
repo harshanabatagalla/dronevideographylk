@@ -65,8 +65,13 @@ export function FootageGallery({
               fill
               loading={i < eagerCount ? "eager" : "lazy"}
               fetchPriority={i === 0 && eagerCount > 0 ? "high" : undefined}
-              // The grid sits in a max-w-6xl container, so a column is never wider than 384px.
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
+              // Column widths: one column minus the page padding on phones (about 92vw), two
+              // columns minus padding and gap on tablets (about 46vw), and never wider than
+              // 384px in the max-w-6xl grid. Plain vw values, because Next only reads vw
+              // outside calc() when it builds the srcset.
+              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 384px"
+              // Grid thumbnails only; the full-size view below keeps the default quality.
+              quality={60}
               className="object-cover transition duration-500 group-hover:scale-105"
             />
             <span className="absolute inset-0 z-10 bg-gradient-to-t from-night/80 via-transparent to-transparent" />
