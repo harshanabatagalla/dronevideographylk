@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 /**
  * Hero background video. Phones and tablets never download it; they only see the
  * optimized poster image rendered behind this element by Hero. Wider screens load
- * it after the page is ready, so it never competes with the content for bandwidth.
+ * it once the page has finished loading and the browser is idle.
  */
 export function HeroVideo({ src, type }: { src: string; type: string }) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -16,8 +16,24 @@ export function HeroVideo({ src, type }: { src: string; type: string }) {
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
     const slow = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!wide || saveData || slow) return;
-    const id = window.setTimeout(() => setLoad(true), 400);
-    return () => window.clearTimeout(id);
+    // Start only once the page has fully loaded and the browser is idle, so the
+    // video never competes with the page's own images and scripts.
+    let idle = 0;
+    let timer = 0;
+    const start = () => {
+      if (typeof window.requestIdleCallback === "function") {
+        idle = window.requestIdleCallback(() => setLoad(true), { timeout: 2000 });
+      } else {
+        timer = window.setTimeout(() => setLoad(true), 1000);
+      }
+    };
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+    return () => {
+      window.removeEventListener("load", start);
+      if (idle) window.cancelIdleCallback(idle);
+      window.clearTimeout(timer);
+    };
   }, []);
 
   useEffect(() => {

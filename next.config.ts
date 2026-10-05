@@ -19,8 +19,14 @@ const nextConfig: NextConfig = {
     // mobile/tablet breakpoint or 50vw on desktop, so even a 3x-DPR phone
     // never legitimately requests past ~2048px. Dropping the 3840 tier
     // removes a wasted candidate from every responsive image's srcset.
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-    // 60 is used only for the hero poster, which sits under a dark gradient overlay.
+    // 1440 and 1600 cover common laptop widths, which otherwise jumped straight
+    // from 1200 to 1920.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1600, 1920, 2048],
+    // 448 and 512 fill the gap between 384 and 640, so grid photos rendered at
+    // about 440 to 500 device pixels no longer download a 640px file.
+    imageSizes: [32, 48, 64, 96, 128, 256, 384, 448, 512],
+    // 60 is used for the hero poster (under a dark gradient overlay) and for grid
+    // thumbnails; full-size views use the default 75.
     qualities: [60, 75],
     // Allow optimized remote images. Replace/extend with your CDN (Bunny,
     // Cloudflare R2, Cloudinary) when wiring real media in Phase 2.
