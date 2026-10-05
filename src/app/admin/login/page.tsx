@@ -1,5 +1,7 @@
+import { redirect } from "next/navigation";
 import { loginAction } from "@/app/admin/actions";
-import { usingDefaults } from "@/lib/auth";
+import { isAuthenticated, usingDefaults } from "@/lib/auth";
+import { adminHref } from "@/lib/admin-path";
 import { Icon } from "@/components/ui/Icon";
 
 export const metadata = { title: "Admin Login", robots: { index: false } };
@@ -9,7 +11,10 @@ export default async function AdminLoginPage({
 }: {
   searchParams: Promise<{ error?: string; next?: string }>;
 }) {
-  const { error, next = "/admin" } = await searchParams;
+  // A real check, not just cookie presence: a stale cookie (for example after the
+  // signing secret changes) must not bounce between this page and the dashboard.
+  if (await isAuthenticated()) redirect(adminHref());
+  const { error, next = adminHref() } = await searchParams;
 
   return (
     <div className="grid min-h-screen place-items-center bg-skyline px-5">
@@ -41,7 +46,9 @@ export default async function AdminLoginPage({
 
           {error && (
             <p className="rounded-lg bg-coral/15 px-4 py-2.5 text-sm text-coral">
-              Incorrect password. Please try again.
+              {error === "locked"
+                ? "Too many wrong passwords. Please wait 15 minutes and try again."
+                : "Incorrect password. Please try again."}
             </p>
           )}
 

@@ -3,6 +3,7 @@ import { getDrones, getDrone } from "@/lib/db";
 import { saveDroneAction, deleteDroneAction } from "@/app/admin/actions";
 import { AdminHeading, Card, Field, Textarea, SubmitButton } from "@/components/admin/form";
 import { ConfirmButton } from "@/components/admin/ConfirmButton";
+import { adminHref } from "@/lib/admin-path";
 
 export default async function AdminDronesPage({
   searchParams,
@@ -64,7 +65,7 @@ export default async function AdminDronesPage({
             <div className="flex items-center gap-3 pt-2">
               <SubmitButton>{editing ? "Save changes" : "Add drone"}</SubmitButton>
               {editing && (
-                <Link href="/admin/drones" className="text-sm text-night/65 hover:text-night">
+                <Link href={adminHref("/drones")} className="text-sm text-night/65 hover:text-night">
                   Cancel
                 </Link>
               )}
@@ -89,7 +90,7 @@ export default async function AdminDronesPage({
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
                   <Link
-                    href={`/admin/drones?edit=${d.slug}`}
+                    href={adminHref(`/drones?edit=${d.slug}`)}
                     className="rounded-lg border border-night/15 px-3 py-1.5 text-sm text-night/70 hover:border-ocean/40"
                   >
                     Edit

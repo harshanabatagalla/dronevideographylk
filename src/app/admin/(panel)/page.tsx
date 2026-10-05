@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getDrones, getFootage, getTestimonials, getEnquiries, getOrders } from "@/lib/db";
 import { usingDefaults } from "@/lib/auth";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { adminHref } from "@/lib/admin-path";
 
 export default async function AdminOverview() {
   const [drones, footage, testimonials, enquiries, orders] = await Promise.all([
@@ -14,11 +15,11 @@ export default async function AdminOverview() {
   const newEnquiries = enquiries.filter((e) => e.status === "new").length;
 
   const stats: { label: string; value: number; href: string; icon: IconName }[] = [
-    { label: "Drones", value: drones.length, href: "/admin/drones", icon: "signal" },
-    { label: "Footage", value: footage.length, href: "/admin/footage", icon: "camera" },
-    { label: "Testimonials", value: testimonials.length, href: "/admin/testimonials", icon: "star" },
-    { label: "New enquiries", value: newEnquiries, href: "/admin/enquiries", icon: "whatsapp" },
-    { label: "New orders", value: orders.filter((o) => o.status === "new").length, href: "/admin/orders", icon: "cart" },
+    { label: "Drones", value: drones.length, href: adminHref("/drones"), icon: "signal" },
+    { label: "Footage", value: footage.length, href: adminHref("/footage"), icon: "camera" },
+    { label: "Testimonials", value: testimonials.length, href: adminHref("/testimonials"), icon: "star" },
+    { label: "New enquiries", value: newEnquiries, href: adminHref("/enquiries"), icon: "whatsapp" },
+    { label: "New orders", value: orders.filter((o) => o.status === "new").length, href: adminHref("/orders"), icon: "cart" },
   ];
 
   return (
@@ -51,10 +52,10 @@ export default async function AdminOverview() {
       </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <QuickAction href="/admin/drones" title="Add a drone" text="Add devices and edit plain-language specs." />
-        <QuickAction href="/admin/footage" title="Upload footage" text="Add drone shots and feature them on the homepage." />
-        <QuickAction href="/admin/settings" title="Update links" text="Change social profiles and contact details." />
-        <QuickAction href="/admin/enquiries" title="View enquiries" text="Read and manage customer messages." />
+        <QuickAction href={adminHref("/drones")} title="Add a drone" text="Add devices and edit plain-language specs." />
+        <QuickAction href={adminHref("/footage")} title="Upload footage" text="Add drone shots and feature them on the homepage." />
+        <QuickAction href={adminHref("/settings")} title="Update links" text="Change social profiles and contact details." />
+        <QuickAction href={adminHref("/enquiries")} title="View enquiries" text="Read and manage customer messages." />
       </div>
     </div>
   );

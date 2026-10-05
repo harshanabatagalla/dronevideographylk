@@ -58,7 +58,7 @@ function useReport<T>(url: string, interval: number) {
 type LiveState = ReturnType<typeof useReport<RealtimeReport>>;
 const LiveContext = createContext<LiveState | null>(null);
 
-export function AdminAnalytics({ children }: { children: React.ReactNode }) {
+export function AdminAnalytics({ children, base }: { children: React.ReactNode; base: string }) {
   const live = useReport<RealtimeReport>("/api/admin/analytics?view=realtime", 60000);
   const connected = live.response?.status === "connected" ? live.response : null;
   return (
@@ -70,7 +70,7 @@ export function AdminAnalytics({ children }: { children: React.ReactNode }) {
             Google Analytics
             <span className="font-normal text-night/65">{connected ? "Last 30 minutes" : live.response?.status === "unavailable" ? "Unavailable" : live.response ? "Not connected" : "Checking connection…"}</span>
           </div>
-          <Link href="/admin/analytics" className="text-sm font-semibold text-ocean underline underline-offset-4">View analytics</Link>
+          <Link href={`${base}/analytics`} className="text-sm font-semibold text-ocean underline underline-offset-4">View analytics</Link>
         </div>
         {connected ? (
           <div className="mt-3 flex flex-wrap items-baseline gap-x-7 gap-y-2 text-sm">

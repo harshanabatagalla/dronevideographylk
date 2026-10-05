@@ -2,6 +2,9 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
+import { adminHref, isAdminHref } from "@/lib/admin-path";
+import { clearFailures, isLockedOut, recordFailure } from "@/lib/login-throttle";
 import {
   isAuthenticated,
   startSession,
@@ -28,23 +31,38 @@ import type { Drone, Footage, Spec } from "@/lib/content";
 
 /* ------------------------------- Auth ------------------------------- */
 
+/** The visitor's IP. nginx appends the real address last to X-Forwarded-For; earlier entries can be forged. */
+async function clientIp(): Promise<string> {
+  const forwarded = (await headers()).get("x-forwarded-for");
+  return forwarded?.split(",").pop()?.trim() || "unknown";
+}
+
 export async function loginAction(formData: FormData) {
   const password = String(formData.get("password") ?? "");
-  const next = String(formData.get("next") ?? "/admin");
-  if (!checkPassword(password)) {
-    redirect(`/admin/login?error=1&next=${encodeURIComponent(next)}`);
+  const requested = String(formData.get("next") ?? "");
+  const next = isAdminHref(requested) ? requested : adminHref();
+  const ip = await clientIp();
+  if (isLockedOut(ip)) {
+    redirect(adminHref(`/login?error=locked&next=${encodeURIComponent(next)}`));
   }
+  if (!checkPassword(password)) {
+    recordFailure(ip);
+    // Slows down password guessing without bothering a real admin.
+    await new Promise((resolve) => setTimeout(resolve, 600));
+    redirect(adminHref(`/login?error=${isLockedOut(ip) ? "locked" : "1"}&next=${encodeURIComponent(next)}`));
+  }
+  clearFailures(ip);
   await startSession();
-  redirect(next.startsWith("/admin") ? next : "/admin");
+  redirect(next);
 }
 
 export async function logoutAction() {
   await endSession();
-  redirect("/admin/login");
+  redirect(adminHref("/login"));
 }
 
 async function assertAuth() {
-  if (!(await isAuthenticated())) redirect("/admin/login");
+  if (!(await isAuthenticated())) redirect(adminHref("/login"));
 }
 
 function slugify(value: string): string {
@@ -77,7 +95,7 @@ export async function saveDroneAction(formData: FormData) {
   await assertAuth();
   const name = String(formData.get("name") ?? "").trim();
   const slug = String(formData.get("slug") ?? "").trim() || slugify(name);
-  if (!name || !slug) redirect("/admin/drones?error=1");
+  if (!name || !slug) redirect(adminHref("/drones?error=1"));
 
   // Specs entered one per line as: icon | label | value
   const specs: Spec[] = splitLines(String(formData.get("specs") ?? "")).map((line) => {
@@ -102,7 +120,7 @@ export async function saveDroneAction(formData: FormData) {
   revalidatePath("/fleet");
   revalidatePath(`/fleet/${slug}`);
   revalidatePath("/admin/drones");
-  redirect("/admin/drones");
+  redirect(adminHref("/drones"));
 }
 
 export async function deleteDroneAction(formData: FormData) {
@@ -112,7 +130,7 @@ export async function deleteDroneAction(formData: FormData) {
   revalidatePath("/");
   revalidatePath("/fleet");
   revalidatePath("/admin/drones");
-  redirect("/admin/drones");
+  redirect(adminHref("/drones"));
 }
 
 /* ------------------------------ Footage ----------------------------- */
@@ -121,7 +139,7 @@ export async function saveFootageAction(formData: FormData) {
   await assertAuth();
   const id = String(formData.get("id") ?? "").trim() || newId();
   const title = String(formData.get("title") ?? "").trim();
-  if (!title) redirect("/admin/footage?error=1");
+  if (!title) redirect(adminHref("/footage?error=1"));
 
   const item: Footage = {
     id,
@@ -138,7 +156,7 @@ export async function saveFootageAction(formData: FormData) {
   revalidatePath("/");
   revalidatePath("/portfolio");
   revalidatePath("/admin/footage");
-  redirect("/admin/footage");
+  redirect(adminHref("/footage"));
 }
 
 export async function deleteFootageAction(formData: FormData) {
@@ -148,7 +166,7 @@ export async function deleteFootageAction(formData: FormData) {
   revalidatePath("/");
   revalidatePath("/portfolio");
   revalidatePath("/admin/footage");
-  redirect("/admin/footage");
+  redirect(adminHref("/footage"));
 }
 
 /* --------------------------- Testimonials --------------------------- */
@@ -158,7 +176,7 @@ export async function saveTestimonialAction(formData: FormData) {
   const id = String(formData.get("id") ?? "").trim() || newId();
   const name = String(formData.get("name") ?? "").trim();
   const quote = String(formData.get("quote") ?? "").trim();
-  if (!name || !quote) redirect("/admin/testimonials?error=1");
+  if (!name || !quote) redirect(adminHref("/testimonials?error=1"));
 
   await upsertTestimonial({
     id,
@@ -170,7 +188,7 @@ export async function saveTestimonialAction(formData: FormData) {
   });
   revalidatePath("/");
   revalidatePath("/admin/testimonials");
-  redirect("/admin/testimonials");
+  redirect(adminHref("/testimonials"));
 }
 
 export async function deleteTestimonialAction(formData: FormData) {
@@ -179,7 +197,7 @@ export async function deleteTestimonialAction(formData: FormData) {
   if (id) await deleteTestimonial(id);
   revalidatePath("/");
   revalidatePath("/admin/testimonials");
-  redirect("/admin/testimonials");
+  redirect(adminHref("/testimonials"));
 }
 
 /* ------------------------------ Settings ---------------------------- */
@@ -204,7 +222,7 @@ export async function saveSettingsAction(formData: FormData) {
   await saveSettings(settings);
   revalidatePath("/", "layout");
   revalidatePath("/admin/settings");
-  redirect("/admin/settings?saved=1");
+  redirect(adminHref("/settings?saved=1"));
 }
 
 /* ------------------------------ Enquiries --------------------------- */
@@ -215,7 +233,7 @@ export async function setEnquiryStatusAction(formData: FormData) {
   const status = String(formData.get("status") ?? "new") as Enquiry["status"];
   if (id) await setEnquiryStatus(id, status);
   revalidatePath("/admin/enquiries");
-  redirect("/admin/enquiries");
+  redirect(adminHref("/enquiries"));
 }
 
 /* ------------------------------ Orders ------------------------------ */
@@ -228,5 +246,5 @@ export async function setOrderStatusAction(formData: FormData) {
   const status = String(formData.get("status") ?? "") as Order["status"];
   if (id && ORDER_STATUSES.includes(status)) await setOrderStatus(id, status);
   revalidatePath("/admin/orders");
-  redirect("/admin/orders");
+  redirect(adminHref("/orders"));
 }

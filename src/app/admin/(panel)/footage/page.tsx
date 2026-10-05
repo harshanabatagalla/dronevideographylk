@@ -3,6 +3,7 @@ import { getFootage, getDrones } from "@/lib/db";
 import { saveFootageAction, deleteFootageAction } from "@/app/admin/actions";
 import { AdminHeading, Card, Field, SubmitButton } from "@/components/admin/form";
 import { ConfirmButton } from "@/components/admin/ConfirmButton";
+import { adminHref } from "@/lib/admin-path";
 
 const CATEGORIES = ["Heritage", "Mountains", "Waterfalls", "Coast", "Lakes and Rivers", "Travel", "Wedding", "Event", "Resort", "Adventure"];
 
@@ -79,7 +80,7 @@ export default async function AdminFootagePage({
             <div className="flex items-center gap-3 pt-2">
               <SubmitButton>{editing ? "Save changes" : "Add footage"}</SubmitButton>
               {editing && (
-                <Link href="/admin/footage" className="text-sm text-night/65 hover:text-night">
+                <Link href={adminHref("/footage")} className="text-sm text-night/65 hover:text-night">
                   Cancel
                 </Link>
               )}
@@ -108,7 +109,7 @@ export default async function AdminFootagePage({
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
                   <Link
-                    href={`/admin/footage?edit=${f.id}`}
+                    href={adminHref(`/footage?edit=${f.id}`)}
                     className="rounded-lg border border-night/15 px-3 py-1.5 text-sm text-night/70 hover:border-ocean/40"
                   >
                     Edit
