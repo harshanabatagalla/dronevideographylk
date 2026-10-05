@@ -11,7 +11,15 @@ const display = Space_Grotesk({
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+// Only used for small labels, so it is not preloaded and does not compete with the
+// body and heading fonts before first paint. "optional" means a late arrival is not
+// swapped in on that view (no layout shift); it is cached for the next page.
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  display: "optional",
+  preload: false,
+});
 
 export const viewport: Viewport = {
   width: "device-width",
