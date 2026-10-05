@@ -38,6 +38,9 @@ export const metadata: Metadata = {
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: site.brand }],
   },
   robots: { index: true, follow: true },
+  // Bing Webmaster Tools ownership. Keep it: removing it unverifies the site.
+  // Google Search Console uses public/googleaf12489d0f5c6473.html instead.
+  verification: { other: { "msvalidate.01": "E06646EA0B55FE09D02AFBD41FFD3174" } },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
