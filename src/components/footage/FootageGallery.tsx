@@ -64,11 +64,7 @@ export function FootageGallery({
               alt={photoAlt(f.title, f.location)}
               fill
               loading={i < eagerCount ? "eager" : "lazy"}
-              // The first photo is the LCP image. The rest of the first row is on screen on
-              // desktop but below it on phones, where it split a slow connection three ways
-              // (live trace: 91 KB downloading alongside the 34 KB LCP photo), so it loads
-              // eagerly at low priority.
-              fetchPriority={i === 0 && eagerCount > 0 ? "high" : i < eagerCount ? "low" : undefined}
+              fetchPriority={i === 0 && eagerCount > 0 ? "high" : undefined}
               // Column widths: one column minus the page padding on phones (about 92vw), two
               // columns minus padding and gap on tablets (about 46vw), and never wider than
               // 384px in the max-w-6xl grid. Plain vw values, because Next only reads vw
