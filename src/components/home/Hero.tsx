@@ -30,15 +30,18 @@ export async function Hero() {
   const videoType = heroVideo.endsWith(".webm") ? "video/webm" : "video/mp4";
   return (
     <section id="hero" className="relative flex min-h-[100svh] flex-col overflow-hidden bg-night">
-      {/* The poster is the LCP element on phones (the video only loads on wide screens),
-          so serve it through the image optimizer at the right size, preloaded. It is a
-          16:9 photo cropped to cover, so in portrait its rendered width follows the
-          screen height. 75vh (not the full 178vh) is enough under the dark overlay. */}
+      {/* Lighthouse measures the headline text as the LCP element on phones and desktop,
+          not this darkened poster. A preload in <head> made it compete with the CSS and
+          fonts the text needs, so it loads eagerly at low priority: React does not
+          preload low priority images, and mobile LCP improved from 3.3 s to 3.0 s.
+          It is a 16:9 photo cropped to cover, so in portrait its rendered width follows
+          the screen height. 75vh (not the full 178vh) is enough under the dark overlay. */}
       <Image
         src={heroPoster}
         alt=""
         fill
-        preload
+        loading="eager"
+        fetchPriority="low"
         quality={60}
         sizes="(orientation: portrait) 75vh, 100vw"
         className="object-cover"

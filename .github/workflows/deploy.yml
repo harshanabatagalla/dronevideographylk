@@ -37,6 +37,19 @@ jobs:
             # process table is ever rebuilt from scratch.
             pm2 startOrRestart ecosystem.config.js --update-env
             pm2 save
+            # Clear Cloudflare's cache so this deploy is live at once instead of
+            # after the 2 hour edge cache on HTML pages. Needs a token limited to
+            # Cache Purge on this zone in /root/.cloudflare-purge-token; without
+            # it the step is skipped. Never fails the deploy.
+            for i in $(seq 1 20); do curl -sf -o /dev/null http://127.0.0.1:4101/ && break; sleep 3; done
+            if [ -f /root/.cloudflare-purge-token ]; then
+              curl -s -X POST "https://api.cloudflare.com/client/v4/zones/8e288403f70cea391b840fe311172b64/purge_cache" \
+                -H "Authorization: Bearer $(cat /root/.cloudflare-purge-token)" \
+                -H "Content-Type: application/json" --data '{"purge_everything":true}' \
+                | grep -o '"success":[a-z]*' || true
+            else
+              echo "Cloudflare purge skipped: no token on the server"
+            fi
             # Ask Bing and the other IndexNow engines to recrawl the sitemap.
             # Never blocks or fails the deploy.
             node scripts/indexnow.mjs || true

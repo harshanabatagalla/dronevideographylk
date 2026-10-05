@@ -33,6 +33,8 @@ export function ProductVisual({
         // The LCP image itself needs fetchpriority=high; preload only adds a <link> hint.
         loading={priority ? "eager" : undefined}
         fetchPriority={priority ? "high" : undefined}
+        // Grid thumbnails are lighter; the main photo on a product page keeps full quality.
+        quality={priority ? undefined : 60}
         sizes={sizes}
         className="object-cover"
       />
