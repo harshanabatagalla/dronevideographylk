@@ -6,11 +6,12 @@ import { getEnquiries, getOrders } from "@/lib/db";
 import { AdminNav } from "@/components/admin/AdminNav";
 import { AdminAnalytics } from "@/components/admin/AnalyticsDashboard";
 import { Icon } from "@/components/ui/Icon";
+import { adminHref } from "@/lib/admin-path";
 
 export const metadata = { title: "Admin", robots: { index: false } };
 
 export default async function AdminPanelLayout({ children }: { children: React.ReactNode }) {
-  if (!(await isAuthenticated())) redirect("/admin/login");
+  if (!(await isAuthenticated())) redirect(adminHref("/login"));
   const enquiries = await getEnquiries();
   const newCount = enquiries.filter((e) => e.status === "new").length;
   const newOrders = (await getOrders()).filter((o) => o.status === "new").length;
@@ -19,7 +20,7 @@ export default async function AdminPanelLayout({ children }: { children: React.R
     <div className="min-h-screen bg-cream md:grid md:grid-cols-[250px_1fr]">
       <aside className="border-b border-night/10 bg-night text-white md:border-b-0 md:border-r md:border-white/10">
         <div className="flex items-center justify-between p-5">
-          <Link href="/admin" className="flex items-center gap-2">
+          <Link href={adminHref()} className="flex items-center gap-2">
             <span className="grid h-8 w-8 place-items-center rounded-full bg-sunset text-night">
               <Icon name="play" size={16} />
             </span>
@@ -29,7 +30,7 @@ export default async function AdminPanelLayout({ children }: { children: React.R
             View site ↗
           </Link>
         </div>
-        <AdminNav newEnquiries={newCount} newOrders={newOrders} />
+        <AdminNav base={adminHref()} newEnquiries={newCount} newOrders={newOrders} />
         <form action={logoutAction} className="p-4">
           <button
             type="submit"
@@ -40,7 +41,7 @@ export default async function AdminPanelLayout({ children }: { children: React.R
         </form>
       </aside>
 
-      <main className="min-w-0 p-5 sm:p-8"><AdminAnalytics>{children}</AdminAnalytics></main>
+      <main className="min-w-0 p-5 sm:p-8"><AdminAnalytics base={adminHref()}>{children}</AdminAnalytics></main>
     </div>
   );
 }

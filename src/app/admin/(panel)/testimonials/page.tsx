@@ -3,6 +3,7 @@ import { getTestimonials } from "@/lib/db";
 import { saveTestimonialAction, deleteTestimonialAction } from "@/app/admin/actions";
 import { AdminHeading, Card, Field, Textarea, SubmitButton } from "@/components/admin/form";
 import { ConfirmButton } from "@/components/admin/ConfirmButton";
+import { adminHref } from "@/lib/admin-path";
 
 export default async function AdminTestimonialsPage({
   searchParams,
@@ -35,7 +36,7 @@ export default async function AdminTestimonialsPage({
             <div className="flex items-center gap-3 pt-2">
               <SubmitButton>{editing ? "Save changes" : "Add testimonial"}</SubmitButton>
               {editing && (
-                <Link href="/admin/testimonials" className="text-sm text-night/65 hover:text-night">
+                <Link href={adminHref("/testimonials")} className="text-sm text-night/65 hover:text-night">
                   Cancel
                 </Link>
               )}
@@ -60,7 +61,7 @@ export default async function AdminTestimonialsPage({
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
                     <Link
-                      href={`/admin/testimonials?edit=${t.id}`}
+                      href={adminHref(`/testimonials?edit=${t.id}`)}
                       className="rounded-lg border border-night/15 px-3 py-1.5 text-sm text-night/70 hover:border-ocean/40"
                     >
                       Edit

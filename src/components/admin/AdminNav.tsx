@@ -4,24 +4,34 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icon, type IconName } from "@/components/ui/Icon";
 
-const links: { href: string; label: string; icon: IconName }[] = [
-  { href: "/admin", label: "Overview", icon: "sparkles" },
-  { href: "/admin/analytics", label: "Analytics", icon: "signal" },
-  { href: "/admin/drones", label: "Drones", icon: "signal" },
-  { href: "/admin/footage", label: "Footage", icon: "camera" },
-  { href: "/admin/testimonials", label: "Testimonials", icon: "star" },
-  { href: "/admin/orders", label: "Orders", icon: "cart" },
-  { href: "/admin/enquiries", label: "Enquiries", icon: "whatsapp" },
-  { href: "/admin/settings", label: "Settings", icon: "shield" },
+// Paths below the admin address, which comes from the server (see src/lib/admin-path.ts).
+const links: { path: string; label: string; icon: IconName }[] = [
+  { path: "", label: "Overview", icon: "sparkles" },
+  { path: "/analytics", label: "Analytics", icon: "signal" },
+  { path: "/drones", label: "Drones", icon: "signal" },
+  { path: "/footage", label: "Footage", icon: "camera" },
+  { path: "/testimonials", label: "Testimonials", icon: "star" },
+  { path: "/orders", label: "Orders", icon: "cart" },
+  { path: "/enquiries", label: "Enquiries", icon: "whatsapp" },
+  { path: "/settings", label: "Settings", icon: "shield" },
 ];
 
-export function AdminNav({ newEnquiries = 0, newOrders = 0 }: { newEnquiries?: number; newOrders?: number }) {
+export function AdminNav({
+  base,
+  newEnquiries = 0,
+  newOrders = 0,
+}: {
+  base: string;
+  newEnquiries?: number;
+  newOrders?: number;
+}) {
   const pathname = usePathname();
   return (
     <nav className="px-3 pb-4" aria-label="Admin">
       <ul className="space-y-1">
-        {links.map((l) => {
-          const active = l.href === "/admin" ? pathname === "/admin" : pathname.startsWith(l.href);
+        {links.map((link) => {
+          const l = { ...link, href: `${base}${link.path}` };
+          const active = link.path === "" ? pathname === base : pathname.startsWith(l.href);
           return (
             <li key={l.href}>
               <Link
@@ -32,7 +42,7 @@ export function AdminNav({ newEnquiries = 0, newOrders = 0 }: { newEnquiries?: n
               >
                 <Icon name={l.icon} size={18} />
                 {l.label}
-                {l.href === "/admin/orders" && newOrders > 0 && (
+                {link.path === "/orders" && newOrders > 0 && (
                   <span
                     className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${
                       active ? "bg-night text-sunset" : "bg-sunset text-night"
@@ -41,7 +51,7 @@ export function AdminNav({ newEnquiries = 0, newOrders = 0 }: { newEnquiries?: n
                     {newOrders}
                   </span>
                 )}
-                {l.href === "/admin/enquiries" && newEnquiries > 0 && (
+                {link.path === "/enquiries" && newEnquiries > 0 && (
                   <span
                     className={`ml-auto rounded-full px-2 py-0.5 text-xs font-semibold ${
                       active ? "bg-night text-sunset" : "bg-sunset text-night"
