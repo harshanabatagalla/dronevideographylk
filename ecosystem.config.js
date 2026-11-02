@@ -18,13 +18,26 @@
 // reserved for this app in the server's port registry at /opt/ops/PORTS.md.
 // That file is the source of truth for which ports are taken on that box -
 // check it before ever changing the number below.
+//
+// Host is "localhost", resolved IPv4 first, so the socket is still exactly
+// 127.0.0.1:4101 (what Nginx proxies to). It must not be "127.0.0.1": Next
+// rewrites 127.0.0.1 to "localhost" in the URLs its proxy (src/proxy.ts) sees
+// but not in the URL it compares rewrites against, so every proxy rewrite
+// was treated as external and answered 500 (the hidden admin address and its
+// /admin 404). The IPv4-first flag matters: on this server "localhost"
+// resolves to ::1 first, and binding there would cut Nginx off.
 module.exports = {
   apps: [
     {
       name: "drone",
       script: "npm",
-      args: "start -- -p 4101 -H 127.0.0.1",
-      env: { NODE_ENV: "production", PORT: "4101", HOSTNAME: "127.0.0.1" },
+      args: "start -- -p 4101 -H localhost",
+      env: {
+        NODE_ENV: "production",
+        PORT: "4101",
+        HOSTNAME: "localhost",
+        NODE_OPTIONS: "--dns-result-order=ipv4first",
+      },
     },
   ],
 };
