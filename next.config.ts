@@ -28,6 +28,12 @@ const nextConfig: NextConfig = {
     // 60 is used for the hero poster (under a dark gradient overlay) and for grid
     // thumbnails; full-size views use the default 75.
     qualities: [60, 75],
+    // Keep optimized images for 31 days instead of the 4 hour default. This
+    // max-age is also sent to Cloudflare and browsers, so repeat visitors stop
+    // revalidating every photo. Safe because source files never change in
+    // place: repo media is replaced under a new name and admin uploads get a
+    // random UUID filename.
+    minimumCacheTTL: 2678400,
     // Allow optimized remote images. Replace/extend with your CDN (Bunny,
     // Cloudflare R2, Cloudinary) when wiring real media in Phase 2.
     remotePatterns: [
