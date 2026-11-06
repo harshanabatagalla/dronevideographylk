@@ -36,7 +36,7 @@ export function AccessoryGrid() {
               {items.map((a) => (
                 <li key={a.slug} className="flex h-full flex-col rounded-2xl border border-night/10 bg-white p-5">
                   <p className="font-semibold text-night">{a.name}</p>
-                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-ocean">Fits {a.fits}</p>
+                  <p className="mt-1 text-xs font-medium text-ocean">Fits {a.fits}</p>
                   <p className="mt-2 text-sm text-night/65">{a.note}</p>
                   <div className="mt-auto flex flex-wrap items-end justify-between gap-3 border-t border-night/10 pt-4">
                     {typeof a.lkr === "number" ? (

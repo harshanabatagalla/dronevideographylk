@@ -117,7 +117,6 @@ export default function LocationsPage() {
     <>
       <PageHero
         crumbs={[{ name: "Filming Locations", path: PATH }]}
-        eyebrow="Where we film"
         title="Drone filming locations in Sri Lanka"
         intro={
           <p>
@@ -157,7 +156,7 @@ export default function LocationsPage() {
                   ))}
                 </div>
                 <div className="rounded-2xl border border-night/10 bg-sand/60 p-5">
-                  <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-night/65">
+                  <h3 className="flex items-center gap-2 text-sm font-semibold text-night/65">
                     <Icon name="shield" size={14} /> Planning notes
                   </h3>
                   <ul className="mt-3 space-y-2 text-sm leading-relaxed text-night/75">

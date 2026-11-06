@@ -46,7 +46,6 @@ export default function DronePermitPage() {
           { name: "Sri Lanka Drone Rules", path: RULES_PATH },
           { name: "How to Get a Drone Permit", path: PERMIT_PATH },
         ]}
-        eyebrow="Drone guide"
         title="How to get a drone permit in Sri Lanka"
         intro={
           <p>

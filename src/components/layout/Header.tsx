@@ -34,7 +34,7 @@ export function Header() {
   return (
     <header
       className={`safe-top safe-x fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled || open ? "bg-night/90 backdrop-blur-md shadow-lg shadow-black/20" : "bg-transparent"
+        scrolled || open ? "bg-night" : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">

@@ -20,15 +20,11 @@ export default function ShopPage() {
   const products = getProducts();
   return (
     <>
-      <header className="relative overflow-hidden bg-cinema noise pb-16 pt-32">
-        <div className="aurora" />
-        <div className="relative mx-auto w-full max-w-6xl px-5 sm:px-8">
+      <header className="bg-night pb-16 pt-32">
+        <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
           <Breadcrumbs items={[{ name: "Shop", path: "/shop" }]} />
-          <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 backdrop-blur">
-            <Icon name="cart" size={14} /> Drone shop
-          </span>
-          <h1 className="mt-6 max-w-3xl font-display text-4xl font-semibold leading-[1.05] text-white text-balance sm:text-5xl md:text-6xl">
-            Buy a <span className="text-gradient">DJI drone</span> from working drone pilots
+          <h1 className="mt-6 max-w-3xl font-display text-4xl font-semibold leading-[1.1] text-white text-balance sm:text-5xl md:text-6xl">
+            Buy a DJI drone from working drone pilots
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-white/70">
             DJI drones from the Mavic Mini to the Mavic 3 Cine, with spare batteries, propellers and

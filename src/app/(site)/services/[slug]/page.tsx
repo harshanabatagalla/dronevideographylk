@@ -45,7 +45,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           { name: "Drone Services", path: SERVICES_PATH },
           { name: s.title.replace(" in Sri Lanka", ""), path: servicePath(s.slug) },
         ]}
-        eyebrow="Drone service"
         title={s.h1}
         intro={s.intro.map((p) => (
           <p key={p}>{p}</p>

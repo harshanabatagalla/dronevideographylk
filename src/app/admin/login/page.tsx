@@ -17,7 +17,7 @@ export default async function AdminLoginPage({
   const { error, next = adminHref() } = await searchParams;
 
   return (
-    <div className="grid min-h-screen place-items-center bg-skyline px-5">
+    <div className="grid min-h-screen place-items-center bg-night px-5">
       <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
         <div className="flex items-center gap-2 text-white">
           <span className="grid h-9 w-9 place-items-center rounded-full bg-sunset text-night">

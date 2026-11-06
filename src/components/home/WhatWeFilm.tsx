@@ -48,7 +48,6 @@ export function WhatWeFilm() {
   return (
     <Section className="py-20 sm:py-24">
       <SectionHeading
-        eyebrow="Who we film for"
         title="Drone filming for travellers, hotels and weddings"
         subtitle="Choose the kind of shoot you need. Each page explains what we film, what you get and how to book."
       />
@@ -58,11 +57,10 @@ export function WhatWeFilm() {
           <Reveal key={s.title} delay={i * 60} variant="scale">
             <Link
               href={s.href}
-              className="hover-lift group relative block h-full overflow-hidden rounded-2xl border border-night/10 bg-white p-6 hover:border-ocean/30 hover:shadow-xl hover:shadow-night/5"
+              className="block h-full rounded-2xl border border-night/10 bg-white p-6 transition-colors hover:border-ocean/40"
             >
-              <span className="absolute inset-x-0 top-0 h-1 scale-x-0 bg-gradient-to-r from-sunset to-coral transition-transform duration-500 group-hover:scale-x-100" />
-              <span className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-ocean/15 to-teal/15 text-ocean transition group-hover:from-ocean group-hover:to-teal group-hover:text-white">
-                <Icon name={s.icon} size={26} />
+              <span className="text-ocean">
+                <Icon name={s.icon} size={28} />
               </span>
               <h3 className="mt-5 text-xl font-semibold text-night">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-night/65">{s.text}</p>
@@ -73,14 +71,10 @@ export function WhatWeFilm() {
 
       {/* Drone permits: what we do, and where to read the rules */}
       <Reveal>
-        <div className="relative mt-14 overflow-hidden rounded-3xl border border-sunset/30 bg-gradient-to-br from-night via-night-700 to-ocean p-7 text-white shadow-xl shadow-night/10 sm:p-10">
-          <div className="aurora opacity-30" />
-          <div className="relative grid items-center gap-8 lg:grid-cols-[1.3fr_1fr]">
+        <div className="mt-14 rounded-3xl bg-night p-7 text-white sm:p-10">
+          <div className="grid items-center gap-8 lg:grid-cols-[1.3fr_1fr]">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-sunset px-3 py-1 text-xs font-bold uppercase tracking-[0.15em] text-night">
-                <Icon name="shield" size={14} /> Drone permits
-              </span>
-              <h2 className="mt-4 font-display text-2xl font-semibold sm:text-3xl">
+              <h2 className="font-display text-2xl font-semibold sm:text-3xl">
                 Drone permits in Sri Lanka
               </h2>
               <p className="mt-3 max-w-xl text-white/80">

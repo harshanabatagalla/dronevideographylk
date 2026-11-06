@@ -44,7 +44,6 @@ export default function DroneRulesPage() {
       />
       <PageHero
         crumbs={[{ name: "Sri Lanka Drone Rules", path: RULES_PATH }]}
-        eyebrow="Drone guide"
         title="Sri Lanka drone rules for tourists"
         intro={
           <p>

@@ -79,7 +79,7 @@ export default async function DroneDetailPage({ params }: { params: Promise<{ sl
 
   return (
     <>
-      <div className="bg-skyline pb-10 pt-28">
+      <div className="bg-night pb-10 pt-28">
         <Section>
           <Breadcrumbs
             items={[
@@ -93,7 +93,7 @@ export default async function DroneDetailPage({ params }: { params: Promise<{ sl
       <Section className="py-12">
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
-            <div className="cinematic-frame relative aspect-[4/3] overflow-hidden rounded-3xl">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
               <Image
                 src={drone.image}
                 alt={`${drone.name} camera drone`}
@@ -108,7 +108,7 @@ export default async function DroneDetailPage({ params }: { params: Promise<{ sl
           </div>
 
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ocean">One of our drones</p>
+            <p className="text-sm font-semibold text-ocean">One of our drones</p>
             <h1 className="mt-2 font-display text-4xl font-semibold text-night">Filming with the {drone.name}</h1>
             <p className="mt-3 text-lg text-night/70">{drone.tagline}</p>
 

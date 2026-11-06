@@ -124,7 +124,7 @@ export function BookingProvider({ whatsapp, children }: { whatsapp: string; chil
           <div className="flex-1 overflow-y-auto px-6 pb-5 sm:px-7">
             {BOOKING_QUESTION_GROUPS.map((group) => (
               <fieldset key={group.title} className="mt-5">
-                <legend className="mb-2 text-xs font-bold uppercase tracking-wider text-ocean">{group.title}</legend>
+                <legend className="mb-2 text-sm font-semibold text-ocean">{group.title}</legend>
                 <div className="space-y-2">
                   {group.questions.map((q) => {
                     const checked = selected.includes(q);

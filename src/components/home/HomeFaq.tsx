@@ -9,7 +9,7 @@ const link = "font-semibold text-ocean hover:underline";
 export function HomeFaq() {
   return (
     <Section className="py-20 sm:py-24">
-      <SectionHeading eyebrow="Questions" title="Questions travellers ask us" />
+      <SectionHeading title="Questions travellers ask us" />
       <div className="mx-auto mt-12 max-w-3xl">
         <Faq
           items={[
