@@ -71,7 +71,7 @@ export function BookingSteps({ light = false }: { light?: boolean }) {
           key={s.title}
           className={`rounded-2xl border p-6 ${light ? "border-white/10 bg-white/5" : "border-night/10 bg-white"}`}
         >
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-sunset to-coral font-display font-bold text-night">
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-sunset font-display font-semibold text-night">
             {i + 1}
           </span>
           <h3 className={`mt-4 font-semibold ${light ? "text-white" : "text-night"}`}>{s.title}</h3>

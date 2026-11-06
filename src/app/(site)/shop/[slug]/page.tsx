@@ -64,7 +64,7 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
   return (
     <>
       {productJsonLd && <JsonLd data={productJsonLd} />}
-      <div className="bg-skyline pb-8 pt-28">
+      <div className="bg-night pb-8 pt-28">
         <Section>
           <Breadcrumbs
             items={[
@@ -78,14 +78,14 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
       <Section className="py-12">
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
-            <div className="cinematic-frame relative aspect-[4/3] overflow-hidden rounded-3xl">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
               <ProductVisual product={p} priority sizes="(max-width: 1024px) 100vw, 576px" />
             </div>
             <PhotoCredit slug={p.slug} className="mt-2" />
             <dl className="mt-6 grid gap-3 sm:grid-cols-2">
               {p.specs.map((s) => (
                 <div key={s.label} className="rounded-2xl border border-night/10 bg-white p-4">
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-night/65">{s.label}</dt>
+                  <dt className="text-xs font-medium text-night/65">{s.label}</dt>
                   <dd className="mt-1 text-sm text-night/80">{s.value}</dd>
                 </div>
               ))}
@@ -93,9 +93,9 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
           </div>
 
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ocean">
-              {SERIES.find((s) => s.key === p.series)?.label} · {p.released}
-              {p.discontinued && " · No longer made"}
+            <p className="text-sm font-semibold text-ocean">
+              {SERIES.find((s) => s.key === p.series)?.label}, {p.released}
+              {p.discontinued && ", no longer made"}
             </p>
             <h1 className="mt-2 font-display text-4xl font-semibold text-night sm:text-5xl">{p.name}</h1>
             <p className="mt-3 text-lg text-night/70">{p.headline}</p>

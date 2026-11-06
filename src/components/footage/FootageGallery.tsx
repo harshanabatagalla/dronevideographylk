@@ -56,7 +56,7 @@ export function FootageGallery({
             key={f.id}
             type="button"
             onClick={() => setActive(f)}
-            className="cinematic-frame group relative aspect-video overflow-hidden rounded-2xl text-left"
+            className="group relative aspect-video overflow-hidden rounded-2xl text-left"
             title={f.youtubeId ? `Play ${f.title}` : `View ${f.title} full size`}
           >
             <Image
@@ -84,7 +84,7 @@ export function FootageGallery({
               <span className="block font-semibold text-white">{f.title}</span>
               <span className="mt-0.5 flex items-center gap-2 text-xs text-white/70">
                 <Icon name="map-pin" size={12} /> {f.location}
-                {f.droneSlug && ` · ${droneName(f.droneSlug)}`}
+                {f.droneSlug && `, ${droneName(f.droneSlug)}`}
               </span>
             </span>
             <span className="absolute right-3 top-3 z-10 rounded-full bg-night/70 px-3 py-1 text-xs font-medium text-white">

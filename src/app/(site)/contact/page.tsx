@@ -31,7 +31,6 @@ export default async function ContactPage() {
     <>
       <PageHero
         crumbs={[{ name: "Contact", path: "/contact" }]}
-        eyebrow="Contact us"
         title="Contact us about your drone shoot"
         intro={
           <p>
@@ -98,7 +97,7 @@ export default async function ContactPage() {
                 </span>
                 <span>
                   <span className="block font-semibold text-night">Based in</span>
-                  <span className="text-sm text-night/65">{settings.address} · we film all over the island</span>
+                  <span className="text-sm text-night/65">{settings.address}. We film all over the island</span>
                 </span>
               </li>
             </ul>

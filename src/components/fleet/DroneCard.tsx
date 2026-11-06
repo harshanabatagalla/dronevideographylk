@@ -11,7 +11,7 @@ import type { Drone } from "@/lib/content";
  */
 export function DroneCard({ drone }: { drone: Drone }) {
   return (
-    <article className="hover-lift group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur hover:border-white/25 hover:shadow-2xl hover:shadow-black/40">
+    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-night-800 transition-colors hover:border-white/25">
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={drone.image}
@@ -22,9 +22,6 @@ export function DroneCard({ drone }: { drone: Drone }) {
           className="object-cover transition duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-night via-night/40 to-transparent" />
-        <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/30 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-white backdrop-blur">
-          Drone
-        </span>
         <div className="absolute inset-x-4 bottom-4">
           <h3 className="font-display text-2xl font-semibold text-white">{drone.name}</h3>
           <p className="mt-1 text-sm text-white/70">{drone.tagline}</p>
@@ -39,9 +36,7 @@ export function DroneCard({ drone }: { drone: Drone }) {
                 <Icon name={s.icon} size={16} />
               </span>
               <span className="text-sm">
-                <span className="block text-[11px] font-semibold uppercase tracking-wide text-white/45">
-                  {s.label}
-                </span>
+                <span className="block text-xs text-white/60">{s.label}</span>
                 <span className="text-white/80">{s.value}</span>
               </span>
             </li>

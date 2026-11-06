@@ -7,7 +7,6 @@ export async function FeaturedFootage() {
   return (
     <Section className="py-20 sm:py-24">
       <SectionHeading
-        eyebrow="Our work"
         title="Drone photos we took in Sri Lanka"
         subtitle="No stock images. Our team took every photo below with our own drones."
       />

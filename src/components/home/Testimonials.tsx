@@ -10,12 +10,11 @@ export async function Testimonials() {
   return (
     <div className="bg-sand py-20 sm:py-24">
       <Section>
-        <SectionHeading eyebrow="Reviews" title="What our clients say" />
+        <SectionHeading title="What our clients say" />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {testimonials.map((t, i) => (
             <Reveal key={t.id} delay={i * 80} variant="scale">
-              <figure className="hover-lift relative flex h-full flex-col overflow-hidden rounded-2xl border border-night/10 bg-white p-7 hover:shadow-xl hover:shadow-night/5">
-                <span className="pointer-events-none absolute -right-2 -top-6 font-display text-8xl font-bold text-sunset/10">”</span>
+              <figure className="flex h-full flex-col rounded-2xl border border-night/10 bg-white p-7">
                 <div className="flex gap-0.5 text-sunset">
                   {Array.from({ length: t.rating }).map((_, idx) => (
                     <Icon key={idx} name="star" size={18} />

@@ -193,7 +193,7 @@ export function CartView() {
           disabled={status === "sending"}
           className="flex w-full items-center justify-center gap-2 rounded-full bg-sunset px-6 py-3.5 text-sm font-semibold text-night transition hover:bg-amber-400 disabled:opacity-60"
         >
-          {status === "sending" ? "Sending order…" : `Place order · ${formatLkr(total)}`}
+          {status === "sending" ? "Sending order…" : `Place order for ${formatLkr(total)}`}
         </button>
         <p className="text-center text-xs text-night/65">Nothing is charged now. We confirm first.</p>
       </form>

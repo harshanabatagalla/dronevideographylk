@@ -18,18 +18,13 @@ export default async function FleetPage() {
   const [drones, settings] = await Promise.all([getDrones(), getSettings()]);
   return (
     <>
-      {/* Immersive header */}
-      <header className="relative flex min-h-[70vh] items-center overflow-hidden bg-cinema noise pt-24">
-        <div className="aurora" />
-        <div className="relative mx-auto w-full max-w-6xl px-5 text-center sm:px-8">
+      <header className="bg-night pb-20 pt-32">
+        <div className="mx-auto w-full max-w-6xl px-5 text-center sm:px-8">
           <div className="flex justify-center">
             <Breadcrumbs items={[{ name: "Our Drones", path: "/fleet" }]} />
           </div>
-          <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 backdrop-blur">
-            <Icon name="drone" size={14} /> Our drones
-          </span>
-          <h1 className="mx-auto mt-6 max-w-4xl font-display text-5xl font-semibold leading-[1.02] text-white text-balance sm:text-6xl md:text-7xl">
-            The <span className="text-gradient">drones we use</span> in Sri Lanka
+          <h1 className="mx-auto mt-6 max-w-4xl font-display text-4xl font-semibold leading-[1.1] text-white text-balance sm:text-5xl md:text-6xl">
+            The drones we use in Sri Lanka
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
             We use different drones depending on the place, the weather and the shots you want. Here is what
@@ -40,19 +35,16 @@ export default async function FleetPage() {
               href={whatsappHref("Hi! Can you help me choose the right drone for my trip?")}
               target="_blank"
               rel="noopener noreferrer"
-              className="glow-sunset inline-flex items-center gap-2 rounded-full bg-sunset px-7 py-3.5 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:bg-amber-400"
+              className="inline-flex items-center gap-2 rounded-full bg-sunset px-7 py-3.5 text-sm font-semibold text-night transition-colors hover:bg-amber-400"
             >
               <Icon name="whatsapp" size={18} /> Help me choose
             </a>
             <a
               href="#fleet"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/5"
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
               See the drones <Icon name="arrow-right" size={16} />
             </a>
-          </div>
-          <div className="scroll-cue mt-14 flex justify-center text-white/50">
-            <span className="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
           </div>
         </div>
       </header>
@@ -73,8 +65,8 @@ export default async function FleetPage() {
       </div>
 
       {/* Closing CTA band */}
-      <section className="relative overflow-hidden bg-cinema-soft py-20">
-        <div className="relative mx-auto max-w-3xl px-5 text-center sm:px-8">
+      <section className="bg-night py-20">
+        <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
           <h2 className="font-display text-3xl font-semibold text-white sm:text-4xl">
             Still not sure which one?
           </h2>
@@ -86,7 +78,7 @@ export default async function FleetPage() {
             href={whatsappHref("Hi! Here is my plan. Which drone do you recommend?")}
             target="_blank"
             rel="noopener noreferrer"
-            className="glow-sunset mt-8 inline-flex items-center gap-2 rounded-full bg-sunset px-8 py-4 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:bg-amber-400"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-sunset px-8 py-4 text-sm font-semibold text-night transition-colors hover:bg-amber-400"
           >
             <Icon name="whatsapp" size={18} /> Chat with a pilot
           </a>

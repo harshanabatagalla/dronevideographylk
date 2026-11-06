@@ -64,7 +64,7 @@ export function ShopGrid({ products }: { products: ShopProduct[] }) {
               <Link href={`/shop/${p.slug}`} className="relative block aspect-[4/3] overflow-hidden">
                 <ProductVisual product={p} />
                 <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-                  <span className="rounded-full bg-black/35 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
+                  <span className="rounded-full bg-black/60 px-2.5 py-1 text-[11px] font-semibold text-white">
                     {p.released}
                   </span>
                   {p.discontinued && (

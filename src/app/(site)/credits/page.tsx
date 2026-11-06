@@ -27,7 +27,7 @@ export default function CreditsPage() {
     .filter((r) => r.page !== null);
   return (
     <>
-      <div className="bg-skyline pb-10 pt-32">
+      <div className="bg-night pb-10 pt-32">
         <Section>
           <h1 className="font-display text-4xl font-semibold text-white">Photo credits</h1>
           <p className="mt-2 max-w-2xl text-white/70">

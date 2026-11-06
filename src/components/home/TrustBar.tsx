@@ -16,8 +16,8 @@ export function TrustBar() {
             key={i.text}
             className="flex items-center gap-2.5 text-[0.8rem] font-medium leading-tight text-night/75 sm:text-sm"
           >
-            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-ocean/15 to-teal/15 text-ocean">
-              <Icon name={i.icon} size={16} />
+            <span className="shrink-0 text-ocean">
+              <Icon name={i.icon} size={18} />
             </span>
             {i.text}
           </div>

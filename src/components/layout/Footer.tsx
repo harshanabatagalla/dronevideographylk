@@ -30,7 +30,7 @@ const explore = [
 function FooterLinks({ title, items }: { title: string; items: { label: string; href: string }[] }) {
   return (
     <div>
-      <h2 className="text-sm font-semibold uppercase tracking-wider text-white">{title}</h2>
+      <h2 className="text-sm font-semibold text-white">{title}</h2>
       <ul className="mt-4 space-y-2 text-sm">
         {items.map((item) => (
           <li key={item.href}>
@@ -112,11 +112,10 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-white/65 sm:flex-row sm:px-8">
           <p>© {new Date().getFullYear()} {site.brand}. All rights reserved.</p>
           <p>
+            Licensed and insured drone pilots in Colombo, Sri Lanka.{" "}
             <Link href="/credits" className="hover:text-sunset">
               Photo credits
             </Link>
-            {" · "}
-            Licensed and insured drone pilots · Colombo, Sri Lanka
           </p>
         </div>
       </div>

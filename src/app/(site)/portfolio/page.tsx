@@ -19,7 +19,6 @@ export default async function PortfolioPage() {
     <>
       <PageHero
         crumbs={[{ name: "Portfolio", path: "/portfolio" }]}
-        eyebrow="Portfolio"
         title="Our drone photos from Sri Lanka"
         intro={
           <p>

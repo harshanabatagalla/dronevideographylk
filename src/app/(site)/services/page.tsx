@@ -20,7 +20,6 @@ export default function ServicesPage() {
     <>
       <PageHero
         crumbs={[{ name: "Drone Services", path: SERVICES_PATH }]}
-        eyebrow="Services"
         title="Drone filming services in Sri Lanka"
         intro={
           <p>
@@ -40,7 +39,7 @@ export default function ServicesPage() {
             <li key={s.slug}>
               <Link
                 href={servicePath(s.slug)}
-                className="hover-lift group flex h-full flex-col rounded-2xl border border-night/10 bg-white p-6 hover:border-ocean/30 hover:shadow-xl hover:shadow-night/5"
+                className="group flex h-full flex-col rounded-2xl border border-night/10 bg-white p-6 transition-colors hover:border-ocean/40"
               >
                 <h2 className="font-display text-xl font-semibold text-night">{s.h1}</h2>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-night/65">{s.cardText}</p>

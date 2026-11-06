@@ -29,7 +29,7 @@ export async function WhatsAppLink({
       rel="noopener noreferrer"
       className={
         className ??
-        "glow-sunset inline-flex items-center gap-2 rounded-full bg-sunset px-7 py-3.5 text-sm font-semibold text-night transition hover:-translate-y-0.5 hover:bg-amber-400"
+        "inline-flex items-center gap-2 rounded-full bg-sunset px-7 py-3.5 text-sm font-semibold text-night transition-colors hover:bg-amber-400"
       }
     >
       <Icon name="whatsapp" size={18} /> {children}
@@ -48,9 +48,8 @@ export async function EnquiryCta({
   message: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-cinema noise">
-      <div className="aurora opacity-70" />
-      <div className="relative mx-auto grid w-full max-w-6xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:items-center">
+    <section className="bg-night">
+      <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:items-center">
         <div>
           <h2 className="font-display text-3xl font-semibold text-white text-balance sm:text-4xl">{title}</h2>
           <p className="mt-4 max-w-lg text-lg text-white/75">{text}</p>
@@ -58,13 +57,13 @@ export async function EnquiryCta({
             <WhatsAppLink message={message}>Send your date and location</WhatsAppLink>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/5"
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
               Use the contact form
             </Link>
           </div>
         </div>
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur sm:p-8">
+        <div className="rounded-3xl border border-white/10 bg-night-800 p-6 sm:p-8">
           <h3 className="font-semibold text-white">What to send us</h3>
           <ul className="mt-4 space-y-3">
             {WHAT_TO_SEND.map((item) => (

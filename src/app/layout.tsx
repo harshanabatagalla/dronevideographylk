@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk, Geist_Mono } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { OG_IMAGE } from "@/lib/seo";
@@ -10,15 +10,6 @@ const display = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
-});
-// Only used for small labels, so it is not preloaded and does not compete with the
-// body and heading fonts before first paint. "optional" means a late arrival is not
-// swapped in on that view (no layout shift); it is cached for the next page.
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "optional",
-  preload: false,
 });
 
 export const viewport: Viewport = {
@@ -55,7 +46,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${display.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${display.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream" suppressHydrationWarning>{children}</body>
     </html>

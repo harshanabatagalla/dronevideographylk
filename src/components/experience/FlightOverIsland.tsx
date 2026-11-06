@@ -3,8 +3,8 @@ import { locations } from "@/lib/content";
 import { FlightTrack, type Waypoint } from "./FlightTrack";
 
 /**
- * Server wrapper: builds the flight waypoints from featured footage, enriching
- * each with a location blurb, then hands off to the pinned client experience.
+ * Server wrapper: builds the location list from featured footage, enriching
+ * each with a location blurb, then hands off to the "Where we film" grid.
  */
 export async function FlightOverIsland() {
   const footage = await getFeaturedFootage();
