@@ -45,10 +45,10 @@ export function CartView() {
   if (placed) {
     return (
       <div className="mx-auto max-w-xl rounded-3xl border border-teal/30 bg-teal/5 p-8 text-center">
-        <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-teal/15 text-teal">
+        <span className="mx-auto grid place-items-center text-teal">
           <Icon name="check" size={28} />
         </span>
-        <h2 className="mt-4 font-display text-2xl font-semibold text-night">Order received</h2>
+        <h2 className="mt-4 font-display text-2xl font-medium text-night">Order received</h2>
         <p className="mt-2 text-night/70">
           Your order number is <strong className="text-night">{placed.ref}</strong>. Total{" "}
           {formatLkr(placed.total)}.
@@ -64,13 +64,13 @@ export function CartView() {
             href={whatsappHref(`Hi! I just placed order ${placed.ref} on your website.`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-sunset px-6 py-3 text-sm font-semibold text-night transition hover:bg-amber-400"
+            className="btn btn-primary"
           >
             <Icon name="whatsapp" size={18} /> Message us about it
           </a>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 rounded-full border border-night/15 px-6 py-3 text-sm font-semibold text-night hover:border-night/40"
+            className="btn btn-ghost"
           >
             Back to shop
           </Link>
@@ -89,7 +89,7 @@ export function CartView() {
         <p className="text-night/65">Your cart is empty.</p>
         <Link
           href="/shop"
-          className="mt-5 inline-flex items-center gap-2 rounded-full bg-sunset px-6 py-3 text-sm font-semibold text-night hover:bg-amber-400"
+          className="btn btn-primary mt-5"
         >
           Browse drones <Icon name="arrow-right" size={16} />
         </Link>
@@ -116,10 +116,10 @@ export function CartView() {
                     </Link>
                     <p className="text-xs text-night/65">{item.sub}</p>
                   </div>
-                  <p className="shrink-0 font-semibold text-night">{formatLkr((item.lkr ?? 0) * line.qty)}</p>
+                  <p className="num shrink-0 font-semibold text-night">{formatLkr((item.lkr ?? 0) * line.qty)}</p>
                 </div>
                 <div className="mt-auto flex items-center gap-3 pt-3">
-                  <div className="flex items-center rounded-full border border-night/15">
+                  <div className="flex items-center rounded-md border border-night/20">
                     <button
                       type="button"
                       onClick={() => setQty(item.sku, line.qty - 1)}
@@ -152,7 +152,7 @@ export function CartView() {
         </ul>
         <div className="mt-4 flex items-center justify-between rounded-2xl bg-sand/70 px-5 py-4">
           <span className="font-medium text-night/70">Total</span>
-          <span className="font-display text-2xl font-semibold text-night">{formatLkr(total)}</span>
+          <span className="num font-display text-2xl font-medium text-night">{formatLkr(total)}</span>
         </div>
         <p className="mt-2 text-xs text-night/65">
           Prices in Sri Lankan rupees. We confirm stock, the final price and any delivery cost before you pay.
@@ -196,7 +196,7 @@ export function CartView() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="flex w-full items-center justify-center gap-2 rounded-full bg-sunset px-6 py-3.5 text-sm font-semibold text-night transition hover:bg-amber-400 disabled:opacity-60"
+          className="btn btn-primary btn-block btn-lg"
         >
           {status === "sending" ? "Sending order…" : `Place order for ${formatLkr(total)}`}
         </button>

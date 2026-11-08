@@ -5,13 +5,12 @@ import { whatsappHref } from "@/lib/site";
 import type { Drone } from "@/lib/content";
 
 /**
- * Premium dark drone card (used on the home fleet teaser).
- * Cinematic image header with floating name, plain-language spec quick-list
- * and a dual call-to-action. Designed to sit on a dark cinematic band.
+ * Drone card for the dark band on the home page: a photo with the name over it,
+ * three plain spec rows, who the drone is best for, and two actions.
  */
 export function DroneCard({ drone }: { drone: Drone }) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-night-800 transition-colors hover:border-white/25">
+    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-night-800">
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={drone.image}
@@ -19,45 +18,34 @@ export function DroneCard({ drone }: { drone: Drone }) {
           fill
           loading="lazy"
           sizes="(max-width: 768px) 100vw, 384px"
-          className="object-cover transition duration-700 group-hover:scale-110"
+          className="object-cover transition-transform duration-700 ease-out-strong group-hover:scale-[1.05]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-night via-night/40 to-transparent" />
-        <div className="absolute inset-x-4 bottom-4">
-          <h3 className="font-display text-2xl font-semibold text-white">{drone.name}</h3>
-          <p className="mt-1 text-sm text-white/70">{drone.tagline}</p>
+        <div className="absolute inset-x-5 bottom-4">
+          <h3 className="font-display text-2xl font-medium text-white">{drone.name}</h3>
+          <p className="mt-1 text-sm text-white/75">{drone.tagline}</p>
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-6">
-        <ul className="space-y-3">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <dl className="divide-y divide-white/10 border-y border-white/10 text-sm">
           {drone.specs.slice(0, 3).map((s) => (
-            <li key={s.label} className="flex items-start gap-3">
-              <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-sunset/15 text-sunset">
-                <Icon name={s.icon} size={16} />
-              </span>
-              <span className="text-sm">
-                <span className="block text-xs text-white/60">{s.label}</span>
-                <span className="text-white/80">{s.value}</span>
-              </span>
-            </li>
+            <div key={s.label} className="flex items-baseline justify-between gap-4 py-2.5">
+              <dt className="shrink-0 text-white/60">{s.label}</dt>
+              <dd className="text-right text-white/90">{s.value}</dd>
+            </div>
           ))}
-        </ul>
+        </dl>
 
-        <div className="mt-5 flex flex-wrap gap-2">
-          {drone.bestFor.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/60"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        <p className="mt-4 text-sm leading-relaxed text-white/65">
+          <span className="text-white/85">Best for: </span>
+          {drone.bestFor.join(", ")}
+        </p>
 
-        <div className="mt-6 flex items-center gap-3 border-t border-white/10 pt-5">
+        <div className="mt-auto flex items-center gap-3 pt-6">
           <Link
             href={`/fleet/${drone.slug}`}
-            className="tap inline-flex items-center gap-1 text-sm font-semibold text-sunset transition hover:text-amber-300"
+            className="tap inline-flex items-center gap-1 text-sm font-semibold text-sunset transition-colors duration-150 hover:text-amber-300"
           >
             {drone.name} details <Icon name="arrow-right" size={14} />
           </Link>
@@ -65,7 +53,7 @@ export function DroneCard({ drone }: { drone: Drone }) {
             href={whatsappHref(`Hi! I'd like to book the ${drone.name} drone for my Sri Lanka trip.`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-sunset px-4 py-2 text-xs font-semibold text-night transition hover:bg-amber-400"
+            className="btn btn-primary btn-sm ml-auto"
           >
             <Icon name="whatsapp" size={14} /> Enquire
           </a>

@@ -8,9 +8,9 @@ const link = "font-semibold text-ocean hover:underline";
 
 export function HomeFaq() {
   return (
-    <Section className="py-20 sm:py-24">
+    <Section className="pb-20 pt-12 sm:pb-28 sm:pt-16">
       <SectionHeading title="Questions travellers ask us" />
-      <div className="mx-auto mt-12 max-w-3xl">
+      <div className="mt-10">
         <Faq
           items={[
             {

@@ -39,8 +39,8 @@ export function ShootPlanner({ drones, whatsapp }: { drones: DroneOption[]; what
   const today = localDateInput();
 
   return (
-    <div className="rounded-3xl border border-night/10 bg-white p-6 shadow-lg shadow-night/5 sm:p-7">
-      <h2 className="font-display text-2xl font-semibold text-night">Plan your shoot</h2>
+    <div className="rounded-3xl border border-night/10 bg-white p-6 sm:p-7">
+      <h2 className="font-display text-2xl font-medium text-night">Plan your shoot</h2>
       <p className="mt-1 text-sm text-night/65">
         Choose a drone, a date and where you want to film. We reply on WhatsApp.
       </p>
@@ -86,14 +86,14 @@ export function ShootPlanner({ drones, whatsapp }: { drones: DroneOption[]; what
         <button
           type="button"
           onClick={() => send("quote")}
-          className="inline-flex items-center gap-2 rounded-full border border-night/15 px-6 py-3 text-sm font-semibold text-night transition hover:border-night/40"
+          className="btn btn-ghost"
         >
           <Icon name="whatsapp" size={18} /> Get a quotation
         </button>
         <button
           type="button"
           onClick={() => send("book")}
-          className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-night transition hover:brightness-95"
+          className="btn btn-whatsapp"
         >
           <Icon name="whatsapp" size={18} /> Book now
         </button>

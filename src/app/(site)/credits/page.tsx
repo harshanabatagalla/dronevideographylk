@@ -29,7 +29,7 @@ export default function CreditsPage() {
     <>
       <div className="bg-night pb-10 pt-32">
         <Section>
-          <h1 className="font-display text-4xl font-semibold text-white">Photo credits</h1>
+          <h1 className="font-display text-4xl font-medium text-white">Photo credits</h1>
           <p className="mt-2 max-w-2xl text-white/70">
             The aerial photos on this site were taken by our own team. The drone product photos in the
             shop were taken by the photographers below and are used under their Creative Commons

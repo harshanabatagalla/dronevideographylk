@@ -22,7 +22,7 @@ export function ShopGrid({ products }: { products: ShopProduct[] }) {
   }, [products, series, sort]);
 
   const tab = (active: boolean) =>
-    `rounded-full px-4 py-2 text-sm font-medium transition ${
+    `rounded-md px-4 py-2 text-sm font-medium transition-colors duration-150 active:scale-[0.97] ${
       active ? "bg-night text-white" : "bg-white text-night/70 ring-1 ring-night/10 hover:ring-night/30"
     }`;
 
@@ -44,7 +44,7 @@ export function ShopGrid({ products }: { products: ShopProduct[] }) {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as Sort)}
-            className="rounded-full border border-night/15 bg-white px-3 py-2 text-sm text-night focus:border-ocean focus:outline-none"
+            className="rounded-md border border-night/20 bg-white px-3 py-2 text-sm text-night focus:border-ocean focus:outline-none"
           >
             <option value="price-asc">Price: low to high</option>
             <option value="price-desc">Price: high to low</option>
@@ -60,15 +60,15 @@ export function ShopGrid({ products }: { products: ShopProduct[] }) {
       <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((p) => (
           <li key={p.slug}>
-            <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-night/10 bg-white transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-night/5">
+            <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-night/10 bg-white transition-colors duration-150 hover:border-night/30">
               <Link href={`/shop/${p.slug}`} className="relative block aspect-[4/3] overflow-hidden">
                 <ProductVisual product={p} />
                 <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-                  <span className="rounded-full bg-black/60 px-2.5 py-1 text-[11px] font-semibold text-white">
+                  <span className="rounded-sm bg-black/65 px-2 py-1 text-[11px] font-semibold text-white">
                     {p.released}
                   </span>
                   {p.discontinued && (
-                    <span className="rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-night">
+                    <span className="rounded-sm bg-white/90 px-2 py-1 text-[11px] font-semibold text-night">
                       No longer made
                     </span>
                   )}
@@ -105,7 +105,7 @@ export function ShopGrid({ products }: { products: ShopProduct[] }) {
                       const priced = p.variants?.find((v) => v.lkr === from);
                       return from ? (
                         <>
-                          <p className="font-display text-2xl font-semibold text-night">{formatLkr(from)}</p>
+                          <p className="num font-display text-2xl font-medium text-night">{formatLkr(from)}</p>
                           <p className="text-xs text-night/65">{priced?.label}</p>
                         </>
                       ) : (

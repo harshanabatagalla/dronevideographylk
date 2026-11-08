@@ -49,7 +49,7 @@ export async function DroneList({ slugs }: { slugs: string[] }) {
             href={`/fleet/${d.slug}`}
             className="flex h-full items-start gap-3 rounded-2xl border border-night/10 bg-white p-4 transition hover:border-ocean/40"
           >
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-ocean/10 text-ocean">
+            <span className="mt-0.5 shrink-0 text-ocean">
               <Icon name="drone" size={20} />
             </span>
             <span>
@@ -65,17 +65,17 @@ export async function DroneList({ slugs }: { slugs: string[] }) {
 
 export function BookingSteps({ light = false }: { light?: boolean }) {
   return (
-    <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <ol className="grid gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
       {BOOKING_STEPS.map((s, i) => (
-        <li
-          key={s.title}
-          className={`rounded-2xl border p-6 ${light ? "border-white/10 bg-white/5" : "border-night/10 bg-white"}`}
-        >
-          <span className="grid h-10 w-10 place-items-center rounded-full bg-sunset font-display font-semibold text-night">
+        <li key={s.title} className={`border-t-2 pt-5 ${light ? "border-white/70" : "border-night"}`}>
+          <p
+            aria-hidden="true"
+            className={`num font-display text-4xl font-medium leading-none ${light ? "text-white" : "text-night"}`}
+          >
             {i + 1}
-          </span>
+          </p>
           <h3 className={`mt-4 font-semibold ${light ? "text-white" : "text-night"}`}>{s.title}</h3>
-          <p className={`mt-2 text-sm leading-relaxed ${light ? "text-white/70" : "text-night/65"}`}>{s.text}</p>
+          <p className={`mt-2 text-sm leading-relaxed ${light ? "text-white/75" : "text-night/70"}`}>{s.text}</p>
         </li>
       ))}
     </ol>

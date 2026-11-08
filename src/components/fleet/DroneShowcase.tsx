@@ -37,35 +37,25 @@ export function DroneShowcase({ drone, index }: { drone: Drone; index: number })
           className={reversed ? "lg:order-1" : ""}
         >
           <div>
-            <h2 className="font-display text-4xl font-semibold leading-[1.1] text-white sm:text-5xl">
+            <h2 className="font-display text-4xl font-medium leading-[1.1] text-white sm:text-5xl">
               {drone.name}
             </h2>
             <p className="mt-4 max-w-md text-lg text-white/70">{drone.tagline}</p>
 
-            {/* Spec highlights */}
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            {/* Spec highlights as a plain spec sheet */}
+            <dl className="mt-8 divide-y divide-white/10 border-y border-white/10">
               {drone.specs.slice(0, 4).map((s) => (
-                <div key={s.label} className="rounded-2xl border border-white/10 bg-night-800 p-4">
-                  <span className="text-sunset">
-                    <Icon name={s.icon} size={20} />
-                  </span>
-                  <p className="mt-3 text-sm text-white/60">{s.label}</p>
-                  <p className="mt-0.5 text-sm text-white/90">{s.value}</p>
+                <div key={s.label} className="flex items-baseline justify-between gap-6 py-3">
+                  <dt className="shrink-0 text-white/60">{s.label}</dt>
+                  <dd className="text-right text-white/90">{s.value}</dd>
                 </div>
               ))}
-            </div>
+            </dl>
 
-            {/* Best-for tags */}
-            <div className="mt-6 flex flex-wrap gap-2">
-              {drone.bestFor.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-white/15 px-3 py-1 text-xs font-medium text-white/70"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <p className="mt-5 leading-relaxed text-white/65">
+              <span className="text-white/85">Best for: </span>
+              {drone.bestFor.join(", ")}
+            </p>
 
             {/* CTAs */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -75,13 +65,13 @@ export function DroneShowcase({ drone, index }: { drone: Drone; index: number })
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-sunset px-7 py-3.5 text-sm font-semibold text-night transition-colors hover:bg-amber-400"
+                className="btn btn-primary btn-lg"
               >
                 <Icon name="whatsapp" size={18} /> Book this drone
               </a>
               <Link
                 href={`/fleet/${drone.slug}`}
-                className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                className="btn btn-light btn-lg"
               >
                 What we use the {drone.name} for <Icon name="arrow-right" size={16} />
               </Link>

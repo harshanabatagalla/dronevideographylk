@@ -82,11 +82,11 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
               <ProductVisual product={p} priority sizes="(max-width: 1024px) 100vw, 576px" />
             </div>
             <PhotoCredit slug={p.slug} className="mt-2" />
-            <dl className="mt-6 grid gap-3 sm:grid-cols-2">
+            <dl className="mt-6 divide-y divide-night/15 border-y border-night/15">
               {p.specs.map((s) => (
-                <div key={s.label} className="rounded-2xl border border-night/10 bg-white p-4">
-                  <dt className="text-xs font-medium text-night/65">{s.label}</dt>
-                  <dd className="mt-1 text-sm text-night/80">{s.value}</dd>
+                <div key={s.label} className="flex items-baseline justify-between gap-6 py-3 text-sm">
+                  <dt className="shrink-0 text-night/65">{s.label}</dt>
+                  <dd className="num text-right text-night/85">{s.value}</dd>
                 </div>
               ))}
             </dl>
@@ -97,7 +97,7 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
               {SERIES.find((s) => s.key === p.series)?.label}, {p.released}
               {p.discontinued && ", no longer made"}
             </p>
-            <h1 className="mt-2 font-display text-4xl font-semibold text-night sm:text-5xl">{p.name}</h1>
+            <h1 className="mt-2 font-display text-4xl font-medium text-night sm:text-5xl">{p.name}</h1>
             <p className="mt-3 text-lg text-night/70">{p.headline}</p>
 
             <VariantPicker product={p} />
@@ -106,7 +106,7 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
               <p>{p.purpose}</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {p.bestFor.map((tag) => (
-                  <span key={tag} className="rounded-full bg-sand px-3 py-1 text-sm font-medium text-night/70">
+                  <span key={tag} className="rounded bg-sand px-2.5 py-1 text-sm font-medium text-night/75">
                     {tag}
                   </span>
                 ))}
@@ -181,7 +181,7 @@ function Block({ icon, title, children }: { icon: IconName; title: string; child
   return (
     <section className="mt-6">
       <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-night">
-        <span className="grid h-8 w-8 place-items-center rounded-lg bg-ocean/10 text-ocean">
+        <span className="grid h-8 w-7 place-items-center text-ocean">
           <Icon name={icon} size={18} />
         </span>
         {title}
@@ -202,11 +202,11 @@ function ListCard({
   title: string;
   items: string[];
 }) {
-  const badge = tone === "good" ? "bg-teal/15 text-teal" : "bg-coral/15 text-coral";
+  const badge = tone === "good" ? "text-teal" : "text-coral";
   return (
     <div className="rounded-3xl border border-night/10 bg-white p-6">
       <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-night">
-        <span className={`grid h-8 w-8 place-items-center rounded-lg ${badge}`}>
+        <span className={`grid h-8 w-7 place-items-center ${badge}`}>
           <Icon name={icon} size={18} />
         </span>
         {title}

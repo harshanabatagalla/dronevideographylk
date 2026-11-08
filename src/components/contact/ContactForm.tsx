@@ -39,10 +39,10 @@ export function ContactForm() {
   if (status === "sent") {
     return (
       <div className="rounded-2xl border border-teal/30 bg-teal/5 p-8 text-center">
-        <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-teal/15 text-teal">
+        <span className="mx-auto grid place-items-center text-teal">
           <Icon name="check" size={28} />
         </span>
-        <h3 className="mt-4 font-display text-2xl font-semibold text-night">Thank you!</h3>
+        <h3 className="mt-4 font-display text-2xl font-medium text-night">Thank you!</h3>
         <p className="mt-2 text-night/65">
           We&apos;ve received your enquiry and will reply within 24 hours. For a faster response,
           message us on WhatsApp.
@@ -131,7 +131,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex items-center gap-2 rounded-full bg-sunset px-7 py-3.5 text-sm font-semibold text-night transition hover:bg-amber-400 disabled:opacity-60"
+          className="btn btn-primary btn-lg"
         >
           {status === "sending" ? "Sending…" : "Send enquiry"}
           {status !== "sending" && <Icon name="arrow-right" size={18} />}

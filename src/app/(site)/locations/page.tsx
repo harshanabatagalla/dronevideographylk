@@ -136,7 +136,7 @@ export default function LocationsPage() {
             <a
               key={r.id}
               href={`#${r.id}`}
-              className="rounded-full border border-night/15 px-4 py-2 text-sm font-medium text-night/75 transition hover:border-ocean/40 hover:text-ocean"
+              className="rounded-md border border-night/20 px-4 py-2 text-sm font-medium text-night/75 transition-colors duration-150 hover:border-ocean hover:text-ocean"
             >
               {r.title}
             </a>
@@ -148,7 +148,7 @@ export default function LocationsPage() {
         {REGIONS.map((r) => (
           <Section key={r.id} className="py-10">
             <section id={r.id} className="scroll-mt-28">
-              <h2 className="font-display text-2xl font-semibold text-night sm:text-3xl">{r.title}</h2>
+              <h2 className="font-display text-2xl font-medium text-night sm:text-3xl">{r.title}</h2>
               <div className="mt-4 grid gap-8 lg:grid-cols-[1.4fr_1fr]">
                 <div className="space-y-4 leading-relaxed text-night/75">
                   {r.text.map((p) => (

@@ -14,10 +14,13 @@ import { photoAlt } from "@/lib/alt";
 export function FootageGallery({
   items,
   filterable = false,
+  feature = false,
   eagerCount = 0,
 }: {
   items: Footage[];
   filterable?: boolean;
+  /** Show the first photo large (two columns wide and two rows tall on desktop). */
+  feature?: boolean;
   /** How many leading photos load right away: the first row on desktop, where any of them can
    *  be the LCP image. Only the first gets high priority, since on phones it is the only one
    *  on screen and the rest would compete with it for bandwidth. */
@@ -42,16 +45,17 @@ export function FootageGallery({
   return (
     <div>
       {filterable && (
-        <div className="mb-8 flex flex-wrap justify-center gap-2">
+        <div className="mb-8 flex flex-wrap gap-2">
           {categories.map((c) => (
             <button
               key={c}
               type="button"
               onClick={() => setFilter(c)}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+              aria-pressed={filter === c}
+              className={`rounded-md border px-4 py-2 text-sm font-medium transition-[background-color,border-color,color,transform] duration-150 ease-out-strong active:scale-[0.97] ${
                 filter === c
-                  ? "bg-ocean text-white"
-                  : "border border-night/15 text-night/70 hover:border-ocean/40"
+                  ? "border-night bg-night text-white"
+                  : "border-night/20 text-night/75 hover:border-night/50"
               }`}
             >
               {c}
@@ -61,47 +65,56 @@ export function FootageGallery({
       )}
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {visible.map((f, i) => (
-          <button
-            key={f.id}
-            type="button"
-            onClick={() => setActive(f)}
-            className="group relative aspect-video overflow-hidden rounded-2xl text-left"
-            title={f.youtubeId ? `Play ${f.title}` : `View ${f.title} full size`}
-          >
-            <Image
-              src={f.poster}
-              alt={photoAlt(f.title, f.location)}
-              fill
-              loading={i < eagerCount ? "eager" : "lazy"}
-              fetchPriority={i === 0 && eagerCount > 0 ? "high" : undefined}
-              // Column widths: one column minus the page padding on phones (about 92vw), two
-              // columns minus padding and gap on tablets (about 46vw), and never wider than
-              // 384px in the max-w-6xl grid. Plain vw values, because Next only reads vw
-              // outside calc() when it builds the srcset.
-              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 384px"
-              // Grid thumbnails only; the full-size view below keeps the default quality.
-              quality={60}
-              className="object-cover transition duration-500 group-hover:scale-105"
-            />
-            <span className="absolute inset-0 z-10 bg-gradient-to-t from-night/80 via-transparent to-transparent" />
-            {f.youtubeId && (
-              <span className="absolute left-1/2 top-1/2 z-10 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-night shadow-lg transition group-hover:scale-110">
-                <Icon name="play" size={24} />
+        {visible.map((f, i) => {
+          const big = feature && !filterable && i === 0;
+          return (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setActive(f)}
+              className={`group relative overflow-hidden rounded-2xl text-left ${
+                big ? "aspect-video sm:col-span-2 lg:row-span-2 lg:aspect-auto" : "aspect-video"
+              }`}
+              title={f.youtubeId ? `Play ${f.title}` : `View ${f.title} full size`}
+            >
+              <Image
+                src={f.poster}
+                alt={photoAlt(f.title, f.location)}
+                fill
+                loading={i < eagerCount ? "eager" : "lazy"}
+                fetchPriority={i === 0 && eagerCount > 0 ? "high" : undefined}
+                // Column widths: one column minus the page padding on phones (about 92vw), two
+                // columns minus padding and gap on tablets (about 46vw), and never wider than
+                // 384px in the max-w-6xl grid. Plain vw values, because Next only reads vw
+                // outside calc() when it builds the srcset.
+                sizes={
+                  big
+                    ? "(max-width: 640px) 92vw, (max-width: 1024px) 92vw, 756px"
+                    : "(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 384px"
+                }
+                // Grid thumbnails only; the full-size view below keeps the default quality.
+                quality={60}
+                className="object-cover transition-transform duration-500 ease-out-strong group-hover:scale-[1.04]"
+              />
+              <span className="absolute inset-0 z-10 bg-gradient-to-t from-night/80 via-transparent to-transparent" />
+              {f.youtubeId && (
+                <span className="absolute left-1/2 top-1/2 z-10 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-night shadow-lg transition group-hover:scale-110">
+                  <Icon name="play" size={24} />
+                </span>
+              )}
+              <span className="absolute bottom-0 left-0 z-10 p-4">
+                <span className="block font-semibold text-white">{f.title}</span>
+                <span className="mt-0.5 flex items-center gap-2 text-xs text-white/70">
+                  <Icon name="map-pin" size={12} /> {f.location}
+                  {f.droneSlug && `, ${droneName(f.droneSlug)}`}
+                </span>
               </span>
-            )}
-            <span className="absolute bottom-0 left-0 z-10 p-4">
-              <span className="block font-semibold text-white">{f.title}</span>
-              <span className="mt-0.5 flex items-center gap-2 text-xs text-white/70">
-                <Icon name="map-pin" size={12} /> {f.location}
-                {f.droneSlug && `, ${droneName(f.droneSlug)}`}
+              <span className="absolute right-3 top-3 z-10 rounded-sm bg-night/75 px-2 py-1 text-xs font-medium text-white">
+                {f.category}
               </span>
-            </span>
-            <span className="absolute right-3 top-3 z-10 rounded-full bg-night/70 px-3 py-1 text-xs font-medium text-white">
-              {f.category}
-            </span>
-          </button>
-        ))}
+            </button>
+          );
+        })}
       </div>
 
       <dialog

@@ -59,7 +59,7 @@ export function VariantPicker({ product }: { product: ShopProduct }) {
           )}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-night/15 px-5 py-3 text-sm font-semibold text-night transition hover:border-night/40"
+          className="btn btn-ghost"
         >
           <Icon name="whatsapp" size={18} /> Ask about price and stock
         </a>

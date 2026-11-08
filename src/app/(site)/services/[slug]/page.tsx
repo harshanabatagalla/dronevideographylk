@@ -54,7 +54,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <WhatsAppLink message={s.message}>Check availability on WhatsApp</WhatsAppLink>
           <Link
             href={RULES_PATH}
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/5"
+            className="btn btn-light btn-lg"
           >
             Drone rules in Sri Lanka <Icon name="arrow-right" size={16} />
           </Link>
@@ -66,7 +66,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <article className="space-y-12">
             {s.sections.map((sec) => (
               <section key={sec.heading}>
-                <h2 className="font-display text-2xl font-semibold text-night sm:text-3xl">{sec.heading}</h2>
+                <h2 className="font-display text-2xl font-medium text-night sm:text-3xl">{sec.heading}</h2>
                 {sec.body?.map((p) => (
                   <p key={p} className="mt-4 leading-relaxed text-night/75">
                     {p}
@@ -76,7 +76,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   <ul className="mt-5 space-y-3">
                     {sec.list.map((item) => (
                       <li key={item} className="flex items-start gap-3 text-night/75">
-                        <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-teal/15 text-teal">
+                        <span className="mt-1 shrink-0 text-teal">
                           <Icon name="check" size={12} />
                         </span>
                         {item}
@@ -113,7 +113,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       </Section>
 
       <Section className="pb-16">
-        <h2 className="font-display text-2xl font-semibold text-night sm:text-3xl">The drones we use for this</h2>
+        <h2 className="font-display text-2xl font-medium text-night sm:text-3xl">The drones we use for this</h2>
         <p className="mt-3 max-w-2xl text-night/70">
           We choose the drone for the place, the weather and the shots you want. These are the ones we usually
           pick for this kind of shoot.
@@ -124,7 +124,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       </Section>
 
       <Section className="pb-16">
-        <h2 className="font-display text-2xl font-semibold text-night sm:text-3xl">Photos from our portfolio</h2>
+        <h2 className="font-display text-2xl font-medium text-night sm:text-3xl">Photos from our portfolio</h2>
         <p className="mt-3 max-w-2xl text-night/70">
           A few places we have photographed with our own drones.{" "}
           <Link href="/portfolio" className="font-semibold text-ocean hover:underline">
@@ -139,7 +139,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       <div className="bg-sand py-16">
         <Section>
-          <h2 className="font-display text-2xl font-semibold text-night sm:text-3xl">How booking works</h2>
+          <h2 className="font-display text-2xl font-medium text-night sm:text-3xl">How booking works</h2>
           <div className="mt-8">
             <BookingSteps />
           </div>
@@ -147,7 +147,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       </div>
 
       <Section className="py-16">
-        <h2 className="font-display text-2xl font-semibold text-night sm:text-3xl">Questions people ask</h2>
+        <h2 className="font-display text-2xl font-medium text-night sm:text-3xl">Questions people ask</h2>
         <div className="mt-8">
           <Faq
             items={s.faqs.map((f) => ({

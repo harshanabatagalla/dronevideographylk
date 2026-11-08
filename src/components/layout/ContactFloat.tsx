@@ -45,13 +45,13 @@ export function ContactFloat({
         transform: inHero ? "translateY(0.75rem)" : "translateY(0)",
         pointerEvents: inHero ? "none" : "auto",
       }}
-      className="safe-bottom fixed right-4 z-40 flex items-center gap-2 transition-all duration-300"
+      className="safe-bottom fixed right-4 z-40 flex items-center gap-2 transition-[opacity,transform] duration-300 ease-out-strong"
     >
       <a
         href={telHref}
         aria-label="Call us"
         tabIndex={inHero ? -1 : 0}
-        className="flex items-center gap-1.5 rounded-full bg-ocean px-3 py-2 text-xs font-semibold text-white shadow-lg shadow-black/25 transition hover:scale-105"
+        className="flex items-center gap-2 rounded-lg bg-ocean px-3.5 py-2.5 text-xs font-semibold text-white shadow-md shadow-black/25 transition-transform duration-150 ease-out-strong active:scale-95"
       >
         <Icon name="phone" size={16} />
         <span className="hidden sm:inline">Call us</span>
@@ -62,7 +62,7 @@ export function ContactFloat({
         rel="noopener noreferrer"
         aria-label="Chat with us on WhatsApp"
         tabIndex={inHero ? -1 : 0}
-        className="flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-2 text-xs font-semibold text-night shadow-lg shadow-black/25 transition hover:scale-105"
+        className="flex items-center gap-2 rounded-lg bg-[#25D366] px-3.5 py-2.5 text-xs font-semibold text-night shadow-md shadow-black/25 transition-transform duration-150 ease-out-strong active:scale-95"
       >
         <Icon name="whatsapp" size={16} />
         <span className="hidden sm:inline">Chat with us</span>

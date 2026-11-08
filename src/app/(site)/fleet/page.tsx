@@ -23,7 +23,7 @@ export default async function FleetPage() {
           <div className="flex justify-center">
             <Breadcrumbs items={[{ name: "Our Drones", path: "/fleet" }]} />
           </div>
-          <h1 className="mx-auto mt-6 max-w-4xl font-display text-4xl font-semibold leading-[1.1] text-white text-balance sm:text-5xl md:text-6xl">
+          <h1 className="mx-auto mt-6 max-w-4xl font-display text-4xl font-medium leading-[1.1] text-white text-balance sm:text-5xl md:text-6xl">
             The drones we use in Sri Lanka
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
@@ -35,13 +35,13 @@ export default async function FleetPage() {
               href={whatsappHref("Hi! Can you help me choose the right drone for my trip?")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-sunset px-7 py-3.5 text-sm font-semibold text-night transition-colors hover:bg-amber-400"
+              className="btn btn-primary btn-lg"
             >
               <Icon name="whatsapp" size={18} /> Help me choose
             </a>
             <a
               href="#fleet"
-              className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              className="btn btn-light btn-lg"
             >
               See the drones <Icon name="arrow-right" size={16} />
             </a>
@@ -67,7 +67,7 @@ export default async function FleetPage() {
       {/* Closing CTA band */}
       <section className="bg-night py-20">
         <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
-          <h2 className="font-display text-3xl font-semibold text-white sm:text-4xl">
+          <h2 className="font-display text-3xl font-medium text-white sm:text-4xl">
             Still not sure which one?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-white/70">
@@ -78,7 +78,7 @@ export default async function FleetPage() {
             href={whatsappHref("Hi! Here is my plan. Which drone do you recommend?")}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-sunset px-8 py-4 text-sm font-semibold text-night transition-colors hover:bg-amber-400"
+            className="btn btn-primary btn-lg mt-8"
           >
             <Icon name="whatsapp" size={18} /> Chat with a pilot
           </a>

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav } from "@/lib/site";
 import { Icon } from "@/components/ui/Icon";
+import { Logo } from "@/components/ui/Logo";
 import { CartButton } from "@/components/shop/CartButton";
 import { BookButton } from "@/components/booking/BookingDialog";
 
@@ -38,13 +39,8 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
-        <Link href="/" className="flex items-center gap-2 text-white">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-sunset text-night">
-            <Icon name="play" size={18} />
-          </span>
-          <span className="font-display text-lg font-semibold tracking-tight">
-            dronevideography<span className="text-sunset">.lk</span>
-          </span>
+        <Link href="/" className="flex items-center gap-2.5 text-white" aria-label="dronevideography.lk home">
+          <Logo />
         </Link>
 
         <nav className="hidden items-center gap-6 xl:flex" aria-label="Primary">
@@ -65,7 +61,7 @@ export function Header() {
           })}
           <CartButton />
           <BookButton
-            className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-sunset px-5 py-2.5 text-sm font-semibold text-night transition hover:bg-amber-400"
+            className="btn btn-primary btn-sm whitespace-nowrap"
           >
             <Icon name="whatsapp" size={18} /> Book Now
           </BookButton>
@@ -101,7 +97,7 @@ export function Header() {
             <li className="mt-2">
               <BookButton
                 onClick={() => setMenu({ pathname, open: false })}
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-sunset px-5 py-3 font-semibold text-night"
+                className="btn btn-primary btn-block"
               >
                 <Icon name="whatsapp" size={18} /> Book a drone video
               </BookButton>

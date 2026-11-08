@@ -108,35 +108,31 @@ export default async function DroneDetailPage({ params }: { params: Promise<{ sl
           </div>
 
           <div>
-            <p className="text-sm font-semibold text-ocean">One of our drones</p>
-            <h1 className="mt-2 font-display text-4xl font-semibold text-night">Filming with the {drone.name}</h1>
+            <h1 className="font-display text-4xl font-medium text-night sm:text-5xl">Filming with the {drone.name}</h1>
             <p className="mt-3 text-lg text-night/70">{drone.tagline}</p>
 
             <div className="mt-6 flex flex-wrap gap-2">
               {drone.bestFor.map((tag) => (
-                <span key={tag} className="rounded-full bg-sand px-3 py-1 text-sm font-medium text-night/70">
+                <span key={tag} className="rounded bg-sand px-2.5 py-1 text-sm font-medium text-night/75">
                   {tag}
                 </span>
               ))}
             </div>
 
             <h2 className="mt-8 font-display text-xl font-semibold text-night">What it can do</h2>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <dl className="mt-4 divide-y divide-night/15 border-y border-night/15">
               {drone.specs.map((s) => (
-                <div key={s.label} className="rounded-2xl border border-night/10 bg-white p-4">
-                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-ocean/10 text-ocean">
-                    <Icon name={s.icon} size={20} />
-                  </span>
-                  <p className="mt-3 text-sm font-semibold text-night">{s.label}</p>
-                  <p className="mt-1 text-sm text-night/65">{s.value}</p>
+                <div key={s.label} className="grid gap-1 py-3 sm:grid-cols-[9rem_1fr] sm:gap-6">
+                  <dt className="font-semibold text-night">{s.label}</dt>
+                  <dd className="text-night/70">{s.value}</dd>
                 </div>
               ))}
-            </div>
+            </dl>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <WhatsAppLink
                 message={`Hi! I'd like to book a shoot with the ${drone.name} in Sri Lanka. My date and place are: `}
-                className="inline-flex items-center gap-2 rounded-full bg-sunset px-6 py-3 text-sm font-semibold text-night transition hover:bg-amber-400"
+                className="btn btn-primary"
               >
                 Book a shoot with this drone
               </WhatsAppLink>

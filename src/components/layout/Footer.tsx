@@ -3,6 +3,7 @@ import { site, buildWhatsappHref } from "@/lib/site";
 import { services, servicePath, SERVICES_PATH } from "@/lib/services";
 import { PERMIT_PATH, RULES_PATH } from "@/lib/drone-rules";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { Logo } from "@/components/ui/Logo";
 import { CloudflareEmailOff } from "@/components/ui/CloudflareEmailOff";
 import type { SiteSettings } from "@/lib/db";
 
@@ -54,16 +55,11 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
   );
 
   return (
-    <footer className="bg-night text-white/80">
+    <footer className="border-t border-white/10 bg-night text-white/80">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div>
-          <Link href="/" className="flex items-center gap-2 text-white">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-sunset text-night">
-              <Icon name="play" size={18} />
-            </span>
-            <span className="font-display text-lg font-semibold">
-              dronevideography<span className="text-sunset">.lk</span>
-            </span>
+          <Link href="/" className="flex items-center gap-2.5 text-white" aria-label="dronevideography.lk home">
+            <Logo />
           </Link>
           <p className="mt-4 max-w-sm text-sm text-white/60">{site.description}</p>
           <ul className="mt-5 space-y-3 text-sm text-white/60">
@@ -93,7 +89,7 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="grid h-10 w-10 place-items-center rounded-full bg-white/5 text-white/80 ring-1 ring-white/10 transition hover:bg-sunset hover:text-night"
+                  className="grid h-10 w-10 place-items-center rounded-lg border border-white/15 text-white/80 transition-colors duration-150 hover:border-sunset hover:bg-sunset hover:text-night"
                 >
                   <Icon name={s.icon} size={18} />
                 </a>
