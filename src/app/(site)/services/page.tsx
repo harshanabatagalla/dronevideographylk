@@ -75,7 +75,11 @@ export default function ServicesPage() {
               ))}
             </ul>
             <p className="mt-4 leading-relaxed text-night/70">
-              Send us your plan and we will send you a price before you book.
+              Send us your plan and we will send you a price before you book. Our guide to{" "}
+              <Link href="/blog/drone-videography-cost-in-sri-lanka" className="font-semibold text-ocean hover:underline">
+                drone videography cost in Sri Lanka
+              </Link>{" "}
+              explains each factor.
             </p>
           </section>
 

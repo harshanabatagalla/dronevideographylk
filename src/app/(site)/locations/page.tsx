@@ -175,7 +175,16 @@ export default function LocationsPage() {
       </div>
 
       <Section className="pb-16">
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-3">
+          <Link
+            href="/blog/best-places-for-drone-videography-in-sri-lanka"
+            className="rounded-3xl border border-night/10 bg-white p-6 transition hover:border-ocean/40"
+          >
+            <h2 className="font-display text-xl font-semibold text-night">Best places to film</h2>
+            <p className="mt-2 text-sm text-night/65">
+              A guide to each region, with what it looks like from above and what to check first.
+            </p>
+          </Link>
           <Link
             href={RULES_PATH}
             className="rounded-3xl border border-night/10 bg-white p-6 transition hover:border-ocean/40"

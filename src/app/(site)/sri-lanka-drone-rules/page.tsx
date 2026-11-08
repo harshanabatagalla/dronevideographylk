@@ -256,6 +256,10 @@ export default function DroneRulesPage() {
                 <Link href="/locations" className="font-semibold text-ocean hover:underline">
                   the places we film
                 </Link>
+                . For the full picture of a shoot, read our guide to{" "}
+                <Link href="/blog/drone-videography-in-sri-lanka" className="font-semibold text-ocean hover:underline">
+                  drone videography in Sri Lanka
+                </Link>
                 .
               </p>
             </GuideSection>
