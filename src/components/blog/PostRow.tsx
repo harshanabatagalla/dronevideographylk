@@ -1,16 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatDate, getPhoto, postPath, readingMinutes, type BlogPost } from "@/lib/blog";
+import { getPhoto, postPath, readingMinutes, type BlogPost } from "@/lib/blog";
 
-/** Category, date and reading time as one plain sentence fragment. */
-export function PostMeta({ post, className = "" }: { post: BlogPost; className?: string }) {
+/**
+ * Category and reading time. Every guide was published the same day, so a date on each row
+ * would be noise; the date lives on the post page and in its schema. Inside a topic section
+ * the category repeats the heading, so lists there pass showCategory={false}.
+ */
+export function PostMeta({
+  post,
+  showCategory = true,
+  className = "",
+}: {
+  post: BlogPost;
+  showCategory?: boolean;
+  className?: string;
+}) {
   return (
     <p className={`text-sm text-night/70 ${className}`}>
-      {post.category},{" "}
-      <time dateTime={post.published} className="whitespace-nowrap">
-        {formatDate(post.published)}
-      </time>
-      , <span className="whitespace-nowrap">{readingMinutes(post)} min read</span>
+      {showCategory && <>{post.category}, </>}
+      <span className="whitespace-nowrap">{readingMinutes(post)} min read</span>
     </p>
   );
 }
@@ -20,7 +29,15 @@ export function PostMeta({ post, className = "" }: { post: BlogPost; className?:
  * Used on the blog list, under every post and on the home page. Put rows inside a list
  * that has a top border, and each row adds its own bottom border.
  */
-export function PostRow({ post, sizes = "(max-width: 640px) 120px, 224px" }: { post: BlogPost; sizes?: string }) {
+export function PostRow({
+  post,
+  showCategory = true,
+  sizes = "(max-width: 640px) 120px, 224px",
+}: {
+  post: BlogPost;
+  showCategory?: boolean;
+  sizes?: string;
+}) {
   const photo = getPhoto(post.cover);
   return (
     <li className="border-b border-night/15">
@@ -41,7 +58,7 @@ export function PostRow({ post, sizes = "(max-width: 640px) 120px, 224px" }: { p
           )}
         </div>
         <div className="min-w-0">
-          <PostMeta post={post} />
+          <PostMeta post={post} showCategory={showCategory} />
           <h3 className="mt-1.5 font-display text-xl font-medium leading-snug text-night transition-colors duration-150 group-hover:text-ocean sm:text-2xl">
             {post.title}
           </h3>

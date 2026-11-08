@@ -8,7 +8,7 @@ export const places: BlogPost = {
     "The best places for drone videography in Sri Lanka, from Sigiriya and Ella to the south coast, with what to see from above and what to check first.",
   excerpt:
     "A region by region guide to the best places for drone videography in Sri Lanka, with our own photos and a rule check for each place.",
-  category: "Locations",
+  category: "Places",
   published: "2026-11-09",
   updated: "2026-11-09",
   cover: "knuckles-rice-terraces",

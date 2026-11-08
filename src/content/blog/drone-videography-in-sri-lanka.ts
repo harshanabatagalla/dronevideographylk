@@ -8,7 +8,7 @@ export const pillar: BlogPost = {
     "Drone videography in Sri Lanka explained: who it is for, what you get, the approvals needed, what changes the price and how to book a local team.",
   excerpt:
     "What drone videography in Sri Lanka covers, what you get at the end, which approvals matter and how to book a local team before you arrive.",
-  category: "Guide",
+  category: "Planning",
   published: "2026-11-09",
   updated: "2026-11-09",
   cover: "sigiriya-rock-pidurangala",

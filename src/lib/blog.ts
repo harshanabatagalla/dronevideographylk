@@ -5,6 +5,31 @@ import { season } from "@/content/blog/best-time-for-drone-filming-in-sri-lanka"
 import { cost } from "@/content/blog/drone-videography-cost-in-sri-lanka";
 import { sigiriya } from "@/content/blog/drone-filming-at-sigiriya";
 import { ella } from "@/content/blog/drone-filming-in-ella-and-the-hill-country";
+import { bookFromAbroad } from "@/content/blog/book-a-drone-videographer-in-sri-lanka-from-abroad";
+import { hireOrOwn } from "@/content/blog/hire-a-drone-pilot-or-fly-your-own-in-sri-lanka";
+import { weddingDrone } from "@/content/blog/wedding-drone-video-in-sri-lanka";
+import { hotelDrone } from "@/content/blog/hotel-drone-video-in-sri-lanka";
+import { propertyDrone } from "@/content/blog/property-drone-photography-in-sri-lanka";
+import { honeymoonDrone } from "@/content/blog/honeymoon-drone-video-in-sri-lanka";
+import { creatorsDrone } from "@/content/blog/drone-footage-for-travel-creators-in-sri-lanka";
+import { commercialDrone } from "@/content/blog/commercial-drone-filming-in-sri-lanka";
+import { droneCompare } from "@/content/blog/dji-air-3-vs-mavic-4-pro-vs-mini-2-for-travel-video";
+import { resolution } from "@/content/blog/4k-6k-and-8k-drone-video-explained";
+import { video360 } from "@/content/blog/360-degree-drone-video-in-sri-lanka";
+import { lowLight } from "@/content/blog/low-light-and-sunset-drone-video-in-sri-lanka";
+import { registration } from "@/content/blog/drone-registration-and-flyer-id-in-sri-lanka";
+import { insurance } from "@/content/blog/drone-insurance-in-sri-lanka";
+import { noFly } from "@/content/blog/drone-no-fly-zones-in-sri-lanka";
+import { nationalParks } from "@/content/blog/drone-filming-in-sri-lankan-national-parks";
+import { penalties } from "@/content/blog/what-happens-if-you-fly-a-drone-without-approval-in-sri-lanka";
+import { galle } from "@/content/blog/drone-filming-at-galle-fort";
+import { kandy } from "@/content/blog/drone-filming-in-kandy";
+import { southCoast } from "@/content/blog/drone-filming-on-the-south-coast-of-sri-lanka";
+import { teaCountry } from "@/content/blog/drone-filming-in-the-tea-country";
+import { knuckles } from "@/content/blog/drone-filming-in-the-knuckles-range-and-meemure";
+import { waterfalls } from "@/content/blog/drone-filming-at-sri-lankan-waterfalls";
+import { eastCoast } from "@/content/blog/drone-filming-at-arugam-bay-and-the-east-coast";
+import { northwest } from "@/content/blog/drone-filming-in-kalpitiya-and-the-northwest";
 
 /**
  * Blog posts are plain data, so every page, the sitemap and the tests read the same source.
@@ -28,7 +53,32 @@ export type Block =
   | { type: "note"; title: string; text: string }
   | { type: "table"; caption: string; head: string[]; rows: string[][] };
 
-export type BlogCategory = "Guide" | "Locations" | "Planning";
+export type BlogCategory = "Planning" | "Places" | "Rules" | "Shoots" | "Drones";
+
+/** The topics on the blog list page, in the order they appear. */
+export const CATEGORIES: { id: BlogCategory; label: string; description: string }[] = [
+  { id: "Planning", label: "Planning your shoot", description: "How to book, when to go and what it costs." },
+  {
+    id: "Places",
+    label: "Places to film",
+    description: "Guides to regions and landmarks, with our own photos and a rule check for each place.",
+  },
+  {
+    id: "Rules",
+    label: "Rules and permits",
+    description: "Registration, insurance, no fly zones and approvals, in plain words.",
+  },
+  {
+    id: "Shoots",
+    label: "Types of shoot",
+    description: "Weddings, honeymoons, hotels, property, creators and commercial work.",
+  },
+  {
+    id: "Drones",
+    label: "Drones and video",
+    description: "Which drone to use, what the numbers mean and how light changes the picture.",
+  },
+];
 
 export type BlogPost = {
   slug: string;
@@ -59,9 +109,43 @@ export type BlogPost = {
 export const BLOG_PATH = "/blog";
 export const postPath = (slug: string) => `${BLOG_PATH}/${slug}`;
 
-export const posts: BlogPost[] = [pillar, places, season, cost, sigiriya, ella].sort((a, b) =>
-  a.published === b.published ? 0 : a.published < b.published ? 1 : -1,
-);
+/**
+ * Newest first. Posts with the same date keep the order written here, so the main guide
+ * stays first and the home page shows the three most useful ones.
+ */
+export const posts: BlogPost[] = [
+  pillar,
+  places,
+  season,
+  cost,
+  bookFromAbroad,
+  hireOrOwn,
+  weddingDrone,
+  honeymoonDrone,
+  hotelDrone,
+  propertyDrone,
+  creatorsDrone,
+  commercialDrone,
+  droneCompare,
+  resolution,
+  video360,
+  lowLight,
+  registration,
+  insurance,
+  noFly,
+  nationalParks,
+  penalties,
+  sigiriya,
+  ella,
+  galle,
+  kandy,
+  southCoast,
+  teaCountry,
+  knuckles,
+  waterfalls,
+  eastCoast,
+  northwest,
+].sort((a, b) => (a.published === b.published ? 0 : a.published < b.published ? 1 : -1));
 
 export function getPost(slug: string): BlogPost | undefined {
   return posts.find((p) => p.slug === slug);
