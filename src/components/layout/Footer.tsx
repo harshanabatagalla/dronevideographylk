@@ -15,6 +15,10 @@ const socialIcons: { key: keyof SiteSettings["socials"]; icon: IconName; label: 
 ];
 
 const guides = [
+  { label: "Drone videography in Sri Lanka", href: "/blog/drone-videography-in-sri-lanka" },
+  { label: "Best places to film", href: "/blog/best-places-for-drone-videography-in-sri-lanka" },
+  { label: "Best time to film", href: "/blog/best-time-for-drone-filming-in-sri-lanka" },
+  { label: "What it costs", href: "/blog/drone-videography-cost-in-sri-lanka" },
   { label: "Sri Lanka drone rules", href: RULES_PATH },
   { label: "How to get a drone permit", href: PERMIT_PATH },
   { label: "Drone filming locations", href: "/locations" },
@@ -24,6 +28,7 @@ const explore = [
   { label: "All drone services", href: SERVICES_PATH },
   { label: "Our drones", href: "/fleet" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Blog", href: "/blog" },
   { label: "Drone shop", href: "/shop" },
   { label: "Contact", href: "/contact" },
 ];

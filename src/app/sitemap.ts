@@ -4,6 +4,7 @@ import { footage } from "@/lib/content";
 import { products } from "@/lib/shop";
 import { services, servicePath, SERVICES_PATH } from "@/lib/services";
 import { PERMIT_PATH, RULES_PATH, RULES_REVIEWED } from "@/lib/drone-rules";
+import { BLOG_PATH, getPhoto, postPath, posts } from "@/lib/blog";
 
 /**
  * lastModified is the date the page content last changed in a meaningful way,
@@ -47,5 +48,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...(p.image ? { images: [abs(p.image)] } : {}),
   }));
 
-  return [...core, ...servicePages, ...shopPages];
+  // Blog: the list page changes whenever a post does, and each post lists its own photos.
+  const blogLatest = posts.map((p) => p.updated).sort().at(-1) ?? SITE_UPDATED;
+  const blogPages: MetadataRoute.Sitemap = [
+    { url: abs(BLOG_PATH), lastModified: blogLatest },
+    ...posts.map((p) => {
+      const ids = [p.cover, ...p.blocks.flatMap((b) => (b.type === "photo" ? [b.id] : []))];
+      const images = [...new Set(ids)]
+        .map((id) => getPhoto(id)?.poster)
+        .filter((src): src is string => Boolean(src))
+        .map(abs);
+      return { url: abs(postPath(p.slug)), lastModified: p.updated, images };
+    }),
+  ];
+
+  return [...core, ...blogPages, ...servicePages, ...shopPages];
 }

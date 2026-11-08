@@ -5,6 +5,7 @@ import { FleetTeaser } from "@/components/home/FleetTeaser";
 import { FlightOverIsland } from "@/components/experience/FlightOverIsland";
 import { FeaturedFootage } from "@/components/home/FeaturedFootage";
 import { HowItWorks } from "@/components/home/HowItWorks";
+import { LatestPosts } from "@/components/home/LatestPosts";
 import { Testimonials } from "@/components/home/Testimonials";
 import { HomeFaq } from "@/components/home/HomeFaq";
 import { FinalCTA } from "@/components/home/FinalCTA";
@@ -27,6 +28,7 @@ export default function Home() {
       <FleetTeaser />
       <FlightOverIsland />
       <HowItWorks />
+      <LatestPosts />
       <Testimonials />
       <HomeFaq />
       <FinalCTA />

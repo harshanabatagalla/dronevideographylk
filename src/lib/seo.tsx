@@ -153,24 +153,66 @@ export function articleJsonLd({
   path,
   datePublished,
   dateModified,
+  type = "Article",
+  image = OG_IMAGE,
+  keywords,
+  wordCount,
 }: {
   headline: string;
   description: string;
   path: string;
   datePublished: string;
   dateModified: string;
+  /** Blog posts use "BlogPosting", guides use "Article". */
+  type?: "Article" | "BlogPosting";
+  /** Site relative path of the lead image. */
+  image?: string;
+  keywords?: string[];
+  wordCount?: number;
 }) {
   return {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": type,
     headline,
     description,
     mainEntityOfPage: `${site.url}${path}`,
-    image: `${site.url}${OG_IMAGE}`,
+    image: `${site.url}${image}`,
     datePublished,
     dateModified,
+    ...(keywords?.length ? { keywords: keywords.join(", ") } : {}),
+    ...(wordCount ? { wordCount } : {}),
+    inLanguage: "en",
     author: { "@type": "Organization", name: site.brand, url: site.url },
     publisher: { "@id": BUSINESS_ID },
+  };
+}
+
+/** The blog as a whole, listing its posts. */
+export function blogJsonLd({
+  name,
+  description,
+  path,
+  posts,
+}: {
+  name: string;
+  description: string;
+  path: string;
+  posts: { headline: string; path: string; datePublished: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name,
+    description,
+    url: `${site.url}${path}`,
+    inLanguage: "en",
+    publisher: { "@id": BUSINESS_ID },
+    blogPost: posts.map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.headline,
+      url: `${site.url}${p.path}`,
+      datePublished: p.datePublished,
+    })),
   };
 }
 
