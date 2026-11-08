@@ -8,7 +8,7 @@ export const sigiriya: BlogPost = {
     "Can you fly a drone at Sigiriya? A plain answer, the approval it needs, nearby places that are easier to film and how to plan aerial shots there.",
   excerpt:
     "Sigiriya is the first place most visitors want to see from the air, and one of the hardest to get approval for. Here is what is allowed and how to plan.",
-  category: "Locations",
+  category: "Places",
   published: "2026-11-09",
   updated: "2026-11-09",
   cover: "sigiriya-sunset",

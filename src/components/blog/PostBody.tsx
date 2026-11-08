@@ -81,7 +81,13 @@ export function PostBody({ blocks }: { blocks: Block[] }) {
             );
           case "table":
             return (
-              <div key={i} className="mt-7 overflow-x-auto">
+              <div
+                key={i}
+                role="region"
+                aria-label={b.caption}
+                tabIndex={0}
+                className="mt-7 overflow-x-auto rounded-sm"
+              >
                 <table className="w-full min-w-[34rem] border-collapse text-left text-base">
                   <caption className="pb-3 text-left text-sm text-night/70">{b.caption}</caption>
                   <thead>

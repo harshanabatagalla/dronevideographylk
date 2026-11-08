@@ -92,8 +92,31 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </PageHero>
 
       <Section className="py-12 sm:py-16">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,42rem)_1fr] lg:gap-16">
-          <article>
+        {/* minmax(0, ...) lets wide tables scroll inside the column instead of stretching the page. */}
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-[minmax(0,42rem)_1fr] lg:gap-16">
+          <article className="min-w-0">
+            {/* On a phone the contents list sits above the text. On wide screens it is the sticky sidebar. */}
+            <details className="group mb-8 rounded-2xl border border-night/15 bg-white lg:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-night [&::-webkit-details-marker]:hidden">
+                On this page
+                <span
+                  aria-hidden="true"
+                  className="text-2xl font-light leading-none text-ocean transition-transform duration-200 ease-out-strong group-open:rotate-45"
+                >
+                  +
+                </span>
+              </summary>
+              <ol className="space-y-2.5 px-5 pb-5 text-base">
+                {toc.map((it) => (
+                  <li key={it.id}>
+                    <a href={`#${it.id}`} className="tap text-night/80 hover:text-ocean">
+                      {it.title}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </details>
+
             {photo && (
               <figure>
                 <div className="relative aspect-video overflow-hidden rounded-2xl bg-night/5">

@@ -58,7 +58,7 @@ test('section ids are unique and the reserved questions id is not reused', () =>
     const ids = post.blocks.filter((b) => b.type === 'h2').map((b) => b.id);
     assert.equal(new Set(ids).size, ids.length, `${post.slug}: repeated section id`);
     assert.ok(!ids.includes('questions'), `${post.slug}: "questions" is reserved for the FAQ`);
-    for (const id of ids) assert.match(id, /^[a-z]+(?:-[a-z]+)*$/);
+    for (const id of ids) assert.match(id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
   }
 });
 

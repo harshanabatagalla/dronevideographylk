@@ -8,7 +8,7 @@ export const ella: BlogPost = {
     "Drone filming in Ella and the Sri Lanka hill country: the Nine Arch Bridge, waterfalls, tea hills and cloud, with the weather and safety points to plan for.",
   excerpt:
     "Tea slopes, tall waterfalls, a stone railway bridge and mist in the valleys. What to know before you film the hill country from the air.",
-  category: "Locations",
+  category: "Places",
   published: "2026-11-09",
   updated: "2026-11-09",
   cover: "hills-around-ella",
