@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Icon } from "@/components/ui/Icon";
+import { Logo } from "@/components/ui/Logo";
 import { RULES_PATH } from "@/lib/drone-rules";
 import { SERVICES_PATH } from "@/lib/services";
 import { site } from "@/lib/site";
@@ -22,17 +22,12 @@ export default function NotFound() {
   return (
     <main className="flex min-h-screen flex-col bg-night text-white">
       <div className="mx-auto w-full max-w-3xl px-5 py-10 sm:px-8">
-        <Link href="/" className="flex w-fit items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-sunset text-night">
-            <Icon name="play" size={18} />
-          </span>
-          <span className="font-display text-lg font-semibold">
-            dronevideography<span className="text-sunset">.lk</span>
-          </span>
+        <Link href="/" className="flex w-fit items-center gap-2.5" aria-label="dronevideography.lk home">
+          <Logo />
         </Link>
 
         <p className="mt-16 text-sm font-medium text-sunset">Error 404</p>
-        <h1 className="mt-2 font-display text-4xl font-semibold sm:text-5xl">We could not find that page</h1>
+        <h1 className="mt-2 font-display text-4xl font-medium sm:text-5xl">We could not find that page</h1>
         <p className="mt-4 max-w-xl text-lg text-white/70">
           The link may be old, or the page may have moved. These pages should help:
         </p>

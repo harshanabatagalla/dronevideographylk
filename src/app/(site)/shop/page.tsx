@@ -23,7 +23,7 @@ export default function ShopPage() {
       <header className="bg-night pb-16 pt-32">
         <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
           <Breadcrumbs items={[{ name: "Shop", path: "/shop" }]} />
-          <h1 className="mt-6 max-w-3xl font-display text-4xl font-semibold leading-[1.1] text-white text-balance sm:text-5xl md:text-6xl">
+          <h1 className="mt-6 max-w-3xl font-display text-4xl font-medium leading-[1.1] text-white text-balance sm:text-5xl md:text-6xl">
             Buy a DJI drone from working drone pilots
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-white/70">
@@ -35,7 +35,7 @@ export default function ShopPage() {
               href={whatsappHref("Hi! Can you help me choose a DJI drone to buy?")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-sunset px-6 py-3 text-sm font-semibold text-night transition hover:bg-amber-400"
+              className="btn btn-primary"
             >
               <Icon name="whatsapp" size={18} /> Help me pick a drone
             </a>
@@ -44,16 +44,16 @@ export default function ShopPage() {
       </header>
 
       <Section className="py-12">
-        <div className="mb-10 grid gap-4 md:grid-cols-3">
-          <Note icon="shield" title="How payment works">
+        <div className="mb-14 grid gap-8 md:grid-cols-3">
+          <Note title="How payment works">
             Place your order and we confirm stock and delivery by WhatsApp or email. Then pay by bank
             transfer or cash on delivery.
           </Note>
-          <Note icon="signal" title="About prices">
+          <Note title="About prices">
             Prices are in Sri Lankan rupees and follow the DJI distributor here. Some older models
             have no set price, so ask us and we will check.
           </Note>
-          <Note icon="map-pin" title="Flying in Sri Lanka">
+          <Note title="Flying in Sri Lanka">
             Drones must be registered with the Civil Aviation Authority of Sri Lanka (CAASL) before you
             fly.{" "}
             <Link href={RULES_PATH} className="font-semibold text-ocean hover:underline">
@@ -63,7 +63,7 @@ export default function ShopPage() {
           </Note>
         </div>
 
-        <h2 className="mb-6 font-display text-2xl font-semibold text-night sm:text-3xl">
+        <h2 className="mb-6 font-display text-2xl font-medium text-night sm:text-3xl">
           DJI drones and prices
         </h2>
         <ShopGrid products={products} />
@@ -73,22 +73,11 @@ export default function ShopPage() {
   );
 }
 
-function Note({
-  icon,
-  title,
-  children,
-}: {
-  icon: "shield" | "signal" | "map-pin";
-  title: string;
-  children: React.ReactNode;
-}) {
+function Note({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-night/10 bg-white p-5">
-      <span className="grid h-9 w-9 place-items-center rounded-xl bg-ocean/10 text-ocean">
-        <Icon name={icon} size={18} />
-      </span>
-      <p className="mt-3 font-semibold text-night">{title}</p>
-      <p className="mt-1 text-sm text-night/65">{children}</p>
+    <div className="border-t-2 border-night pt-4">
+      <p className="font-semibold text-night">{title}</p>
+      <p className="mt-1.5 text-sm leading-relaxed text-night/70">{children}</p>
     </div>
   );
 }

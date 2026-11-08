@@ -13,7 +13,7 @@ const GROUPS: { key: AccessoryCategory; title: string; blurb: string; icon: "dro
 export function AccessoryGrid() {
   return (
     <div id="accessories" className="mt-20 scroll-mt-24">
-      <h2 className="font-display text-3xl font-semibold text-night">Spares and accessories</h2>
+      <h2 className="font-display text-3xl font-medium text-night">Spares and accessories</h2>
       <p className="mt-2 max-w-2xl text-night/65">
         Batteries, propellers and tools for the drones we sell. Tell us which drone you fly and we
         will send the right part.
@@ -25,7 +25,7 @@ export function AccessoryGrid() {
         return (
           <section key={g.key} className="mt-10">
             <h3 className="flex items-center gap-2 font-display text-xl font-semibold text-night">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-ocean/10 text-ocean">
+              <span className="grid h-9 w-8 place-items-center text-ocean">
                 <Icon name={g.icon} size={18} />
               </span>
               {g.title}
@@ -51,7 +51,7 @@ export function AccessoryGrid() {
                           href={whatsappHref(`Hi! What is the price for the ${a.name}?`)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-full border border-night/15 px-4 py-2 text-xs font-semibold text-night transition hover:border-night/40"
+                          className="btn btn-ghost btn-sm"
                         >
                           <Icon name="whatsapp" size={14} /> Ask price
                         </a>

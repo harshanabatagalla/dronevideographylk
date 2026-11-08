@@ -34,17 +34,22 @@ export default function ServicesPage() {
       </PageHero>
 
       <Section className="py-16">
-        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="border-t border-night/20">
           {services.map((s) => (
-            <li key={s.slug}>
+            <li key={s.slug} className="border-b border-night/15">
               <Link
                 href={servicePath(s.slug)}
-                className="group flex h-full flex-col rounded-2xl border border-night/10 bg-white p-6 transition-colors hover:border-ocean/40"
+                className="group grid gap-x-10 gap-y-2 py-7 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)_11rem] md:items-baseline"
               >
-                <h2 className="font-display text-xl font-semibold text-night">{s.h1}</h2>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-night/65">{s.cardText}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-ocean">
-                  {s.label} <Icon name="arrow-right" size={14} />
+                <h2 className="font-display text-2xl font-medium text-night transition-colors duration-150 group-hover:text-ocean">
+                  {s.h1}
+                </h2>
+                <p className="max-w-xl leading-relaxed text-night/70">{s.cardText}</p>
+                <span className="inline-flex items-center gap-1 text-sm font-semibold text-ocean md:justify-end">
+                  {s.label}
+                  <span className="transition-transform duration-200 ease-out-strong group-hover:translate-x-1">
+                    <Icon name="arrow-right" size={14} />
+                  </span>
                 </span>
               </Link>
             </li>
@@ -55,14 +60,14 @@ export default function ServicesPage() {
       <Section className="pb-16">
         <div className="grid gap-8 lg:grid-cols-2">
           <section className="rounded-3xl border border-night/10 bg-white p-7">
-            <h2 className="font-display text-2xl font-semibold text-night">How much does drone filming cost?</h2>
+            <h2 className="font-display text-2xl font-medium text-night">How much does drone filming cost?</h2>
             <p className="mt-3 leading-relaxed text-night/70">
               There is no single price, because every shoot is different. These things change the price:
             </p>
             <ul className="mt-4 space-y-2.5">
               {PRICE_FACTORS.map((f) => (
                 <li key={f} className="flex items-start gap-3 text-night/75">
-                  <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-teal/15 text-teal">
+                  <span className="mt-1 shrink-0 text-teal">
                     <Icon name="check" size={12} />
                   </span>
                   {f}
@@ -75,7 +80,7 @@ export default function ServicesPage() {
           </section>
 
           <section className="rounded-3xl border border-night/10 bg-sand/60 p-7">
-            <h2 className="font-display text-2xl font-semibold text-night">Drone permits for your shoot</h2>
+            <h2 className="font-display text-2xl font-medium text-night">Drone permits for your shoot</h2>
             <p className="mt-3 leading-relaxed text-night/70">
               Every outdoor drone flight in Sri Lanka needs approval from the Civil Aviation Authority of Sri
               Lanka (CAASL), and some places need more. When we fly for you, we handle the approval as the operator.
@@ -100,7 +105,7 @@ export default function ServicesPage() {
 
       <div className="bg-sand py-16">
         <Section>
-          <h2 className="font-display text-2xl font-semibold text-night sm:text-3xl">How booking works</h2>
+          <h2 className="font-display text-2xl font-medium text-night sm:text-3xl">How booking works</h2>
           <div className="mt-8">
             <BookingSteps />
           </div>

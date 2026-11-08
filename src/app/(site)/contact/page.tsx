@@ -43,7 +43,7 @@ export default async function ContactPage() {
       <Section className="py-16">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
           <div>
-            <h2 className="font-display text-2xl font-semibold text-night">Reach us directly</h2>
+            <h2 className="font-display text-2xl font-medium text-night">Reach us directly</h2>
             <ul className="mt-6 space-y-4">
               <li>
                 <a
@@ -52,7 +52,7 @@ export default async function ContactPage() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 rounded-2xl border border-night/10 bg-white p-4 transition hover:border-teal/40"
                 >
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#25D366]/15 text-[#128C3E]">
+                  <span className="grid w-7 shrink-0 place-items-center text-[#128C3E]">
                     <Icon name="whatsapp" size={22} />
                   </span>
                   <span>
@@ -66,7 +66,7 @@ export default async function ContactPage() {
                   href={telHref}
                   className="flex items-center gap-4 rounded-2xl border border-night/10 bg-white p-4 transition hover:border-ocean/40"
                 >
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-ocean/10 text-ocean">
+                  <span className="grid w-7 shrink-0 place-items-center text-ocean">
                     <Icon name="phone" size={22} />
                   </span>
                   <span>
@@ -81,7 +81,7 @@ export default async function ContactPage() {
                     href={`mailto:${settings.email}`}
                     className="flex items-center gap-4 rounded-2xl border border-night/10 bg-white p-4 transition hover:border-ocean/40"
                   >
-                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-ocean/10 text-ocean">
+                    <span className="grid w-7 shrink-0 place-items-center text-ocean">
                       <Icon name="mail" size={22} />
                     </span>
                     <span>
@@ -92,7 +92,7 @@ export default async function ContactPage() {
                 </CloudflareEmailOff>
               </li>
               <li className="flex items-center gap-4 rounded-2xl border border-night/10 bg-white p-4">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-sunset/15 text-sunset">
+                <span className="grid w-7 shrink-0 place-items-center text-ocean">
                   <Icon name="map-pin" size={22} />
                 </span>
                 <span>

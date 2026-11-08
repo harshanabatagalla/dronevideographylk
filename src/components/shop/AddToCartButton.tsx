@@ -19,13 +19,13 @@ export function AddToCartButton({
 
   if (disabled) {
     return (
-      <span className="inline-flex min-h-10 items-center rounded-full bg-night/10 px-5 py-2.5 text-sm font-semibold text-night/65">
+      <span className="inline-flex min-h-10 items-center rounded-md bg-night/10 px-5 py-2.5 text-sm font-semibold text-night/65">
         Out of stock
       </span>
     );
   }
 
-  const pad = size === "sm" ? "min-h-10 px-4 py-2.5 text-xs" : "min-h-12 px-6 py-3 text-sm";
+  const pad = size === "sm" ? "btn-sm min-h-10" : "min-h-12";
 
   return (
     <span className="inline-flex flex-wrap items-center gap-3">
@@ -35,7 +35,7 @@ export function AddToCartButton({
           add(sku);
           setAdded(true);
         }}
-        className={`inline-flex items-center gap-2 rounded-full bg-sunset font-semibold text-night transition hover:bg-amber-400 ${pad}`}
+        className={`btn btn-primary ${pad}`}
       >
         <Icon name={added ? "check" : "cart"} size={size === "sm" ? 14 : 18} />
         {added ? "Added" : "Add to cart"}

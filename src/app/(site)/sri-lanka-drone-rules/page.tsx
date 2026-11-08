@@ -59,7 +59,7 @@ export default function DroneRulesPage() {
         <div className="grid gap-12 lg:grid-cols-[1.7fr_1fr]">
           <article className="space-y-14">
             <section id="short-answer" className="scroll-mt-28 rounded-3xl border border-sunset/40 bg-sunset/10 p-6 sm:p-8">
-              <h2 className="font-display text-2xl font-semibold text-night">Can tourists fly drones in Sri Lanka?</h2>
+              <h2 className="font-display text-2xl font-medium text-night">Can tourists fly drones in Sri Lanka?</h2>
               <p className="mt-3 text-lg leading-relaxed text-night/80">
                 Yes, but not without approval. Before any outdoor flight you need approval from the Civil
                 Aviation Authority of Sri Lanka (CAASL). You apply on its online Drone Flight Approval Portal,
@@ -261,7 +261,7 @@ export default function DroneRulesPage() {
             </GuideSection>
 
             <section id="questions" className="scroll-mt-28">
-              <h2 className="font-display text-2xl font-semibold text-night sm:text-3xl">Questions</h2>
+              <h2 className="font-display text-2xl font-medium text-night sm:text-3xl">Questions</h2>
               <div className="mt-6">
                 <Faq
                   items={[
@@ -341,7 +341,7 @@ export default function DroneRulesPage() {
             </section>
 
             <section id="sources" className="scroll-mt-28 rounded-3xl border border-night/10 bg-sand/60 p-6 sm:p-8">
-              <h2 className="font-display text-2xl font-semibold text-night">Official sources</h2>
+              <h2 className="font-display text-2xl font-medium text-night">Official sources</h2>
               <p className="mt-3 text-night/70">
                 This page is a plain English summary, not legal advice. It is based on these official pages:
               </p>

@@ -6,7 +6,7 @@ import { OFFICIAL, RULES_REVIEWED, RULES_REVIEWED_LABEL } from "@/lib/drone-rule
 export function GuideSection({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
     <section id={id} className="scroll-mt-28">
-      <h2 className="font-display text-2xl font-semibold text-night sm:text-3xl">{title}</h2>
+      <h2 className="font-display text-2xl font-medium text-night sm:text-3xl">{title}</h2>
       <div className="mt-4 space-y-4 leading-relaxed text-night/75">{children}</div>
     </section>
   );
@@ -17,7 +17,7 @@ export function Bullets({ items }: { items: ReactNode[] }) {
     <ul className="space-y-3">
       {items.map((item, i) => (
         <li key={i} className="flex items-start gap-3">
-          <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-teal/15 text-teal">
+          <span className="mt-1 shrink-0 text-teal">
             <Icon name="check" size={12} />
           </span>
           <span>{item}</span>

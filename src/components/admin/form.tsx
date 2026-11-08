@@ -95,7 +95,7 @@ export function SubmitButton({ children }: { children: ReactNode }) {
   return (
     <button
       type="submit"
-      className="inline-flex items-center gap-2 rounded-full bg-sunset px-6 py-2.5 text-sm font-semibold text-night transition hover:bg-amber-400"
+      className="btn btn-primary btn-sm"
     >
       {children}
     </button>

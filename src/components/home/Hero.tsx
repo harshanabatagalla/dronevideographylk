@@ -39,7 +39,7 @@ export async function Hero() {
       <div className="relative z-10 flex flex-1 items-center">
         <div className="mx-auto w-full max-w-6xl px-5 pb-16 pt-28 sm:px-8">
           <div className="max-w-3xl">
-            <h1 className="font-display text-[2.6rem] font-semibold leading-[1.05] text-white text-balance sm:text-6xl lg:text-7xl">
+            <h1 className="font-display text-[2.6rem] font-medium leading-[1.04] text-white text-balance sm:text-6xl lg:text-7xl">
               Drone videography in Sri Lanka
             </h1>
 
@@ -48,12 +48,10 @@ export async function Hero() {
               We help with the drone permits. Send us your date and location.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-              <BookButton
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-sunset px-7 py-3.5 text-sm font-semibold text-night transition-colors hover:bg-amber-400"
-              >
+              <BookButton className="btn btn-primary btn-lg">
                 <Icon name="whatsapp" size={18} /> Check availability
               </BookButton>
-              <Button href="/services" variant="light" icon>
+              <Button href="/services" variant="light" size="lg" icon>
                 Our drone services
               </Button>
             </div>

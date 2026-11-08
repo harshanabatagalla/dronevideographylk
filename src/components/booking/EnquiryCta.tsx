@@ -29,7 +29,7 @@ export async function WhatsAppLink({
       rel="noopener noreferrer"
       className={
         className ??
-        "inline-flex items-center gap-2 rounded-full bg-sunset px-7 py-3.5 text-sm font-semibold text-night transition-colors hover:bg-amber-400"
+        "btn btn-primary btn-lg"
       }
     >
       <Icon name="whatsapp" size={18} /> {children}
@@ -51,13 +51,13 @@ export async function EnquiryCta({
     <section className="bg-night">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:items-center">
         <div>
-          <h2 className="font-display text-3xl font-semibold text-white text-balance sm:text-4xl">{title}</h2>
+          <h2 className="font-display text-3xl font-medium text-white text-balance sm:text-4xl">{title}</h2>
           <p className="mt-4 max-w-lg text-lg text-white/75">{text}</p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <WhatsAppLink message={message}>Send your date and location</WhatsAppLink>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              className="btn btn-light btn-lg"
             >
               Use the contact form
             </Link>
@@ -68,7 +68,7 @@ export async function EnquiryCta({
           <ul className="mt-4 space-y-3">
             {WHAT_TO_SEND.map((item) => (
               <li key={item} className="flex items-start gap-3 text-sm text-white/80">
-                <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-teal/90 text-white">
+                <span className="mt-0.5 shrink-0 text-sunset">
                   <Icon name="check" size={14} />
                 </span>
                 {item}

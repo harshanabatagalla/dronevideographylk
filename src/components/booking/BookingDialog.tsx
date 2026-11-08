@@ -104,7 +104,7 @@ export function BookingProvider({ whatsapp, children }: { whatsapp: string; chil
         <form onSubmit={onSubmit} className="flex max-h-[88vh] flex-col">
           <div className="flex items-start justify-between gap-4 border-b border-night/10 px-6 pb-4 pt-6 sm:px-7">
             <div>
-              <h2 id="booking-title" className="font-display text-2xl font-semibold">
+              <h2 id="booking-title" className="font-display text-2xl font-medium">
                 Book a drone video
               </h2>
               <p className="mt-1 text-sm text-night/65">
@@ -167,7 +167,7 @@ export function BookingProvider({ whatsapp, children }: { whatsapp: string; chil
           <div className="border-t border-night/10 px-6 pb-5 pt-4 sm:px-7">
             <button
               type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3.5 text-sm font-semibold text-night transition hover:brightness-95"
+              className="btn btn-whatsapp btn-block btn-lg"
             >
               <Icon name="whatsapp" size={18} />
               {count > 0 ? `Send ${count} question${count === 1 ? "" : "s"} on WhatsApp` : "Send on WhatsApp"}
