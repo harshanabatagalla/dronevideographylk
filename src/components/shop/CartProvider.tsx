@@ -30,7 +30,9 @@ function load(): CartLine[] {
     return parsed
       // carts saved before kits existed stored a bare slug
       .map((l) => (typeof (l as { slug?: string }).slug === "string" ? { sku: `${(l as { slug?: string }).slug}:standard`, qty: l.qty } : l))
-      .filter((l) => typeof l.sku === "string" && Number.isInteger(l.qty) && l.qty > 0);
+      .filter((l) => typeof l.sku === "string" && Number.isInteger(l.qty) && l.qty > 0)
+      // a hand edited or old cart can hold more than the shop allows
+      .map((l) => ({ sku: l.sku, qty: Math.min(MAX_QTY, l.qty) }));
   } catch {
     return [];
   }

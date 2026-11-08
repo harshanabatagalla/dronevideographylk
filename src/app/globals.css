@@ -88,6 +88,11 @@
   text-wrap: balance;
 }
 
+/* Stop the page scrolling behind an open dialog (booking questions, photo viewer). */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 /* ================================================================== */
 /*  iPhone safe areas (Dynamic Island, notch, home bar)               */
 /* ================================================================== */
