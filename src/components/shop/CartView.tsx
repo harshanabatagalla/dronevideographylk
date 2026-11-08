@@ -5,6 +5,7 @@ import { useState, type FormEvent } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { formatLkr, getSku } from "@/lib/shop";
 import { whatsappHref } from "@/lib/site";
+import { postJson } from "@/lib/api-client";
 import { useCart } from "./CartProvider";
 import Image from "next/image";
 
@@ -27,18 +28,17 @@ export function CartView() {
     setError("");
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
     try {
-      const res = await fetch("/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, items: lines }),
+      // Send only the lines shown on this page. Lines for items that no longer exist
+      // or have no price are hidden above, so the customer must not be blamed for them.
+      const json = await postJson<{ ok: boolean; ref: string; total: number }>("/api/orders", {
+        ...data,
+        items: items.map(({ line }) => line),
       });
-      const json = await res.json();
-      if (!res.ok || !json.ok) throw new Error(json.error ?? "Something went wrong.");
       setPlaced({ ref: json.ref, total: json.total, payment: String(data.payment) });
       clear();
     } catch (err) {
       setStatus("error");
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     }
   }
 
@@ -162,11 +162,11 @@ export function CartView() {
       <form onSubmit={onSubmit} className="h-fit space-y-4 rounded-3xl border border-night/10 bg-white p-6">
         <h2 className="font-display text-xl font-semibold text-night">Your details</h2>
         <input type="text" name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
-        <Field label="Full name" name="name" autoComplete="name" required />
-        <Field label="Email" name="email" type="email" autoComplete="email" required />
-        <Field label="Phone / WhatsApp" name="phone" type="tel" autoComplete="tel" required />
-        <Field label="Delivery address" name="address" autoComplete="street-address" required />
-        <Field label="City" name="city" autoComplete="address-level2" required />
+        <Field label="Full name" name="name" autoComplete="name" maxLength={120} required />
+        <Field label="Email" name="email" type="email" autoComplete="email" maxLength={200} required />
+        <Field label="Phone / WhatsApp" name="phone" type="tel" autoComplete="tel" maxLength={40} required />
+        <Field label="Delivery address" name="address" autoComplete="street-address" maxLength={300} required />
+        <Field label="City" name="city" autoComplete="address-level2" maxLength={80} required />
 
         <fieldset>
           <legend className="mb-1.5 text-sm font-medium text-night">How will you pay?</legend>
@@ -181,12 +181,17 @@ export function CartView() {
           <textarea
             name="notes"
             rows={3}
+            maxLength={1000}
             placeholder="Anything we should know, like a preferred delivery time"
             className="w-full rounded-xl border border-night/15 bg-white px-4 py-3 text-night focus:border-ocean focus:outline-none"
           />
         </label>
 
-        {status === "error" && <p className="rounded-lg bg-coral/10 px-4 py-3 text-sm text-coral">{error}</p>}
+        {status === "error" && (
+          <p role="alert" className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-800">
+            {error}
+          </p>
+        )}
 
         <button
           type="submit"
@@ -207,12 +212,14 @@ function Field({
   type = "text",
   required = false,
   autoComplete,
+  maxLength,
 }: {
   label: string;
   name: string;
   type?: string;
   required?: boolean;
   autoComplete?: string;
+  maxLength?: number;
 }) {
   return (
     <label className="block text-sm">
@@ -224,6 +231,7 @@ function Field({
         name={name}
         required={required}
         autoComplete={autoComplete}
+        maxLength={maxLength}
         className="w-full rounded-xl border border-night/15 bg-white px-4 py-3 text-night focus:border-ocean focus:outline-none"
       />
     </label>

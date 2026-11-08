@@ -1,6 +1,23 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Do not tell every visitor which framework runs the site.
+  poweredByHeader: false,
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          // The browser must trust the declared file type, never guess one.
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          // Only this site may put its own pages in a frame (stops clickjacking).
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+        ],
+      },
+    ];
+  },
   // Fleet drones were renamed; keep the old links working.
   async redirects() {
     return [

@@ -54,6 +54,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={active ? "page" : undefined}
                 className={`whitespace-nowrap text-sm font-medium transition-colors ${
                   active ? "text-sunset" : "text-white/80 hover:text-white"
                 }`}

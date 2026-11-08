@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { droneName, type Footage } from "@/lib/content";
 import { photoAlt } from "@/lib/alt";
@@ -26,6 +26,16 @@ export function FootageGallery({
   const categories = ["All", ...Array.from(new Set(items.map((i) => i.category)))];
   const [filter, setFilter] = useState<string>("All");
   const [active, setActive] = useState<Footage | null>(null);
+  const lightbox = useRef<HTMLDialogElement>(null);
+
+  // A native modal dialog gives Escape to close, keyboard focus kept inside it,
+  // an inert page behind it, and focus returned to the thumbnail on close.
+  useEffect(() => {
+    const dialog = lightbox.current;
+    if (!dialog) return;
+    if (active && !dialog.open) dialog.showModal();
+    if (!active && dialog.open) dialog.close();
+  }, [active]);
 
   const visible = filter === "All" ? items : items.filter((i) => i.category === filter);
 
@@ -94,22 +104,25 @@ export function FootageGallery({
         ))}
       </div>
 
-      {active && (
-        <div
-          className="fixed inset-0 z-[60] grid place-items-center bg-night/90 p-4 backdrop-blur"
-          role="dialog"
-          aria-modal="true"
-          aria-label={active.title}
-          onClick={() => setActive(null)}
-        >
-          <div className="w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between pb-3 text-white">
+      <dialog
+        ref={lightbox}
+        aria-label={active?.title ?? "Footage"}
+        onClose={() => setActive(null)}
+        onClick={(e) => {
+          // Clicking the dark area outside the box closes it.
+          if (e.target === lightbox.current) setActive(null);
+        }}
+        className="m-auto w-[calc(100%-2rem)] max-w-4xl bg-transparent p-0 text-white backdrop:bg-night/90"
+      >
+        {active && (
+          <div>
+            <div className="flex items-center justify-between pb-3">
               <h3 className="font-display text-lg font-semibold">{active.title}</h3>
               <button
                 type="button"
                 onClick={() => setActive(null)}
                 aria-label="Close"
-                className="grid h-9 w-9 place-items-center rounded-full bg-white/10 hover:bg-white/20"
+                className="grid h-10 w-10 place-items-center rounded-full bg-white/10 hover:bg-white/20"
               >
                 <Icon name="close" size={20} />
               </button>
@@ -118,7 +131,7 @@ export function FootageGallery({
               {active.youtubeId ? (
                 <iframe
                   className="h-full w-full"
-                  src={`https://www.youtube-nocookie.com/embed/${active.youtubeId}?autoplay=1&rel=0`}
+                  src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(active.youtubeId)}?autoplay=1&rel=0`}
                   title={active.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -134,8 +147,8 @@ export function FootageGallery({
               )}
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </dialog>
     </div>
   );
 }

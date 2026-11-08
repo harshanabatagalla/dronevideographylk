@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { ALL_COUNTRIES, COMMON_COUNTRIES } from "@/lib/countries";
+import { postJson } from "@/lib/api-client";
 
 const shootTypes = [
   "Travel video",
@@ -26,18 +27,12 @@ export function ContactForm() {
     const data = Object.fromEntries(new FormData(form).entries());
 
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const json = await res.json();
-      if (!res.ok || !json.ok) throw new Error(json.error ?? "Something went wrong.");
+      await postJson("/api/contact", data);
       setStatus("sent");
       form.reset();
     } catch (err) {
       setStatus("error");
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     }
   }
 
@@ -68,8 +63,8 @@ export function ContactForm() {
         aria-hidden="true"
       />
 
-      <Field label="Your name" name="name" required />
-      <Field label="Email" name="email" type="email" required />
+      <Field label="Your name" name="name" autoComplete="name" maxLength={120} required />
+      <Field label="Email" name="email" type="email" autoComplete="email" maxLength={254} required />
       <label className="text-sm">
         <span className="mb-1.5 block font-medium text-night">Country</span>
         <select
@@ -95,8 +90,8 @@ export function ContactForm() {
           </optgroup>
         </select>
       </label>
-      <Field label="Travel dates" name="dates" placeholder="For example 12 to 20 August" />
-      <Field label="Locations" name="locations" placeholder="For example Ella, Mirissa" className="sm:col-span-2" />
+      <Field label="Travel dates" name="dates" maxLength={120} placeholder="For example 12 to 20 August" />
+      <Field label="Locations" name="locations" maxLength={300} placeholder="For example Ella, Mirissa" className="sm:col-span-2" />
 
       <label className="sm:col-span-2 text-sm">
         <span className="mb-1.5 block font-medium text-night">Type of shoot</span>
@@ -121,6 +116,7 @@ export function ContactForm() {
         <textarea
           name="message"
           rows={5}
+          maxLength={4000}
           required
           placeholder="What do you want us to film?"
           className="w-full rounded-xl border border-night/15 bg-white px-4 py-3 text-night focus:border-ocean focus:outline-none"
@@ -128,7 +124,7 @@ export function ContactForm() {
       </label>
 
       {status === "error" && (
-        <p className="sm:col-span-2 rounded-lg bg-coral/10 px-4 py-3 text-sm text-coral">{error}</p>
+        <p role="alert" className="sm:col-span-2 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-800">{error}</p>
       )}
 
       <div className="sm:col-span-2">
@@ -151,6 +147,8 @@ function Field({
   type = "text",
   required = false,
   placeholder,
+  autoComplete,
+  maxLength,
   className = "",
 }: {
   label: string;
@@ -158,6 +156,8 @@ function Field({
   type?: string;
   required?: boolean;
   placeholder?: string;
+  autoComplete?: string;
+  maxLength?: number;
   className?: string;
 }) {
   return (
@@ -170,6 +170,8 @@ function Field({
         name={name}
         required={required}
         placeholder={placeholder}
+        autoComplete={autoComplete}
+        maxLength={maxLength}
         className="w-full rounded-xl border border-night/15 bg-white px-4 py-3 text-night focus:border-ocean focus:outline-none"
       />
     </label>

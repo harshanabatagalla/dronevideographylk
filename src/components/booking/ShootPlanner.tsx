@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { buildWhatsappHref } from "@/lib/site";
+import { formatPlannerDate, localDateInput } from "@/lib/dates";
 
 type DroneOption = { slug: string; name: string };
 
@@ -23,7 +24,7 @@ export function ShootPlanner({ drones, whatsapp }: { drones: DroneOption[]; what
         : "Hi! I would like to book a drone shoot.",
       "",
       `Drone: ${drone || "you can choose for me"}`,
-      `Date: ${date ? new Date(date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "not fixed yet"}`,
+      `Date: ${formatPlannerDate(date) ?? "not fixed yet"}`,
       `Location: ${locations.trim() || "not decided yet"}`,
     ];
     const href = buildWhatsappHref(whatsapp, lines.join("\n"));
@@ -33,7 +34,9 @@ export function ShootPlanner({ drones, whatsapp }: { drones: DroneOption[]; what
   }
 
   const field = "w-full rounded-xl border border-night/15 bg-white px-4 py-3 text-night focus:border-ocean focus:outline-none";
-  const today = new Date().toISOString().slice(0, 10);
+  // The visitor's own date. The page is built on the server, whose date can differ
+  // around midnight, so the attribute is allowed to differ without a warning.
+  const today = localDateInput();
 
   return (
     <div className="rounded-3xl border border-night/10 bg-white p-6 shadow-lg shadow-night/5 sm:p-7">
@@ -57,7 +60,14 @@ export function ShootPlanner({ drones, whatsapp }: { drones: DroneOption[]; what
 
         <label className="text-sm">
           <span className="mb-1.5 block font-medium text-night">Date</span>
-          <input type="date" min={today} value={date} onChange={(e) => setDate(e.target.value)} className={field} />
+          <input
+            type="date"
+            min={today}
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            suppressHydrationWarning
+            className={field}
+          />
         </label>
 
         <label className="text-sm">

@@ -107,7 +107,7 @@ export function AnalyticsConsent({ measurementId, pages }: { measurementId: stri
     <div className="border-t border-white/15 bg-[#0b1929] px-4 py-4 text-white">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 text-sm">
         <button ref={preferences} type="button" onClick={() => setOpen(value => !value)} aria-expanded={ready && (open || choice === null)} aria-controls="analytics-preferences" className="rounded px-2 py-2 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-white">Analytics preferences</button>
-        <span role="status" className="text-white/70">{choice === "accepted" ? "Analytics accepted" : "Analytics off"}{storageError ? " — your choice could not be saved; analytics remains off." : ""}</span>
+        <span role="status" className="text-white/70">{choice === "accepted" ? "Analytics accepted" : "Analytics off"}{storageError ? ". Your choice could not be saved, so analytics stays off." : ""}</span>
       </div>
       {ready && (open || choice === null) && (
         <section id="analytics-preferences" aria-labelledby="analytics-heading" className="mx-auto mt-3 max-w-7xl rounded-xl border border-white/25 bg-[#142b43] p-5">

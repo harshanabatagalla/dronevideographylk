@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { adminHref, isAdminHref } from "@/lib/admin-path";
 import { clearFailures, isLockedOut, recordFailure } from "@/lib/login-throttle";
+import { ipFromHeaders } from "@/lib/rate-limit";
 import {
   isAuthenticated,
   startSession,
@@ -31,10 +32,8 @@ import type { Drone, Footage, Spec } from "@/lib/content";
 
 /* ------------------------------- Auth ------------------------------- */
 
-/** The visitor's IP. nginx appends the real address last to X-Forwarded-For; earlier entries can be forged. */
 async function clientIp(): Promise<string> {
-  const forwarded = (await headers()).get("x-forwarded-for");
-  return forwarded?.split(",").pop()?.trim() || "unknown";
+  return ipFromHeaders(await headers());
 }
 
 export async function loginAction(formData: FormData) {
@@ -94,7 +93,8 @@ const SPEC_ICONS: Spec["icon"][] = ["clock", "camera", "signal", "wind", "mounta
 export async function saveDroneAction(formData: FormData) {
   await assertAuth();
   const name = String(formData.get("name") ?? "").trim();
-  const slug = String(formData.get("slug") ?? "").trim() || slugify(name);
+  // Always a clean address segment: letters, numbers and single hyphens only.
+  const slug = slugify(String(formData.get("slug") ?? "").trim() || name);
   if (!name || !slug) redirect(adminHref("/drones?error=1"));
 
   // Specs entered one per line as: icon | label | value
@@ -140,12 +140,16 @@ export async function saveFootageAction(formData: FormData) {
   const id = String(formData.get("id") ?? "").trim() || newId();
   const title = String(formData.get("title") ?? "").trim();
   if (!title) redirect(adminHref("/footage?error=1"));
+  // A YouTube video id is 11 characters of letters, digits, dash and underscore.
+  // Anything else would end up inside the embed address on the public page.
+  const youtubeId = String(formData.get("youtubeId") ?? "").trim();
+  if (youtubeId && !/^[A-Za-z0-9_-]{6,20}$/.test(youtubeId)) redirect(adminHref("/footage?error=1"));
 
   const item: Footage = {
     id,
     title,
     poster: String(formData.get("poster") ?? "").trim(),
-    youtubeId: String(formData.get("youtubeId") ?? "").trim() || undefined,
+    youtubeId: youtubeId || undefined,
     location: String(formData.get("location") ?? "").trim(),
     category: (String(formData.get("category") ?? "Travel") as Footage["category"]),
     droneSlug: String(formData.get("droneSlug") ?? "").trim(),
@@ -227,11 +231,13 @@ export async function saveSettingsAction(formData: FormData) {
 
 /* ------------------------------ Enquiries --------------------------- */
 
+const ENQUIRY_STATUSES: Enquiry["status"][] = ["new", "handled", "archived"];
+
 export async function setEnquiryStatusAction(formData: FormData) {
   await assertAuth();
   const id = String(formData.get("id") ?? "");
-  const status = String(formData.get("status") ?? "new") as Enquiry["status"];
-  if (id) await setEnquiryStatus(id, status);
+  const status = String(formData.get("status") ?? "") as Enquiry["status"];
+  if (id && ENQUIRY_STATUSES.includes(status)) await setEnquiryStatus(id, status);
   revalidatePath("/admin/enquiries");
   redirect(adminHref("/enquiries"));
 }
