@@ -28,7 +28,10 @@ export default async function PortfolioPage() {
         }
       />
       <Section className="py-16">
-        <FootageGallery items={footage} filterable eagerCount={3} />
+        {/* Only the first photo loads at once. On a phone the next two are below the
+            screen and would compete with it; on desktop they are on screen, so lazy
+            loading starts them straight away anyway. */}
+        <FootageGallery items={footage} filterable eagerCount={1} />
         <p className="mx-auto mt-12 max-w-2xl text-center text-night/70">
           Want photos like these of your trip, hotel or property?{" "}
           <Link href={servicePath("drone-photography")} className="font-semibold text-ocean hover:underline">

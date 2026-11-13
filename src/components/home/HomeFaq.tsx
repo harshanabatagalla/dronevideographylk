@@ -8,7 +8,7 @@ const link = "font-semibold text-ocean hover:underline";
 
 export function HomeFaq() {
   return (
-    <Section className="pb-20 pt-12 sm:pb-28 sm:pt-16">
+    <Section className="cv pb-20 pt-12 [--cv-d:817px] [--cv-m:800px] sm:pb-28 sm:pt-16">
       <SectionHeading title="Questions travellers ask us" />
       <div className="mt-10">
         <Faq

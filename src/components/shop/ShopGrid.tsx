@@ -61,7 +61,7 @@ export function ShopGrid({ products }: { products: ShopProduct[] }) {
         {visible.map((p) => (
           <li key={p.slug}>
             <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-night/10 bg-white transition-colors duration-150 hover:border-night/30">
-              <Link href={`/shop/${p.slug}`} className="relative block aspect-[4/3] overflow-hidden">
+              <Link href={`/shop/${p.slug}`} className="relative block aspect-[4/3] overflow-hidden [content-visibility:auto]">
                 <ProductVisual product={p} />
                 <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
                   <span className="rounded-sm bg-black/65 px-2 py-1 text-[11px] font-semibold text-white">

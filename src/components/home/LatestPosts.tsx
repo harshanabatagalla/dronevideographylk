@@ -5,7 +5,7 @@ import { posts } from "@/lib/blog";
 /** Three guides on the home page, so readers and search engines find the blog from the top page. */
 export function LatestPosts() {
   return (
-    <Section className="pb-8 pt-8 sm:pb-12">
+    <Section className="cv pb-8 pt-8 [--cv-d:815px] [--cv-m:775px] sm:pb-12">
       <SectionHeading
         title="Read before you book"
         subtitle="Plain guides to the places, the weather, the rules and the cost of drone filming in Sri Lanka."

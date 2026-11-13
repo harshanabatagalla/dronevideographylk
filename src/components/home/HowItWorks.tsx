@@ -4,7 +4,7 @@ import { BOOKING_STEPS } from "@/lib/services";
 
 export function HowItWorks() {
   return (
-    <Section className="pb-8 pt-20 sm:pb-12 sm:pt-28">
+    <Section className="cv pb-8 pt-20 [--cv-d:535px] [--cv-m:1180px] sm:pb-12 sm:pt-28">
       <SectionHeading
         title="How booking works"
         subtitle="You can book everything on WhatsApp, even before you arrive in Sri Lanka."

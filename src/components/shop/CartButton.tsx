@@ -9,6 +9,9 @@ export function CartButton() {
   return (
     <Link
       href="/shop/cart"
+      // The cart page pulls in the whole shop catalog. It is rarely visited, so do not
+      // prefetch it from every page's header.
+      prefetch={false}
       aria-label={count > 0 ? `Cart, ${count} item${count === 1 ? "" : "s"}` : "Cart"}
       className="relative grid h-10 w-10 place-items-center rounded-full text-white/85 transition hover:bg-white/10 hover:text-white"
     >

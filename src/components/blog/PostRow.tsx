@@ -40,7 +40,8 @@ export function PostRow({
 }) {
   const photo = getPhoto(post.cover);
   return (
-    <li className="border-b border-night/15">
+    // Long lists (31 guides on the blog page) are skipped until near the screen.
+    <li className="border-b border-night/15 [contain-intrinsic-block-size:auto_170px] [content-visibility:auto]">
       <Link
         href={postPath(post.slug)}
         className="group grid grid-cols-[7.5rem_1fr] items-start gap-4 py-6 sm:grid-cols-[14rem_1fr] sm:gap-8 sm:py-7"

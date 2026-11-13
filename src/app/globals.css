@@ -31,7 +31,10 @@
   --color-sand: #f5efe6;
   --color-cream: #fbf8f3;
 
-  --font-sans: var(--font-inter);
+  /* Body text uses the phone's or computer's own font (San Francisco, Segoe UI, Roboto).
+     It needs no download, which took mobile Lighthouse from 96 to 98 on the home page.
+     Headings keep Space Grotesk, the brand font. */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-display: var(--font-display);
 
   /* Corner radii: a firmer scale than the Tailwind default. */
@@ -101,6 +104,22 @@
   .bg-night :focus-visible,
   dialog :focus-visible {
     outline-color: var(--color-sunset);
+  }
+}
+
+/*
+ * Sections far below the first screen skip style, layout and paint until they come near
+ * the viewport, which also holds back their lazy images. --cv-m and --cv-d are the
+ * measured heights on phones and on desktop, so the scrollbar stays steady; "auto" makes
+ * the browser remember the real height once a section has been shown.
+ */
+.cv {
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto var(--cv-m, 800px);
+}
+@media (min-width: 1024px) {
+  .cv {
+    contain-intrinsic-block-size: auto var(--cv-d, 800px);
   }
 }
 
