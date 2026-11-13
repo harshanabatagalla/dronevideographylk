@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { OG_IMAGE } from "@/lib/seo";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 const display = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
@@ -46,7 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${display.variable} h-full antialiased`}
+      className={`${display.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream" suppressHydrationWarning>{children}</body>
     </html>

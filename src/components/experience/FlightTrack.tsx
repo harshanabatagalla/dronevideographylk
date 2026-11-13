@@ -18,7 +18,7 @@ export type Waypoint = {
  */
 export function FlightTrack({ waypoints }: { waypoints: Waypoint[] }) {
   return (
-    <section aria-labelledby="where-we-film" className="bg-night-800 py-20 text-white sm:py-28">
+    <section aria-labelledby="where-we-film" className="cv bg-night-800 py-20 text-white [--cv-d:945px] [--cv-m:1420px] sm:py-28">
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
         <h2
           id="where-we-film"

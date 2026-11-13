@@ -7,7 +7,7 @@ import { getSettings } from "@/lib/db";
 export async function FinalCTA() {
   const settings = await getSettings();
   return (
-    <div className="bg-night">
+    <div className="cv bg-night [--cv-d:420px] [--cv-m:510px]">
       <Section className="py-20 sm:py-28">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-end lg:gap-16">
           <h2 className="font-display text-4xl font-medium leading-[1.08] text-white text-balance sm:text-6xl">

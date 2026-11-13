@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { Button } from "@/components/ui/Section";
 import { HeroVideo } from "./HeroVideo";
+import { HeroPoster } from "./HeroPoster";
 import { Icon } from "@/components/ui/Icon";
 import { BookButton } from "@/components/booking/BookingDialog";
 import { getSettings } from "@/lib/db";
@@ -16,22 +16,10 @@ export async function Hero() {
   const videoType = heroVideo.endsWith(".webm") ? "video/webm" : "video/mp4";
   return (
     <section id="hero" className="relative flex min-h-[100svh] flex-col overflow-hidden bg-night">
-      {/* Lighthouse measures the headline text as the LCP element on phones and desktop,
-          not this darkened poster. A preload in <head> made it compete with the CSS and
-          fonts the text needs, so it loads eagerly at low priority: React does not
-          preload low priority images, and mobile LCP improved from 3.3 s to 3.0 s.
-          It is a 16:9 photo cropped to cover, so in portrait its rendered width follows
-          the screen height. 75vh (not the full 178vh) is enough under the dark overlay. */}
-      <Image
-        src={heroPoster}
-        alt=""
-        fill
-        loading="eager"
-        fetchPriority="low"
-        quality={60}
-        sizes="(orientation: portrait) 75vh, 100vw"
-        className="object-cover"
-      />
+      {/* The headline text is the LCP element. Lighthouse's mobile model counts every
+          request that starts before that paint, so the decorative poster now waits for
+          the load event (HeroPoster) instead of competing with the CSS and fonts. */}
+      <HeroPoster src={heroPoster} />
       <HeroVideo src={heroVideo} type={videoType} />
       <div className="absolute inset-0 bg-gradient-to-b from-night/85 via-night/55 to-night" />
       <div className="absolute inset-0 bg-gradient-to-r from-night/85 via-night/25 to-transparent" />

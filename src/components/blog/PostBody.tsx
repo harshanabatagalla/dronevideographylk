@@ -56,7 +56,7 @@ export function PostBody({ blocks }: { blocks: Block[] }) {
             if (!photo) return null;
             return (
               <figure key={i} className="my-9">
-                <div className="relative aspect-video overflow-hidden rounded-2xl bg-night/5">
+                <div className="relative aspect-video overflow-hidden rounded-2xl bg-night/5 [content-visibility:auto]">
                   <Image
                     src={photo.poster}
                     alt={photoAlt(photo.title, photo.location)}

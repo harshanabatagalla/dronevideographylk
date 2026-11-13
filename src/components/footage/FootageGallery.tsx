@@ -40,6 +40,20 @@ export function FootageGallery({
     if (!active && dialog.open) dialog.close();
   }, [active]);
 
+  // Photos after the first eagerCount wait for the page's load event, so on a phone they
+  // never compete with the first photo and the scripts. They are listed in the sitemap,
+  // so search engines still find them.
+  const [afterLoad, setAfterLoad] = useState(false);
+  useEffect(() => {
+    const go = () => setAfterLoad(true);
+    if (document.readyState === "complete") {
+      const t = window.setTimeout(go, 0);
+      return () => window.clearTimeout(t);
+    }
+    window.addEventListener("load", go, { once: true });
+    return () => window.removeEventListener("load", go);
+  }, []);
+
   const visible = filter === "All" ? items : items.filter((i) => i.category === filter);
 
   return (
@@ -72,11 +86,16 @@ export function FootageGallery({
               key={f.id}
               type="button"
               onClick={() => setActive(f)}
-              className={`group relative overflow-hidden rounded-2xl text-left ${
+              className={`group relative overflow-hidden rounded-2xl bg-night-800 text-left ${
                 big ? "aspect-video sm:col-span-2 lg:row-span-2 lg:aspect-auto" : "aspect-video"
+              } ${
+                // Tiles that do not load right away are skipped until near the screen, so a
+                // long gallery does not start every photo at once.
+                i >= eagerCount ? "[content-visibility:auto]" : ""
               }`}
               title={f.youtubeId ? `Play ${f.title}` : `View ${f.title} full size`}
             >
+              {(i < eagerCount || afterLoad) && (
               <Image
                 src={f.poster}
                 alt={photoAlt(f.title, f.location)}
@@ -96,6 +115,7 @@ export function FootageGallery({
                 quality={60}
                 className="object-cover transition-transform duration-500 ease-out-strong group-hover:scale-[1.04]"
               />
+              )}
               <span className="absolute inset-0 z-10 bg-gradient-to-t from-night/80 via-transparent to-transparent" />
               {f.youtubeId && (
                 <span className="absolute left-1/2 top-1/2 z-10 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-night shadow-lg transition group-hover:scale-110">

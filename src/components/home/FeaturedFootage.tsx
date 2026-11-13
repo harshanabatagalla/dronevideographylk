@@ -5,7 +5,7 @@ import { getFeaturedFootage } from "@/lib/db";
 export async function FeaturedFootage() {
   const featured = await getFeaturedFootage();
   return (
-    <Section className="pb-20 sm:pb-28">
+    <Section className="cv pb-20 [--cv-d:960px] [--cv-m:1620px] sm:pb-28">
       <SectionHeading
         title="Drone photos we took in Sri Lanka"
         subtitle="No stock images. Our team took every photo below with our own drones."

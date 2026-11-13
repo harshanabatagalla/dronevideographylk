@@ -13,7 +13,7 @@ export async function FleetTeaser() {
   const main = drones.slice(0, FEATURED_COUNT);
   const more = drones.slice(FEATURED_COUNT);
   return (
-    <div className="bg-night py-20 sm:py-28">
+    <div className="cv bg-night py-20 [--cv-d:1410px] [--cv-m:2900px] sm:py-28">
       <Section>
         <SectionHeading
           light

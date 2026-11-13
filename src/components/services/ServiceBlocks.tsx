@@ -15,7 +15,9 @@ export async function PhotoGrid({ ids, caption }: { ids: string[]; caption?: str
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((f) => (
           <div key={f.id} className="overflow-hidden rounded-2xl border border-night/10 bg-white">
-            <div className="relative aspect-[4/3]">
+            {/* Skipped until near the screen, so photos lower down do not load at once.
+                The aspect ratio keeps the space while it waits. */}
+            <div className="relative aspect-[4/3] [content-visibility:auto]">
               <Image
                 src={f.poster}
                 alt={photoAlt(f.title, f.location)}

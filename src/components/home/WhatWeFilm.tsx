@@ -47,7 +47,7 @@ const permitList = [
 
 export function WhatWeFilm() {
   return (
-    <Section className="py-20 sm:py-28">
+    <Section className="cv py-20 [--cv-d:1420px] [--cv-m:2090px] sm:py-28">
       <SectionHeading
         title="Drone filming for travellers, hotels and weddings"
         subtitle="Choose the kind of shoot you need. Each page explains what we film, what you get and how to book."

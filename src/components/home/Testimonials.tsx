@@ -8,7 +8,7 @@ export async function Testimonials() {
   const testimonials = await getTestimonials();
   if (testimonials.length === 0) return null;
   return (
-    <div className="bg-sand py-20 sm:py-24">
+    <div className="cv bg-sand py-20 [--cv-d:550px] [--cv-m:1090px] sm:py-24">
       <Section>
         <SectionHeading title="What our clients say" />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
