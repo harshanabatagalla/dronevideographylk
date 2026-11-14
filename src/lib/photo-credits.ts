@@ -29,6 +29,7 @@ const PHOTO_CREDITS_BASE: Record<string, PhotoCredit> = {
   "dji-mavic-3": { author: "C.Stadler/Bwag", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", source: "https://commons.wikimedia.org/wiki/File:DJI_-_Drohne_Mavic_3.JPG" },
   "dji-mavic-3-pro": { author: "A.BourgeoisP", license: "CC BY 4.0", licenseUrl: "https://creativecommons.org/licenses/by/4.0/", source: "https://commons.wikimedia.org/wiki/File:2024-10-_DJI_Mavic_3_Pro_-_22.jpg" },
   "dji-mavic-4-pro": { author: "C.Stadler/Bwag", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", source: "https://commons.wikimedia.org/wiki/File:DJI_-_Drohne_Mavic_4_Pro.JPG" },
+  "dji-avata-360": { author: "NDG", license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/", source: "https://commons.wikimedia.org/wiki/File:DJI_Avata_360_in_Store_2026-05-15-1.jpg" },
   "dji-avata-2": { author: "Fumikas Sagisavas", license: "CC0 (public domain)", licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/", source: "https://commons.wikimedia.org/wiki/File:DJI_AVATA_2_cropped.jpg" },
   "dji-flip": { author: "Agent Komodo", license: "CC BY 4.0", licenseUrl: "https://creativecommons.org/licenses/by/4.0/", source: "https://commons.wikimedia.org/wiki/File:DJI_Flip_et_radiocommande_RC2.jpg" },
 };
