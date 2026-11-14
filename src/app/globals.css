@@ -27,6 +27,9 @@
   --color-ocean-light: #22b8cf;
   --color-teal: #0d9488;
   --color-sunset: #f59e0b;
+  /* Sunset is too light for text on cream or white (2:1). This darker amber passes
+     4.5:1, so the second drone in a comparison can be named in its own colour. */
+  --color-sunset-ink: #b45309;
   --color-coral: #fb7185;
   --color-sand: #f5efe6;
   --color-cream: #fbf8f3;
