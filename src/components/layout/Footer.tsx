@@ -29,6 +29,7 @@ const explore = [
   { label: "Our drones", href: "/fleet" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Blog", href: "/blog" },
+  { label: "Compare drones", href: "/compare" },
   { label: "Drone shop", href: "/shop" },
   { label: "Contact", href: "/contact" },
 ];
@@ -60,7 +61,7 @@ export function Footer({ settings }: { settings?: SiteSettings }) {
   );
 
   return (
-    <footer className="cv border-t border-white/10 bg-night text-white/80 [--cv-d:495px] [--cv-m:1715px]">
+    <footer className="cv border-t border-white/10 bg-night text-white/80 [--cv-d:483px] [--cv-m:1747px]">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div>
           <Link href="/" className="flex items-center gap-2.5 text-white" aria-label="dronevideography.lk home">

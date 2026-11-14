@@ -3,6 +3,7 @@ import { Section } from "@/components/ui/Section";
 import { PHOTO_CREDITS } from "@/lib/photo-credits";
 import { getProduct } from "@/lib/shop";
 import { getDrone } from "@/lib/content";
+import { COMPARE_PATH, getCompareDrone } from "@/lib/compare";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -12,12 +13,14 @@ export const metadata = pageMetadata({
   path: "/credits",
 });
 
-/** Where a credited photo is shown: its shop page, or our drone page. Null if it is no longer used. */
+/** Where a credited photo is shown: its shop page, our drone page, or the drone comparison. Null if it is no longer used. */
 function usedOn(slug: string): { name: string; href: string } | null {
   const product = getProduct(slug);
   if (product) return { name: product.name, href: `/shop/${slug}` };
   const drone = getDrone(slug);
   if (drone) return { name: drone.name, href: `/fleet/${slug}` };
+  const compared = getCompareDrone(slug);
+  if (compared?.image) return { name: compared.name, href: COMPARE_PATH };
   return null;
 }
 

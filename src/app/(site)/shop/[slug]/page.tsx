@@ -10,6 +10,7 @@ import { site } from "@/lib/site";
 import { fitDescription, pageMetadata, JsonLd } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { RULES_PATH } from "@/lib/drone-rules";
+import { COMPARE_PATH, comparePath, getCompareDrone, popularWith, similarTo, type CompareDrone } from "@/lib/compare";
 
 export function generateStaticParams() {
   return getProducts().map((p) => ({ slug: p.slug }));
@@ -59,6 +60,16 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
       }
     : null;
   const related = getProducts().filter((o) => o.series === p.series && o.slug !== p.slug);
+  // Comparisons for this drone: the popular ones first, then the closest drones.
+  const compared = getCompareDrone(p.slug);
+  const compareLinks = compared
+    ? [
+        ...popularWith(p.slug).map(([x, y]) => getCompareDrone(x === p.slug ? y : x)),
+        ...similarTo(compared, [], 4),
+      ]
+        .filter((o, i, all): o is CompareDrone => Boolean(o) && all.findIndex((q) => q?.slug === o?.slug) === i)
+        .slice(0, 4)
+    : [];
   const seriesLabel = SERIES.find((s) => s.key === p.series)?.label ?? p.series;
 
   return (
@@ -146,6 +157,28 @@ export default async function ShopProductPage({ params }: { params: Promise<{ sl
             </li>
           </ul>
         </div>
+
+        {compared && (
+          <div className="mt-6 rounded-3xl border border-night/10 bg-white p-6">
+            <h2 className="font-display text-xl font-semibold text-night">Compare the {p.name}</h2>
+            <ul className="mt-3 grid gap-x-8 sm:grid-cols-2">
+              {compareLinks.map((o) => (
+                <li key={o.slug} className="border-b border-night/10">
+                  <Link href={comparePath(compared.slug, o.slug)} className="tap block py-2.5 text-night/80 hover:text-ocean">
+                    {compared.short} vs {o.short}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-sm text-night/65">
+              Every spec side by side, with scores for camera, video, flight, safety and travel.{" "}
+              <Link href={COMPARE_PATH} className="font-semibold text-ocean hover:underline">
+                Compare it with any DJI drone
+              </Link>
+              .
+            </p>
+          </div>
+        )}
 
         {related.length > 0 && (
           <div className="mt-6 rounded-3xl border border-night/10 bg-white p-6">

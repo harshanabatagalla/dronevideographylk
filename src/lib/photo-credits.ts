@@ -45,6 +45,7 @@ export const PHOTO_CREDITS: Record<string, PhotoCredit> = {
   "dji-mini-se": { ...PHOTO_CREDITS_BASE["dji-mini-2"], note: "Photo shows the DJI Mini 2. The Mini SE uses the same body." },
   "dji-mavic-3-cine": { ...PHOTO_CREDITS_BASE["dji-mavic-3"], note: "Photo shows the DJI Mavic 3. The Cine model has the same airframe." },
   "dji-mavic-3-pro-cine": { ...PHOTO_CREDITS_BASE["dji-mavic-3-pro"], note: "Photo shows the DJI Mavic 3 Pro. The Pro Cine has the same airframe." },
+  "dji-mavic-2-zoom": { ...PHOTO_CREDITS_BASE["dji-mavic-2-pro"], note: "Photo shows the DJI Mavic 2 Pro. The Mavic 2 Zoom has the same body with a zoom camera." },
 };
 
 export function getPhotoCredit(slug: string): PhotoCredit | undefined {

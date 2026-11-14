@@ -5,6 +5,7 @@ import { products } from "@/lib/shop";
 import { services, servicePath, SERVICES_PATH } from "@/lib/services";
 import { PERMIT_PATH, RULES_PATH, RULES_REVIEWED } from "@/lib/drone-rules";
 import { BLOG_PATH, getPhoto, postPath, posts } from "@/lib/blog";
+import { COMPARE_PATH, COMPARE_UPDATED, POPULAR, getCompareDrone, pairPath } from "@/lib/compare";
 
 /**
  * lastModified is the date the page content last changed in a meaningful way,
@@ -62,5 +63,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   ];
 
-  return [...core, ...blogPages, ...servicePages, ...shopPages];
+  // Drone comparisons: the hub and the popular pairs. Other pairs are noindex, so they stay out.
+  const comparePages: MetadataRoute.Sitemap = [
+    { url: abs(COMPARE_PATH), lastModified: COMPARE_UPDATED },
+    ...POPULAR.map(([a, b]) => {
+      const images = [getCompareDrone(a)?.image, getCompareDrone(b)?.image]
+        .filter((src): src is string => Boolean(src))
+        .map(abs);
+      return { url: abs(pairPath(a, b)), lastModified: COMPARE_UPDATED, ...(images.length ? { images } : {}) };
+    }),
+  ];
+
+  return [...core, ...blogPages, ...comparePages, ...servicePages, ...shopPages];
 }

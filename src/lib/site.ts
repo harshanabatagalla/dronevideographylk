@@ -47,6 +47,7 @@ export const nav = [
   { label: "Locations", href: "/locations" },
   { label: "Drone Rules", href: "/sri-lanka-drone-rules" },
   { label: "Blog", href: "/blog" },
+  { label: "Compare", href: "/compare" },
   { label: "Shop", href: "/shop" },
   { label: "Contact", href: "/contact" },
 ] as const;
