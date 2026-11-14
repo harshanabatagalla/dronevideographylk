@@ -1069,6 +1069,7 @@ export const drones: CompareDrone[] = [
     released: 2026,
     current: true,
     headline: "A goggle drone that films in every direction at once, in 8K.",
+    image: "/media/fleet/dji-avata-360-v2.webp",
     weightG: 455,
     size: [246, 199, 56],
     folds: false,
